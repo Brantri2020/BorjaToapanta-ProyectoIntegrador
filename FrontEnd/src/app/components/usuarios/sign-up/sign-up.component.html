@@ -1,45 +1,207 @@
-<div class="displayTable">
-    <div class="displayTableCell">
-  
-      <div class="authBlock">
-        <h3>Sign Up</h3>
-  
-        <div class="formGroup">
-          <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
-        </div>
-  
-        <div class="formGroup">
-          <input type="password" class="formControl" placeholder="Password" #userPwd required>
-        </div>
-  
-        <div class="formGroup">
-          <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
-        </div>
-  
-        <div class="formGroup">
-          <span class="or"><span class="orInner">Or</span></span>
-        </div>
-  
-        <!-- Continue with Google -->
-        <div class="formGroup">
-          <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-            <i class="fab fa-google-plus-g"></i>
-            Continue with Google
-          </button>
-        </div>
-  
-        <!-- Continue with Facebook -->
-        <div class="formGroup">
-          <button type="button" class="btn facebookBtn">
-            <i class="fab fa-facebook"></i>
-            Continue with Facebook
-          </button>
-        </div>
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+          <div class="card">
+              <div class="card-body text-center">
+                  <span class="titulo">{{ titulo | uppercase}}</span>
+                  <form class="mt-3" [formGroup]="usuarioForm" (ngSubmit)="agregarUsuario()">
+                      <div class="mb-3">
+                          <input type="text" formControlName="nombre" class="form-control form-control-lg"
+                              placeholder="Nombre" minlength="3" maxlength="25" pattern="[0-9A-Za-záéíóú ]*">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('nombre')?.hasError('required') && usuarioForm.get('nombre')?.touched">
+                              <span>El nombre del usuario <strong>es obligatorio.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('nombre')?.hasError('minlength')" >
+                              <span>El nombre del usuario puede contener <strong>mínimo 3 caracteres o máximo 25.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('nombre')?.hasError('pattern')" >
+                              <span>El nombre del proveedor puede contener <strong>letras o números.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <input type="text" formControlName="apellido" class="form-control form-control-lg"
+                              placeholder="Apellido" minlength="3" maxlength="25" pattern="[0-9A-Za-záéíóú ]*">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('apellido')?.hasError('required') && usuarioForm.get('apellido')?.touched">
+                              <span>El apellido del usuario <strong>es obligatorio.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('apellido')?.hasError('minlength')" >
+                              <span>El apellido del usuario puede contener <strong>mínimo 3 caracteres o máximo 25.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('apellido')?.hasError('pattern')" >
+                              <span>El apellido del usuario puede contener <strong>letras o números.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <input type="text" formControlName="cedula" class="form-control form-control-lg"
+                              placeholder="Cédula" minlength="10" maxlength="15" pattern="[0-9\-]*" id="cedulaId">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('cedula')?.hasError('required') && usuarioForm.get('cedula')?.touched">
+                              <span>La cédula del usuario <strong>es obligatorio.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('cedula')?.hasError('minlength')" >
+                              <span>La cédula del usuario puede contener <strong>mínimo 10 caracteres o máximo 15.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('cedula')?.hasError('pattern')" >
+                              <span>La cédula del usuario puede contener <strong>solo números.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <input type="text" formControlName="direccion" class="form-control form-control-lg"
+                              placeholder="Dirección" minlength="10" maxlength="50" pattern="[0-9A-Za-záéíóú ]*">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('direccion')?.hasError('required') && usuarioForm.get('direccion')?.touched">
+                              <span>La dirección del usuario <strong>es obligatorio.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('direccion')?.hasError('minlength')" >
+                              <span>La dirección del usuario puede contener <strong>mínimo 10 caracteres o máximo 50.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('direccion')?.hasError('pattern')" >
+                              <span>La dirección del usuario puede contener <strong>caracteres y números.</strong></span>                                                                   
+                          </div>
+                      </div>                      
+                      <div class="mb-3">
+                          <input type="email" formControlName="correoUsuario" class="form-control form-control-lg"
+                              placeholder="Correo" minlength="8" maxlength="40" pattern="[0-9A-Za-z\.\-@]*" id="correoUsuario">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('correoUsuario')?.hasError('required') && usuarioForm.get('correoUsuario')?.touched">
+                              <span>El correo <strong>es obligatorio.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('correoUsuario')?.hasError('minlength')" >
+                              <span>El correo puede contener <strong>mínimo 8 caracteres o máximo 40.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('nombreUsuario')?.hasError('pattern')" >
+                              <span>El correo puede contener <strong>solo letras, números, arroba, punto y guión.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <input type="password" formControlName="password" class="form-control form-control-lg"
+                              placeholder="Contraseña" minlength="8" maxlength="16" pattern="[0-9A-Za-z\.\-]*">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('password')?.hasError('required') && usuarioForm.get('password')?.touched">
+                              <span>La contraseña del usuario <strong>es obligatoria.</strong></span>
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('password')?.hasError('minlength')" >
+                              <span>La contraseña del usuario puede contener <strong>mínimo 8 caracteres o máximo 16.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('password')?.hasError('pattern')" >
+                              <span>La contraseña del usuario puede contener <strong>solo letras, números, punto y guión.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <input type="password" formControlName="password2" class="form-control form-control-lg"
+                              placeholder="Repita la contraseña" minlength="8" maxlength="16">
+                          <div class="text-danger"
+                              *ngIf="usuarioForm.get('password2')?.hasError('required') && usuarioForm.get('password2')?.touched">
+                              <span>Repetir la contraseña del usuario <strong>es obligatorio.</strong></span>
+                          </div>      
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('password2')?.hasError('minlength')" >
+                              <span>La contraseña del usuario puede contener <strong>mínimo 8 caracteres o máximo 16.</strong></span>                                                                   
+                          </div>                      
+                          <div class="text-danger"                                
+                          *ngIf="usuarioForm.get('password2')?.hasError('mustMatch')">
+                              <span>Las contraseñas <strong>no coinciden.</strong></span>                                                                   
+                          </div>
+                      </div>
+                      <div class="text-danger" style="text-align: center;">
+                          <span><strong>{{mensaje}}</strong></span>
+                      </div>
+                      <br>                                               
+                      <div class="mb-3">
+                          <button routerLink="/usuarios"
+                              class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                          <button type="submit" [disabled]="usuarioForm.invalid"
+                              class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                      </div>
+
+                      
+                  </form>
+
+                  <br>
+                  <div class="displayTable">
+                    <div class="displayTableCell">
+                      <div class="authBlock">
+                    <div class="formGroup">
+                      <span class="or"><span class="orInner">Ó</span></span>
+                    </div>
+              
+                    <!--Continuar con Google -->
+                    <div class="formGroup">
+                      <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+                        <i class="fab fa-google-plus-g"></i>
+                        Registrarse con cuenta de Google
+                      </button>
+                    </div></div></div></div>
+              
+              
+              </div>
+          </div>
       </div>
-  
-      <div class="redirectToLogin">
-        <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
-      </div>
-    </div>
-  
   </div>
+</div>
+<br>
+<footer style="text-align: center; color: white;">
+  Brandon Toapanta Jimenez &copy;<br>
+  Contacto: +593990533058 <br>
+  Correo: brantri2015@hotmail.com <br>
+</footer>
+<br>
+
+<!--
+
+
+<div class="displayTable">
+  <div class="displayTableCell">
+    <div class="authBlock">
+      <h3>Registro Usuario</h3>
+
+      <div class="formGroup">
+        <input type="email" class="formControl" placeholder="Correo electrónico" #email required>
+      </div>
+
+      <div class="formGroup">
+        <input type="password" class="formControl" placeholder="Contraseña" #pass required>
+      </div>
+
+      <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Registrar"
+          (click)="authService.SignUp(email.value, pass.value)">
+      </div>
+
+      <div class="formGroup">
+        <span class="or"><span class="orInner">Ó</span></span>
+      </div>
+
+      Continuar con Google 
+      <div class="formGroup">
+        <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+          <i class="fab fa-google-plus-g"></i>
+          Registrarse con cuenta de Google
+        </button>
+      </div>
+
+
+    </div>
+
+    <div class="redirectToLogin">
+      <span>Ya tiene una cuenta? <span class="redirect" routerLink="/sign-in">Iniciar sesión</span></span>
+    </div>
+  </div>
+
+</div>
+
+-->

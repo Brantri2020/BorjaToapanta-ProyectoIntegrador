@@ -65,7 +65,7 @@ h6 {
   display: table;
   width: 100%;
   height: 100%;
-  background: #3F51B5;
+
 }
 
 .displayTableCell {
@@ -160,9 +160,7 @@ input:-moz-placeholder {
   background: #eb5e4c;
 }
 
-.displayTable .facebookBtn {
-  background: #5d82d1;
-}
+
 
 .or {
   text-align: center;
@@ -664,3 +662,21 @@ body .table thead th {
     display: none;
   }
 }
+
+
+
+body {
+  background: #009FFF;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ec2F4B, #009FFF);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ec2F4B, #009FFF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.titulo{
+  font-size: 2.0rem;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
