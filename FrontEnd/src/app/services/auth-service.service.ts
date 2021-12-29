@@ -17,10 +17,10 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone // Servicio NgZone para eliminar la advertencia de alcance externo
   ) {    
-    /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
+    /* Guardar los datos del usuario en el almacenamiento local 
+    cuando se inicia sesión y configurar nulo cuando se cierra la sesión */
     this.afAuth.authState.subscribe((user: any) => {
       if (user) {
         this.userData = user;
@@ -33,7 +33,7 @@ export class AuthService {
     })
   }
 
-  // Sign in with email/pass
+  // inicio sesion
   SignIn(email: any, pass: any) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, pass)
       .then((result: { user: any; }) => {
@@ -50,8 +50,7 @@ export class AuthService {
   SignUp(correo: string, pass: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(correo, pass)
       .then((result: { user: any; }) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
-        up and returns promise */
+        /* Llame a la función SendVerificaitonMail () cuando un nuevo usuario se registre y devuelva la promesa */
         this.SendVerificationMail();
         this.SetUserData(result.user);
       }).catch((error: { message: any; }) => {
@@ -59,7 +58,7 @@ export class AuthService {
       })
   }
 
-  // Send email verfificaiton when new user sign up
+  // Enviar verificación por correo electrónico cuando se registre un nuevo usuario
   SendVerificationMail() {
     return this.afAuth.auth.currentUser!.sendEmailVerification()
     .then(() => {
@@ -67,17 +66,17 @@ export class AuthService {
     })
   }
 
-  // Reset Forggot pass
+  // Reseteo contraseña
   Forgotpassword(passResetEmail: any) {
     return this.afAuth.auth.sendPasswordResetEmail(passResetEmail)
     .then(() => {
-      window.alert('pass reset email sent, check your inbox.');
+      window.alert('correo electrónico para reestablecer su contraseña enviado, verifique su bandeja de entrada.');
     }).catch((error: any) => {
       window.alert(error)
     })
   }
 
-  // Returns true when user is looged in and email is verified
+  // Devuelve verdadero cuando el usuario inicia sesión y se verifica el correo electrónico
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')|| '{}');
     return (user !== null && user.emailVerified !== false) ? true : false;
@@ -88,7 +87,7 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
-  // Auth logic to run auth providers
+  // Lógica de autenticación para ejecutar proveedores de autenticación
   AuthLogin(provider: any) {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result: { user: any; }) => {
@@ -101,9 +100,11 @@ export class AuthService {
     })
   }
 
-  /* Setting up user data when sign in with username/pass, 
-  sign up with username/pass and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+ /*
+ Configurar los datos del usuario al iniciar sesión con nombre de usuario / contraseña, 
+ registrarse con nombre de usuario / contraseña e iniciar sesión con el proveedor de autenticación 
+ social en la base de datos de Firestore utilizando el servicio Angular Firestore + Angular Firestore Document
+ */
   SetUserData(user: { uid: any; email: any; displayName: any; photoURL: any; emailVerified: any; }) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
@@ -118,7 +119,7 @@ export class AuthService {
     })
   }
 
-  // Sign out 
+  // Cerrar Sesión 
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
