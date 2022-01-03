@@ -1,9 +1,9 @@
 'use strict';
 
   
-const PORT="4000";
+const PORT="3000";
 const HOST="localhost";
-const HOST_URL="http://localhost:4000" 
+const HOST_URL="http://localhost:3000" 
 
 
 module.exports = {
