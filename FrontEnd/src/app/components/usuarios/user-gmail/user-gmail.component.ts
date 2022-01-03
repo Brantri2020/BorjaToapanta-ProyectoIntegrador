@@ -38,7 +38,6 @@ export class UserGmailComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.SignOut;
-    this.router.navigate(['/user-gmail']);
   }
 
   agregarUsuario() {

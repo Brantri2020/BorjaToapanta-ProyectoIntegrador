@@ -55,7 +55,7 @@
                       </div>
                       <div class="mb-3">
                           <input type="text" formControlName="direccion" class="form-control form-control-lg"
-                              placeholder="Dirección" minlength="10" maxlength="50" pattern="[0-9A-Za-záéíóú ]*">
+                              placeholder="Dirección" minlength="10" maxlength="50" pattern="[0-9A-Za-záéíóú\,\-\. ]*">
                           <div class="text-danger"
                               *ngIf="usuarioForm.get('direccion')?.hasError('required') && usuarioForm.get('direccion')?.touched">
                               <span>La dirección del usuario <strong>es obligatorio.</strong></span>
@@ -117,9 +117,11 @@
                               <span>Las contraseñas <strong>no coinciden.</strong></span>                                                                   
                           </div>
                       </div>
+                      <!--
                       <div class="text-danger" style="text-align: center;">
                           <span><strong>{{mensaje}}</strong></span>
                       </div>
+                      -->
                       <br>                                               
                       <div class="mb-3">
                           <button routerLink="/sign-in"
