@@ -10,7 +10,7 @@ export class UsuarioService {
   url = 'http://localhost:3000/api/';
   constructor(private http: HttpClient) { }
 
-  guardarUsuario(usuario: Usuario): Observable<any>{
+  guardarUsuario(usuario: any): Observable<any>{
     return this.http.post(this.url + "usuario/", usuario);
   }
 

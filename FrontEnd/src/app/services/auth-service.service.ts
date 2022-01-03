@@ -87,6 +87,9 @@ export class AuthService {
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
+
+
+
   // Sign in with Google
   GoogleAuth() {
 
@@ -108,10 +111,10 @@ export class AuthService {
 
        }
 
-       if(bandera){
-        window.alert("Registrado");
+       if(!bandera){
+        this.router.navigate(['user-gmail']);
        }else{
-         window.alert("No registrado");
+        this.router.navigate(['dashboard']);
        }
   }, error => {
     console.log(error);
@@ -128,13 +131,18 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result: { user: any; }) => {
        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+
+         //// funcion para verificar si ya esta en cloud firestore
+          this.VerificarDatos(result.user.email);
+
+          
         })
       this.SetUserData(result.user);
     }).catch((error: any) => {
       window.alert(error)
     })
   }
+
 
  /*
  Configurar los datos del usuario al iniciar sesión con nombre de usuario / contraseña, 
@@ -152,8 +160,7 @@ export class AuthService {
       emailVerified: user.emailVerified
     }
     
-    //// funcion para verificar si ya esta en cloud firestore
-    this.VerificarDatos(userData.email);
+   
     return userRef.set(userData, {
       merge: true
     })

@@ -13,6 +13,8 @@ import { SignUpComponent } from './components/usuarios/sign-up/sign-up.component
 import { ForgotPasswordComponent } from './components/usuarios/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/usuarios/verify-email/verify-email.component';
 import { AuthService } from './services/auth-service.service';
+import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
+
 
 // Firebase services + enviorment module
 import { AngularFireModule } from "@angular/fire";
@@ -23,7 +25,6 @@ import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    UserGmailComponent
   ],
   imports: [
     BrowserModule,

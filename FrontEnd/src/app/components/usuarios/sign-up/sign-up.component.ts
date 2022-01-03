@@ -61,14 +61,12 @@ export class SignUpComponent implements OnInit {
       password2: this.usuarioForm.get('password2')?.value      
     }
 
-    const USUARIO2: Usuario = {
+    const USUARIO2 = {
       nombre: this.usuarioForm.get('nombre')?.value,
       apellido: this.usuarioForm.get('apellido')?.value,
       cedula: this.usuarioForm.get('cedula')?.value,
       direccion: this.usuarioForm.get('direccion')?.value,
-      correoUsuario: this.usuarioForm.get('correoUsuario')?.value,
-      password: this.usuarioForm.get('password')?.value,
-      password2: this.usuarioForm.get('password2')?.value      
+      correoUsuario: this.usuarioForm.get('correoUsuario')?.value
     }
       //agregamos usuario
       console.log(USUARIO);
