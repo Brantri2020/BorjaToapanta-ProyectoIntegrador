@@ -1,7 +1,7 @@
 'use strict';
 
 const firebase = require('../db');
-const Student = require('../models/user');
+const Usuario = require('../models/user');
 const firestore = firebase.firestore();
 
 
@@ -14,6 +14,27 @@ const addUser = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
+
+const getAllEmails = async (req, res, next) => {
+    try {
+        const usuarios = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Usuario');
+        const data = await usuarios.get();
+
+        const emailsArray = [];
+        if(data.empty) {
+            res.status(404).send('No usuarios record found');
+        }else {
+            data.forEach(doc => {
+                emailsArray.push(doc.data().correoUsuario);
+            });
+            res.send(emailsArray);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 /*
 const getAllStudents = async (req, res, next) => {
     try {
@@ -87,7 +108,7 @@ const deleteStudent = async (req, res, next) => {
 
 module.exports = {
     addUser,
-   // getAllStudents,
+    getAllEmails,
     //getStudent,
     //updateStudent,
     //deleteStudent

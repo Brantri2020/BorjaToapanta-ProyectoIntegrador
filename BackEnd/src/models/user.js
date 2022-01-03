@@ -1,6 +1,5 @@
 class Usuario {
-    constructor(id, nombre, apellido, cedula, direccion,
-        correoUsuario) {
+    constructor(id, nombre, apellido, cedula, direccion, correoUsuario) {
             this.id = id;
             this.nombre = nombre;
             this.apellido = apellido;
@@ -10,3 +9,4 @@ class Usuario {
            
     }
 }
+module.exports = Usuario;

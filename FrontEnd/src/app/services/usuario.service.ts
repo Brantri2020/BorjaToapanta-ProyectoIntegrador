@@ -14,6 +14,11 @@ export class UsuarioService {
     return this.http.post(this.url + "usuario/", usuario);
   }
 
+  obtenerEmails(): Observable<any>{
+    return this.http.get(this.url + "emails/");
+  }
+
+  
 
 
 }

@@ -4,6 +4,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from '../model/usuario';
 
 @Injectable({
@@ -12,13 +13,17 @@ import { Usuario } from '../model/usuario';
 
 export class AuthService {
   userData: any; // Save logged in user data
+  emails = [];
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone // Servicio NgZone para eliminar la advertencia de alcance externo
-  ) {    
+    public ngZone: NgZone, // Servicio NgZone para eliminar la advertencia de alcance externo
+    private _usuarioService: UsuarioService
+    ) {    
+
+
     /* Guardar los datos del usuario en el almacenamiento local 
     cuando se inicia sesión y configurar nulo cuando se cierra la sesión */
     this.afAuth.authState.subscribe((user: any) => {
@@ -84,7 +89,38 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+
+        return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+
+  VerificarDatos(email:string){
+    //quiero que verifique los emails registrados, si no lo esta el de google llene el formulario menos el correo y pass
+     var bandera = false;
+    this._usuarioService.obtenerEmails().subscribe(data => {      
+      this.emails = data;
+      console.log(this.emails);
+      var n="";
+      for (n in this.emails) {
+        if (email == this.emails[n]) {
+         bandera = true;
+        }
+
+       }
+
+       if(bandera){
+        window.alert("Registrado");
+       }else{
+         window.alert("No registrado");
+       }
+  }, error => {
+    console.log(error);
+  
+  })
+
+  
+
+
   }
 
   // Lógica de autenticación para ejecutar proveedores de autenticación
@@ -107,6 +143,7 @@ export class AuthService {
  */
   SetUserData(user: { uid: any; email: any; displayName: any; photoURL: any; emailVerified: any; }) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    var datos: boolean= true;
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -114,6 +151,9 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }
+    
+    //// funcion para verificar si ya esta en cloud firestore
+    this.VerificarDatos(userData.email);
     return userRef.set(userData, {
       merge: true
     })

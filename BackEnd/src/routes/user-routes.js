@@ -1,5 +1,6 @@
 const express = require('express');
-const {addUser, 
+const {addUser, getAllEmails, 
+         
       // getAllStudents, 
       // getStudent,
        //updateStudent,
@@ -9,6 +10,7 @@ const {addUser,
 const router = express.Router();
 
 router.post('/usuario', addUser);
+router.get('/emails', getAllEmails);
 //router.get('/students', getAllStudents);
 //router.get('/student/:id', getStudent);
 //router.put('/student/:id', updateStudent);
