@@ -31,13 +31,15 @@ export class UserGmailComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       cedula: ['', Validators.required],
-      direccion: ['', Validators.required]
+      direccion: ['', Validators.required],
+      correoUsuario: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    this.authService.SignOut;
+    const user = JSON.parse(localStorage.getItem('user')|| '{}');    
+    this.usuarioForm.get('correoUsuario')?.setValue(user.email);
   }
 
   agregarUsuario() {
