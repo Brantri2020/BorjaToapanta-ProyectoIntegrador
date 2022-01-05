@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from 'src/app/services/must-match.validator';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastrService } from 'ngx-toastr';
+
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 
@@ -55,8 +56,10 @@ export class UserGmailComponent implements OnInit {
 
       //agregar datos del usuario
       this._usuarioService.guardarUsuario(USUARIO2).subscribe(data => {
-        this.toastr.success('El usuario fue registrado con éxito!', 'Usuario Registrado!');
-        this.router.navigate(['/dashboard']);
+        this.toastr.success('El usuario fue registrado con éxito!', 'Usuario Registrado!',{
+        timeOut: 3000
+        });
+        
       }, error => {
         console.log(error);
         this.mensaje = error.error;

@@ -52,6 +52,10 @@
                               *ngIf="usuarioForm.get('cedula')?.hasError('pattern')" >
                               <span>La cédula del usuario puede contener <strong>solo números.</strong></span>                                                                   
                           </div>
+                          <div class="text-danger"                                
+                          *ngIf="usuarioForm.get('cedula')?.hasError('ValidadorCedula')">
+                              <span>Las contraseñas <strong>no coinciden.</strong></span>                                                                   
+                          </div>
                       </div>
                       <div class="mb-3">
                           <input type="text" formControlName="direccion" class="form-control form-control-lg"

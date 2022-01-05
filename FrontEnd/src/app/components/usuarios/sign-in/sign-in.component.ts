@@ -15,4 +15,12 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  limpiarDatos(){
+    let correo :any = document.getElementById('userName');
+    let pass :any = document.getElementById('userPassword');
+
+    correo="";
+    pass="";
+  }
+
 }

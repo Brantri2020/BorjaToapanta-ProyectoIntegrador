@@ -3,7 +3,7 @@ import { AuthService } from "../../../services/auth-service.service";
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MustMatch } from 'src/app/services/must-match.validator';
+import { MustMatch, ValidadorCedula } from 'src/app/services/must-match.validator';
 import { Usuario } from 'src/app/model/usuario';
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/services/usuario.service';

@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './components/usuarios/forgot-password/f
 import { VerifyEmailComponent } from './components/usuarios/verify-email/verify-email.component';
 import { AuthService } from './services/auth-service.service';
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 // Firebase services + enviorment module
@@ -44,8 +45,10 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
+  
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
