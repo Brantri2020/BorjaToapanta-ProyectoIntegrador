@@ -85,8 +85,12 @@
                               <span>El correo puede contener <strong>mínimo 8 caracteres o máximo 40.</strong></span>                                                                   
                           </div>
                           <div class="text-danger"                                
-                              *ngIf="usuarioForm.get('nombreUsuario')?.hasError('pattern')" >
+                              *ngIf="usuarioForm.get('correoUsuario')?.hasError('pattern')" >
                               <span>El correo puede contener <strong>solo letras, números, arroba, punto y guión.</strong></span>                                                                   
+                          </div>
+                          <div class="text-danger"                                
+                              *ngIf="usuarioForm.get('correoUsuario')?.hasError('email')" >
+                              <span><strong>Debe ingresar un email válido.</strong></span>                                                                   
                           </div>
                       </div>
                       <div class="mb-3">
