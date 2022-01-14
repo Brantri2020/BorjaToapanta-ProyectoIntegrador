@@ -69,7 +69,7 @@ export class CrearProveedorComponent implements OnInit {
         this.router.navigate(['/proveedores']);
       }, error => {
         console.log(error);
-
+        window.alert("HIII");
         this.mensaje = error.error;
 /*
         if (this.mensaje == "El proveedor con este RUC ya esta registrado.") {

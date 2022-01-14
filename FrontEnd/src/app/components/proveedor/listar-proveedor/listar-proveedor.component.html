@@ -53,8 +53,8 @@
                   <td>{{proveedor.telefonoConvencional}}</td>
                   <td>{{proveedor.correo}}</td>
                   <td>
-                    <i [routerLink]="['/editar-proveedor', proveedor._id]" class="far fa-edit text-primary"></i>
-                    <i (click)="eliminarProveedor(proveedor._id)" class="fas fa-trash text-danger"></i>
+                    <i [routerLink]="['/editar-proveedor', proveedor.id]" class="far fa-edit text-primary"></i>
+                    <i (click)="eliminarProveedor(proveedor.id)" class="fas fa-trash text-danger"></i>
                   </td>
                 </tr>
               </tbody>

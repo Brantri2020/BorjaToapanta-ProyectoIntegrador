@@ -9,7 +9,7 @@ const addUser = async (req, res, next) => {
     try {
         const data = req.body;
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Usuario').doc().set(data);
-        res.send('Usuario guardado exitosamente');
+        res.json('Usuario guardado exitosamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -28,7 +28,7 @@ const getAllEmails = async (req, res, next) => {
             data.forEach(doc => {
                 emailsArray.push(doc.data().correoUsuario);
             });
-            res.send(emailsArray);
+            res.json(emailsArray);
         }
     } catch (error) {
         res.status(400).send(error.message);

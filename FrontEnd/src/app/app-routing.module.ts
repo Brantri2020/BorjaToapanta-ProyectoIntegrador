@@ -13,6 +13,7 @@ import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.
 import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/crear-proveedor.component';
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full'},
   { path: 'sign-in', component: SignInComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'nuevo-proveedor', component: CrearProveedorComponent, canActivate: [AuthGuard] },
   { path: 'editar-proveedor/:id', component: CrearProveedorComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] }
-eliminaaar!
+  
+
 ];
 
 

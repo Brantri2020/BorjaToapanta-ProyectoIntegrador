@@ -48,6 +48,7 @@ obtenerProveedores(){
   this._proveedorService.getProveedores().subscribe(data =>{
     console.log(data);
     this.listProveedores= data;
+  
   },error =>{
     console.log(error);
   })
@@ -55,6 +56,7 @@ obtenerProveedores(){
 
 
 eliminarProveedor(id:any){
+  
   this._proveedorService.eliminarProveedor(id).subscribe(data => {
     this.toastr.error('El proveedor fue eliminado con éxito', 'Proveedor eliminado');
     this.obtenerProveedores();

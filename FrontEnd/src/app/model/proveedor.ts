@@ -1,5 +1,5 @@
 export class Proveedor {
-    _id?: string;
+    id?: number;
     ruc: string;
     nombre: string;
     cuenta: string;

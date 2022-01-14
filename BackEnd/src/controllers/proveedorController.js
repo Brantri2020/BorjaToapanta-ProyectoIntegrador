@@ -6,6 +6,8 @@ const firestore = firebase.firestore();
 
 
 
+
+
 const obtenerProveedores = async (req, res, next) => {
 
     try {
@@ -29,7 +31,7 @@ const obtenerProveedores = async (req, res, next) => {
                 );
                 proveedoresArray.push(proveedor);
             });
-            res.send(proveedoresArray);
+            res.json(proveedoresArray);
         }
     } catch (error) {
         res.status(400).send(error.message);
@@ -39,14 +41,16 @@ const obtenerProveedores = async (req, res, next) => {
 
 const busquedaProveedor = async (req, res, next) => {
     try {
-        const nombre = req.params.nombre;
-        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(nombre);
+        
+        const nombre = req.params.busqueda;
+        
+        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc("nombre",nombre);
         const data = await proveedor.get();
         if(!data.exists) {
 
             res.status(404).send('Proveedor no existente');
         }else {
-            res.send(data.data());
+            res.json(data.data());
         }
     } catch (error) {
         res.status(400).send(error.message);
@@ -57,7 +61,7 @@ const eliminarProveedor = async (req, res, next) => {
     try {
         const id = req.params.id;
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id).delete();
-        res.send('Proveedor eliminado correctamente');
+        res.json('Proveedor eliminado correctamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -69,7 +73,7 @@ const actualizarProveedor = async (req, res, next) => {
         const data = req.body;
         const proveedor =  await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
         await proveedor.update(data);
-        res.send('Proveedor actualizado correctamente');        
+        res.json('Proveedor actualizado correctamente');        
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -85,7 +89,7 @@ const crearProveedor = async (req, res, next) => {
 
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc().set(data);
 
-        res.send('Proveedor guardado exitosamente');
+        res.json('Proveedor guardado exitosamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -99,7 +103,7 @@ const obtenerProveedor = async (req, res, next) => {
         if(!data.exists) {
             res.status(404).send('Proveedor no encontrado');
         }else {
-            res.send(data.data());
+            res.json(data.data());
         }
     } catch (error) {
         res.status(400).send(error.message);

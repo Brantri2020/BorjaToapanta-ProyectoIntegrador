@@ -13,6 +13,9 @@ import { SignUpComponent } from './components/usuarios/sign-up/sign-up.component
 import { ForgotPasswordComponent } from './components/usuarios/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/usuarios/verify-email/verify-email.component';
 import { AuthService } from './services/auth-service.service';
+import { ProveedorService } from './services/proveedor.service';
+import { UsuarioService } from './services/usuario.service';
+
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -53,7 +56,7 @@ import { ListarProveedorComponent } from './components/proveedor/listar-proveedo
     BrowserAnimationsModule
   ],
   
-  providers: [AuthService],
+  providers: [AuthService, ProveedorService, UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
