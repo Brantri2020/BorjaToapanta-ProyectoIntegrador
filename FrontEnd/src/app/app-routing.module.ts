@@ -10,6 +10,8 @@ import { ForgotPasswordComponent } from '../app/components/usuarios/forgot-passw
 import { AuthGuard } from "../app/guard/auth.guard";
 import { VerifyEmailComponent } from '../app/components/usuarios/verify-email/verify-email.component';
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
+import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/crear-proveedor.component';
+import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full'},
@@ -18,7 +20,11 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'user-gmail', component: UserGmailComponent }
+  { path: 'user-gmail', component: UserGmailComponent },
+  { path: 'nuevo-proveedor', component: CrearProveedorComponent, canActivate: [AuthGuard] },
+  { path: 'editar-proveedor/:id', component: CrearProveedorComponent, canActivate: [AuthGuard] },
+  { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] }
+eliminaaar!
 ];
 
 

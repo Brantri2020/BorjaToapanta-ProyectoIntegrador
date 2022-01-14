@@ -1,16 +1,37 @@
 const express = require('express');
-const {addUser, getAllEmails, 
+const {addUser, getAllEmails
          
       // getAllStudents, 
       // getStudent,
        //updateStudent,
        //deleteStudent
       } = require('../controllers/userController');
+      
+const {obtenerProveedores, busquedaProveedor,
+        eliminarProveedor, actualizarProveedor, crearProveedor, obtenerProveedor
+             
+          // getAllStudents, 
+          // getStudent,
+           //updateStudent,
+           //deleteStudent
+          } = require('../controllers/proveedorController');
+    
 
 const router = express.Router();
 
+// Login
 router.post('/usuario', addUser);
 router.get('/emails', getAllEmails);
+
+//Proveedores
+router.get('/proveedores', obtenerProveedores);
+router.get('/proveedores/busqueda/:busqueda', busquedaProveedor);
+router.delete('/proveedores/:id', eliminarProveedor);
+router.put('/proveedor/:id', actualizarProveedor);
+router.post('/proveedor', crearProveedor);
+router.get('/proveedor/:id', obtenerProveedor);
+
+
 //router.get('/students', getAllStudents);
 //router.get('/student/:id', getStudent);
 //router.put('/student/:id', updateStudent);

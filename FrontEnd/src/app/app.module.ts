@@ -26,6 +26,8 @@ import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/crear-proveedor.component';
+import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,9 @@ import { ToastrModule } from 'ngx-toastr';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    UserGmailComponent
+    UserGmailComponent,
+    CrearProveedorComponent,
+    ListarProveedorComponent
   ],
   imports: [
     BrowserModule,
