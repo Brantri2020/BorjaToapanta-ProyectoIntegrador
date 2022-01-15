@@ -1,75 +1,61 @@
 <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <div class="card">
-          <div class="card-body text-center">
+
+    <div class="card">
+        <div class="card-body text-center">
             <span class="titulo">LISTADO DE PROVEEDORES</span>
             <button class="btn btn-success float-end" routerLink="/nuevo-proveedor">+ NUEVO</button>
-  
-            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaProvForm"
-              (ngSubmit)="buscarProveedor()">
-              <div class="col-auto">
-                <label for="inputPassword2" class="visually-hidden">Buscar</label>
-                <input type="text" class="form-control" formControlName="busqueda" placeholder="Búsqueda">
-              </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">BUSCAR</button>
-              </div>
+            <button class="btn btn-success float-start" routerLink="/dashboard">VOLVER</button>
+
+            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaProvForm" (ngSubmit)="buscarProveedor()">
+                <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">Buscar</label>
+                    <input type="text" class="form-control" formControlName="busqueda" placeholder="Búsqueda">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">BUSCAR</button>
+                </div>
             </form>
-  
-  
+
+
             <table *ngIf="listProveedores.length > 0" class="table table-striped mt-3">
-              <thead>
-                <tr>
-                  <th scope="col"  onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Ruc</th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Nombre</th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Cuenta</th>
-                  <th scope="col"  onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Banco</th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Tipo de cuenta</th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Teléfono celular</th>
-                  <th scope="col"></th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Teléfono convencional</th>
-                  <th scope="col"></th>
-                  <th scope="col" onMouseover="this.style.color='blue'"
-                  onMouseout="this.style.color='black'" style=" cursor: pointer;">Correo</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let proveedor of listProveedores">
-                  <td>{{proveedor.ruc}}</td>
-                  <td>{{proveedor.nombre}}</td>
-                  <td>{{proveedor.cuenta}}</td>
-                  <td>{{proveedor.banco}}</td>
-                  <td>{{proveedor.tipoCuenta}}</td>
-                  <td>{{proveedor.telefonoCelular}}</td>
-                  <td>{{proveedor.telefonoConvencional}}</td>
-                  <td>{{proveedor.correo}}</td>
-                  <td>
-                    <i [routerLink]="['/editar-proveedor', proveedor.id]" class="far fa-edit text-primary"></i>
-                    <i (click)="eliminarProveedor(proveedor.id)" class="fas fa-trash text-danger"></i>
-                  </td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">RUC</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Nombre</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Cuenta</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Banco</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Tipo de cuenta</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Teléfono celular</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Teléfono convencional</th>
+                        <th scope="col" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Correo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let proveedor of listProveedores">
+                        <td>{{proveedor.ruc}}</td>
+                        <td>{{proveedor.nombre}}</td>
+                        <td>{{proveedor.cuenta}}</td>
+                        <td>{{proveedor.banco}}</td>
+                        <td>{{proveedor.tipoCuenta}}</td>
+                        <td>{{proveedor.telefonoCelular}}</td>
+                        <td>{{proveedor.telefonoConvencional}}</td>
+                        <td>{{proveedor.correo}}</td>
+                        <td>
+                            <i [routerLink]="['/editar-proveedor', proveedor.id]" class="far fa-edit text-primary"></i>
+                            <i (click)="eliminarProveedor(proveedor.id)" class="fas fa-trash text-danger"></i>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <h5 style="text-align: start; margin-top: 10px;" *ngIf="listProveedores.length == 0">No hay proveedores para mostrar
             </h5>
-          </div>
         </div>
-      </div>
+
     </div>
-  </div>
-  <br>
-  <footer style="text-align: center; color: white;">
-    Brandon Toapanta Jimenez &copy;<br>
-    Contacto: +593990533058 <br>
-    Correo: brantri2015@hotmail.com <br>
-  </footer>
-  <br>
+</div>
+<br>
+<footer style="text-align: center; color: white;">
+    Brandon Toapanta Jimenez &copy;<br> Contacto: +593990533058 <br> Correo: brantri2015@hotmail.com <br>
+</footer>
+<br>

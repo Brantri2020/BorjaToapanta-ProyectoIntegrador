@@ -44,6 +44,8 @@ export class ListarProveedorComponent implements OnInit {
   
 }
 
+
+
 obtenerProveedores(){
   this._proveedorService.getProveedores().subscribe(data =>{
     console.log(data);

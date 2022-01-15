@@ -8,15 +8,15 @@ const firestore = firebase.firestore();
 
 
 
-const obtenerProveedores = async (req, res, next) => {
+const obtenerProveedores = async(req, res, next) => {
 
     try {
         const proveedores = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor');
         const data = await proveedores.get();
         const proveedoresArray = [];
-        if(data.empty) {
+        if (data.empty) {
             res.status(404).send('No se encontraron proveedores');
-        }else {
+        } else {
             data.forEach(doc => {
                 const proveedor = new Proveedor(
                     doc.id,
@@ -39,17 +39,17 @@ const obtenerProveedores = async (req, res, next) => {
 }
 
 
-const busquedaProveedor = async (req, res, next) => {
+const busquedaProveedor = async(req, res, next) => {
     try {
-        
+
         const nombre = req.params.busqueda;
-        
-        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc("nombre",nombre);
+
+        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc("nombre", nombre);
         const data = await proveedor.get();
-        if(!data.exists) {
+        if (!data.exists) {
 
             res.status(404).send('Proveedor no existente');
-        }else {
+        } else {
             res.json(data.data());
         }
     } catch (error) {
@@ -57,7 +57,7 @@ const busquedaProveedor = async (req, res, next) => {
     }
 }
 
-const eliminarProveedor = async (req, res, next) => {
+const eliminarProveedor = async(req, res, next) => {
     try {
         const id = req.params.id;
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id).delete();
@@ -67,19 +67,19 @@ const eliminarProveedor = async (req, res, next) => {
     }
 }
 
-const actualizarProveedor = async (req, res, next) => {
+const actualizarProveedor = async(req, res, next) => {
     try {
         const id = req.params.id;
         const data = req.body;
-        const proveedor =  await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
+        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
         await proveedor.update(data);
-        res.json('Proveedor actualizado correctamente');        
+        res.json('Proveedor actualizado correctamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const crearProveedor = async (req, res, next) => {
+const crearProveedor = async(req, res, next) => {
     try {
         const data = req.body;
 
@@ -95,14 +95,14 @@ const crearProveedor = async (req, res, next) => {
     }
 }
 
-const obtenerProveedor = async (req, res, next) => {
+const obtenerProveedor = async(req, res, next) => {
     try {
         const id = req.params.id;
         const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
         const data = await proveedor.get();
-        if(!data.exists) {
+        if (!data.exists) {
             res.status(404).send('Proveedor no encontrado');
-        }else {
+        } else {
             res.json(data.data());
         }
     } catch (error) {
@@ -111,9 +111,13 @@ const obtenerProveedor = async (req, res, next) => {
 }
 
 module.exports = {
-    obtenerProveedores, busquedaProveedor,
-        eliminarProveedor, actualizarProveedor, crearProveedor, obtenerProveedor
-             
+    obtenerProveedores,
+    busquedaProveedor,
+    eliminarProveedor,
+    actualizarProveedor,
+    crearProveedor,
+    obtenerProveedor
+
 }
 
 /*

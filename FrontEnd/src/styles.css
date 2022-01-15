@@ -1,6 +1,4 @@
 @import 'https://use.fontawesome.com/releases/v5.5.0/css/all.css';
-
-
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -677,4 +675,3 @@ body {
     font-size: 150%;
     font-style: italic;
 }
-
