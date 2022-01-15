@@ -49,7 +49,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email.value, pass.value)
       .then((result: { user: any; }) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['main']);
         });
         this.SetUserData(result.user);
       }).catch((error: { message: any; }) => {

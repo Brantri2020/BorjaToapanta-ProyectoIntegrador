@@ -1,6 +1,7 @@
 
 
-    <div id="sidemenu" class="menu-expanded">
+
+    <div id="sidemenu" class=" menu-expanded">
 
         <div id="header">
             <div id="title"><span>GAD Parroquial Uyumbicho</span></div>
@@ -14,23 +15,30 @@
         <div id="profile" *ngIf="authService.userData as user">
             <div id="photo"><img src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}"></div>
 
-            <div id="name"><span>Marcos Rivas</span></div>
+            <div id="name"><span>{{nombre}}</span></div>
         </div>
 
         <div id="menu-items">
             <div class="item">
+                <a href="main">
+                    <div class="icon"><img src="../../../assets/iconos/inicio.png" alt=""></div>
+                    <div class="title"><span>Inicio</span></div>
+                </a>
+            </div>
+            <div class="item">
                 <a href="proveedores">
-                    <div class="icon"><img src="assets/iconos/cloud-services.png" alt=""></div>
+                    <div class="icon"><img src="../../../assets/iconos/proveedor.png" alt=""></div>
                     <div class="title"><span>Proveedores</span></div>
                 </a>
             </div>
+
 
             <div class="item separator">
 
             </div>
             <div class="item">
                 <a (click)="authService.SignOut()">
-                    <div class="icon"><img src="assets/iconos/cloud-services.png" alt=""></div>
+                    <div class="icon"><img src="../../../assets/iconos/cerrar-sesion.png" alt=""></div>
                     <div class="title"><span>Cerrar sesión</span></div>
                 </a>
             </div>

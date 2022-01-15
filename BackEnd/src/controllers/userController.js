@@ -35,6 +35,52 @@ const getAllEmails = async (req, res, next) => {
     }
 }
 
+
+const obtenerNombre = async (req, res, next) => {
+
+    try {
+        
+        const correo = req.params.correo;        
+        const nombresUsuario = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Usuario');
+        const data = await nombresUsuario.get();      
+        var user= "";
+        
+        if (data.empty) {
+            res.status(404).send('No se encontró el nombre');
+        } else {
+            data.forEach(doc => {
+                const usuario = new Usuario(
+                    doc.id,
+                    doc.data().nombre,
+                    doc.data().apellido,
+                    doc.data().cedula,
+                    doc.data().direccion,
+                    doc.data().correoUsuario
+                    
+                );
+
+                if (doc.data().correoUsuario == correo){
+                    user=doc.data().nombre +" "+ doc.data().apellido;
+                }
+
+                   
+            });
+            if(user.length!=0){
+                res.json(user)
+            
+                
+            }else{
+                res.status(404).send('No existe el usuario por correo');
+            }
+            
+
+            
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 /*
 const getAllStudents = async (req, res, next) => {
     try {
@@ -109,6 +155,7 @@ const deleteStudent = async (req, res, next) => {
 module.exports = {
     addUser,
     getAllEmails,
+    obtenerNombre
     //getStudent,
     //updateStudent,
     //deleteStudent
