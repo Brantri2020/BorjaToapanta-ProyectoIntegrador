@@ -19,7 +19,7 @@ export class ListarProveedorComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder) {
       this.busquedaProvForm = this.fb.group({
-        busqueda: ['', Validators.required]
+        busqueda: ['',]
       });
      }
 
@@ -30,12 +30,11 @@ export class ListarProveedorComponent implements OnInit {
 
   buscarProveedor() {
     if(this.busquedaProvForm.get('busqueda')?.value==""){
+      
       this.obtenerProveedores();
     }else{
     this._proveedorService.buscarProveedor(this.busquedaProvForm.get('busqueda')?.value).subscribe(data => {      
       this.listProveedores = data;
-      
-
     }, error => {
       console.log(error);
     })
