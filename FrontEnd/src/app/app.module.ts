@@ -31,6 +31,8 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/crear-proveedor.component';
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,9 @@ import { ListarProveedorComponent } from './components/proveedor/listar-proveedo
     VerifyEmailComponent,
     UserGmailComponent,
     CrearProveedorComponent,
-    ListarProveedorComponent
+    ListarProveedorComponent,
+    MenuComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

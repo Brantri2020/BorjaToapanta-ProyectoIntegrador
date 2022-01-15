@@ -248,7 +248,7 @@ export class AuthService {
       if (!bandera) {
         this.router.navigate(['user-gmail']);
       } else {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['main']);
       }
     }, error => {
       console.log(error);
