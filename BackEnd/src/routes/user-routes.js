@@ -8,7 +8,7 @@ const {addUser, getAllEmails, obtenerNombre
       } = require('../controllers/userController');
       
 const {obtenerProveedores, busquedaProveedor,
-        eliminarProveedor, actualizarProveedor, crearProveedor, obtenerProveedor
+        eliminarProveedor, actualizarProveedor, crearProveedor, obtenerProveedor, obtenerProveedoresOrdenados
              
           // getAllStudents, 
           // getStudent,
@@ -31,6 +31,7 @@ router.delete('/proveedores/:id', eliminarProveedor);
 router.put('/proveedor/:id', actualizarProveedor);
 router.post('/proveedor', crearProveedor);
 router.get('/proveedor/:id', obtenerProveedor);
+router.get('/proveedores/proveedores-ordenados/:filtro', obtenerProveedoresOrdenados);
 
 //Menu
 router.get('/correo/:correo', obtenerNombre);

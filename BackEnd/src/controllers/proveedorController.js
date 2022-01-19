@@ -8,6 +8,8 @@ const firestore = firebase.firestore();
 
 
 
+
+
 const obtenerProveedores = async (req, res, next) => {
 
     try {
@@ -137,13 +139,47 @@ const obtenerProveedor = async (req, res, next) => {
     }
 }
 
+// ordenar
+const obtenerProveedoresOrdenados = async (req, res, next) => {
+
+    try {
+
+        const filtro = req.params.filtro; 
+        const proveedores = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').orderBy(filtro, "asc");
+        const data = await proveedores.get();
+        const proveedoresArray = [];
+        if (data.empty) {
+            res.status(404).send('No se encontraron proveedores');
+        } else {
+            data.forEach(doc => {
+                const proveedor = new Proveedor(
+                    doc.id,
+                    doc.data().ruc,
+                    doc.data().nombre,
+                    doc.data().cuenta,
+                    doc.data().banco,
+                    doc.data().tipoCuenta,
+                    doc.data().telefonoCelular,
+                    doc.data().telefonoConvencional,
+                    doc.data().correo
+                );
+                proveedoresArray.push(proveedor);
+            });
+            res.json(proveedoresArray);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     obtenerProveedores,
     busquedaProveedor,
     eliminarProveedor,
     actualizarProveedor,
     crearProveedor,
-    obtenerProveedor
+    obtenerProveedor,
+    obtenerProveedoresOrdenados
 
 }
 
