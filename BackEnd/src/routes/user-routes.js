@@ -1,5 +1,5 @@
 const express = require('express');
-const {addUser, getAllEmails
+const {addUser, getAllEmails, obtenerNombre
          
       // getAllStudents, 
       // getStudent,
@@ -23,6 +23,7 @@ const router = express.Router();
 router.post('/usuario', addUser);
 router.get('/emails', getAllEmails);
 
+
 //Proveedores
 router.get('/proveedores', obtenerProveedores);
 router.get('/proveedores/busqueda/:busqueda', busquedaProveedor);
@@ -30,6 +31,9 @@ router.delete('/proveedores/:id', eliminarProveedor);
 router.put('/proveedor/:id', actualizarProveedor);
 router.post('/proveedor', crearProveedor);
 router.get('/proveedor/:id', obtenerProveedor);
+
+//Menu
+router.get('/correo/:correo', obtenerNombre);
 
 
 //router.get('/students', getAllStudents);

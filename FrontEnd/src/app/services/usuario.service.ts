@@ -21,6 +21,10 @@ export class UsuarioService {
     return this.http.get(this.url + "emails/");
   }
 
+  buscarNombre(correo: string): Observable<any> {
+    return this.http.get(this.url + "correo/"+correo);
+  }
+
   
 
 
