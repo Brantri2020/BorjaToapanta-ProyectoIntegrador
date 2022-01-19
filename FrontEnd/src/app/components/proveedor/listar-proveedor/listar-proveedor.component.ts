@@ -40,6 +40,8 @@ export class ListarProveedorComponent implements OnInit {
     })
   }
 
+ 
+
   
 }
 
@@ -63,6 +65,29 @@ eliminarProveedor(id:any){
     this.obtenerProveedores();
 
   }, error =>{
+    console.log(error);
+  })
+}
+
+ordenarProveedor(filtro: any) {
+  
+
+
+  this.i++;
+  
+  this._proveedorService.obtenerProveedorOrdenado(filtro).subscribe(data => {      
+    
+    if(this.i % 2==1){
+      this.listProveedores2 = data;
+      this.listProveedores = this.listProveedores2.slice().reverse();
+    }else{
+      this.listProveedores = data;
+    }
+    
+    
+    
+    
+  }, error => {
     console.log(error);
   })
 }
