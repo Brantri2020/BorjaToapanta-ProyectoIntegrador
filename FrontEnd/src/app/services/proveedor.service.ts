@@ -37,6 +37,10 @@ export class ProveedorService {
   obtenerProveedor(id: string): Observable<any>{
     return this.http.get(this.url2+id);
   }
+
+  obtenerProveedorOrdenado(filtro: string): Observable<any>{
+    return this.http.get(this.url1+"proveedores-ordenados/"+filtro);
+  }
 }
 
 
