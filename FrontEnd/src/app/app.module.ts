@@ -33,6 +33,8 @@ import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
+import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
     CrearProveedorComponent,
     ListarProveedorComponent,
     MenuComponent,
-    InicioComponent
+    InicioComponent,
+    ListarEmpleadoComponent,
+    CrearEmpleadoComponent
   ],
   imports: [
     BrowserModule,

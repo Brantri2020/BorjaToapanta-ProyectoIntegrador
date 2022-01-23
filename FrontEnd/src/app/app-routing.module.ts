@@ -12,6 +12,8 @@ import { VerifyEmailComponent } from '../app/components/usuarios/verify-email/ve
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
 import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/crear-proveedor.component';
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
+import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
+import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 
 
 const routes: Routes = [
@@ -24,7 +26,10 @@ const routes: Routes = [
   { path: 'user-gmail', component: UserGmailComponent },
   { path: 'nuevo-proveedor', component: CrearProveedorComponent, canActivate: [AuthGuard] },
   { path: 'editar-proveedor/:id', component: CrearProveedorComponent, canActivate: [AuthGuard] },
-  { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] }
+  { path: 'empleados', component: ListarEmpleadoComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-empleado', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
+  { path: 'editar-empleado/:id', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
+  { path: 'empelados', component: ListarEmpleadoComponent, canActivate: [AuthGuard] }
   
 
 ];

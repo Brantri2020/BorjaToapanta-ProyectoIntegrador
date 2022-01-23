@@ -1,21 +1,33 @@
 const express = require('express');
-const {addUser, getAllEmails, obtenerNombre
-         
-      // getAllStudents, 
-      // getStudent,
-       //updateStudent,
-       //deleteStudent
-      } = require('../controllers/userController');
-      
-const {obtenerProveedores, busquedaProveedor,
-        eliminarProveedor, actualizarProveedor, crearProveedor, obtenerProveedor, obtenerProveedoresOrdenados
-             
-          // getAllStudents, 
-          // getStudent,
-           //updateStudent,
-           //deleteStudent
-          } = require('../controllers/proveedorController');
-    
+const {
+    addUser,
+    getAllEmails,
+    obtenerNombre
+
+    // getAllStudents, 
+    // getStudent,
+    //updateStudent,
+    //deleteStudent
+} = require('../controllers/userController');
+
+const {
+    obtenerProveedores,
+    busquedaProveedor,
+    eliminarProveedor,
+    actualizarProveedor,
+    crearProveedor,
+    obtenerProveedor,
+    obtenerProveedoresOrdenados
+
+    // getAllStudents, 
+    // getStudent,
+    //updateStudent,
+    //deleteStudent
+} = require('../controllers/proveedorController');
+
+const {
+    obtenerEmpleados
+} = require('../controllers/empleadoController');
 
 const router = express.Router();
 
@@ -35,6 +47,9 @@ router.get('/proveedores/proveedores-ordenados/:filtro', obtenerProveedoresOrden
 
 //Menu
 router.get('/correo/:correo', obtenerNombre);
+
+//Empleados
+router.get('/empleados/', obtenerEmpleados);
 
 
 //router.get('/students', getAllStudents);

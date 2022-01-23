@@ -70,13 +70,8 @@ eliminarProveedor(id:any){
 }
 
 ordenarProveedor(filtro: any) {
-  
-
-
   this.i++;
-  
   this._proveedorService.obtenerProveedorOrdenado(filtro).subscribe(data => {      
-    
     if(this.i % 2==1){
       this.listProveedores = data;
       
@@ -84,10 +79,6 @@ ordenarProveedor(filtro: any) {
       this.listProveedores2 = data;
       this.listProveedores = this.listProveedores2.slice().reverse();
     }
-    
-    
-    
-    
   }, error => {
     console.log(error);
   })

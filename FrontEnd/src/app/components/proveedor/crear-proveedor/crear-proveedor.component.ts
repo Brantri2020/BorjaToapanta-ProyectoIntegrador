@@ -46,8 +46,6 @@ export class CrearProveedorComponent implements OnInit {
 
 
   agregarProveedor() {
-
-
     const PROVEEDOR: Proveedor = {
       ruc: this.proveedorForm.get('ruc')?.value,
       nombre: this.proveedorForm.get('nombre')?.value,
@@ -57,11 +55,7 @@ export class CrearProveedorComponent implements OnInit {
       telefonoCelular: this.proveedorForm.get('telefonoCelular')?.value,
       telefonoConvencional: this.proveedorForm.get('telefonoConvencional')?.value,
       correo: this.proveedorForm.get('correo')?.value
-
     }
-
-
-
     if (this.id !== null) {
       //editamos proveedor
       this._proveedorService.editarProveedor(this.id, PROVEEDOR).subscribe(data => {
@@ -71,20 +65,7 @@ export class CrearProveedorComponent implements OnInit {
         console.log(error);
         window.alert("HIII");
         this.mensaje = error.error;
-/*
-        if (this.mensaje == "El proveedor con este RUC ya esta registrado.") {
-          var elemento2: any = document.getElementById("rucId");
-          elemento2.className += " is-invalid";
-          var elemento1: any = document.getElementById("nombreProveedorId");
-          var hasClase1 = elemento1.classList.contains('is-invalid');
-          if (hasClase1) {
-            elemento1.classList.remove("is-invalid");
-          }
-        }*/
-
-
       })
-
     } else {
       //agregamos proveedor
       console.log(PROVEEDOR);
@@ -94,23 +75,8 @@ export class CrearProveedorComponent implements OnInit {
       }, error => {
         console.log(error);
         this.mensaje = error.error;
-/*
-        if (this.mensaje == "El proveedor con este RUC ya esta registrado.") {
-          var elemento2: any = document.getElementById("rucId");
-          elemento2.className += " is-invalid";
-          var elemento1: any = document.getElementById("nombreProveedorId");
-          var hasClase1 = elemento1.classList.contains('is-invalid');
-          if (hasClase1) {
-            elemento1.classList.remove("is-invalid");
-          }
-        }
-*/
       })
     }
-
-
-
-
   }
 
   esEditar() {
