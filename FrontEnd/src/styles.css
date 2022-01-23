@@ -4,10 +4,10 @@ body {
     margin: 0;
     padding: 0;
     font-weight: 400;
-    width: 100%;
+    width: 100% -var(--width-collapsed);
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    /*margin-left: var(--width-collapsed);*/
+    margin-left: calc(var(--width-collapsed) - 25px);
 }
 
 
@@ -253,8 +253,9 @@ body {
 }
 
 .body-expanded{
-    margin-left: var(--width);
+    margin-left: calc(var(--width) - 25px);
 }
+
 
 #main-container{
     color:white;
@@ -410,6 +411,7 @@ body {
 
 .menu-collapsed{
     width: var(--width-collapsed);
+
 }
 
 .menu-collapsed #header #title{

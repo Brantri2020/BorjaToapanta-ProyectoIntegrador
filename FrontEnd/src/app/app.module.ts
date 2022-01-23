@@ -37,6 +37,7 @@ import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pag
 import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
 import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
+import { MenuPagosComponent } from './components/pagos/menu-pagos/menu-pagos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
     RolIndividualComponent,
     InicioComponent,
     ListarEmpleadoComponent,
-    CrearEmpleadoComponent
+    CrearEmpleadoComponent,
+    MenuPagosComponent
   ],
   imports: [
     BrowserModule,
