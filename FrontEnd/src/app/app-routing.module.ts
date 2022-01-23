@@ -29,7 +29,9 @@ const routes: Routes = [
   { path: 'empleados', component: ListarEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'nuevo-empleado', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'editar-empleado/:id', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
-  { path: 'empelados', component: ListarEmpleadoComponent, canActivate: [AuthGuard] }
+  { path: 'empelados', component: ListarEmpleadoComponent, canActivate: [AuthGuard] },
+  { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] }
+
   
 
 ];

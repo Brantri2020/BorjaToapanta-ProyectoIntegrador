@@ -51,7 +51,7 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
     MenuComponent,
     InicioComponent,
     NominaPagosComponent,
-    RolIndividualComponent
+    RolIndividualComponent,
     InicioComponent,
     ListarEmpleadoComponent,
     CrearEmpleadoComponent
