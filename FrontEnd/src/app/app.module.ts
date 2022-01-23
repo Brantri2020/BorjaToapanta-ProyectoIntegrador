@@ -33,6 +33,8 @@ import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pagos.component';
+import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
 import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
 @NgModule({
@@ -47,6 +49,9 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
     CrearProveedorComponent,
     ListarProveedorComponent,
     MenuComponent,
+    InicioComponent,
+    NominaPagosComponent,
+    RolIndividualComponent
     InicioComponent,
     ListarEmpleadoComponent,
     CrearEmpleadoComponent
