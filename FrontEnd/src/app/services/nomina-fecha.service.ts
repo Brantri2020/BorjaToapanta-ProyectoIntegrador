@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NominaPago } from '../model/nominaPago';
+import { nominaFecha } from '../model/nominaFecha';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NominaPagoService {
+export class NominaFechaService {
 
-  url1 = 'http://localhost:3000/api/nominas-pago/';
-  url2 = 'http://localhost:3000/api/nomina-pago/';
+  url1 = 'http://localhost:3000/api/nominas-fecha/';
+  url2 = 'http://localhost:3000/api/nomina-fecha/';
   
   constructor(private http: HttpClient,
     public router: Router) { }
 
-  getNominasPago(): Observable<any>{
+    getNominasFecha(): Observable<any>{
     return this.http.get(this.url1);
   }
 
@@ -27,11 +27,11 @@ export class NominaPagoService {
     return this.http.delete(this.url1 + id);
   }
 
-  editarNominaPago(id: string, nominaPago: NominaPago): Observable<any>{
+  editarNominaPago(id: string, nominaPago: nominaFecha): Observable<any>{
     return this.http.put(this.url2 + id, nominaPago);
   }
 
-  guardarNominaPago(nominaPago: NominaPago): Observable<any>{
+  guardarNominaPago(nominaPago: nominaFecha): Observable<any>{
     return this.http.post(this.url2, nominaPago);
   }
 

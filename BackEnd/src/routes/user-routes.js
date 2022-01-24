@@ -29,6 +29,11 @@ const {
     obtenerEmpleados
 } = require('../controllers/empleadoController');
 
+const {
+    obtenerNominasFecha
+} = require('../controllers/nominaController');
+
+
 const router = express.Router();
 
 // Login
@@ -51,6 +56,9 @@ router.get('/correo/:correo', obtenerNombre);
 //Empleados
 router.get('/empleados/', obtenerEmpleados);
 
+
+//NOMINAS
+router.get('/nominas/fecha', obtenerNominasFecha);
 
 //router.get('/students', getAllStudents);
 //router.get('/student/:id', getStudent);

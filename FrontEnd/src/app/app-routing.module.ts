@@ -16,6 +16,7 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
 import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pagos.component';
 import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
+import { GenerarNominaComponent } from './components/pagos/generar-nomina/generar-nomina.component';
 
 
 
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'editar-empleado/:id', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] },
   { path: 'nomina-pagos', component: NominaPagosComponent, canActivate: [AuthGuard] },
-  { path: 'rol-individual', component: RolIndividualComponent, canActivate: [AuthGuard] }
+  { path: 'rol-individual', component: RolIndividualComponent, canActivate: [AuthGuard] },
+  { path: 'GenerarNominaComponent', component: RolIndividualComponent, canActivate: [AuthGuard] }
   
 
   

@@ -1,7 +1,7 @@
 import { Component, OnInit, Provider } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
-import { NominaPago } from 'src/app/model/NominaPago';
+import { NominaPago } from 'src/app/model/nominaPago';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
 
