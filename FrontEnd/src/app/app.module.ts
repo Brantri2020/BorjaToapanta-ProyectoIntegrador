@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './components/usuarios/forgot-password/f
 import { VerifyEmailComponent } from './components/usuarios/verify-email/verify-email.component';
 import { AuthService } from './services/auth-service.service';
 import { ProveedorService } from './services/proveedor.service';
+import { NominaPagoService } from './services/nomina-pago.service';
 import { UsuarioService } from './services/usuario.service';
 
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
@@ -37,7 +38,7 @@ import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pag
 import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
 import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
-import { MenuPagosComponent } from './components/pagos/menu-pagos/menu-pagos.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,12 +52,11 @@ import { MenuPagosComponent } from './components/pagos/menu-pagos/menu-pagos.com
     ListarProveedorComponent,
     MenuComponent,
     InicioComponent,
-    NominaPagosComponent,
     RolIndividualComponent,
     InicioComponent,
     ListarEmpleadoComponent,
     CrearEmpleadoComponent,
-    MenuPagosComponent
+    NominaPagosComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +71,7 @@ import { MenuPagosComponent } from './components/pagos/menu-pagos/menu-pagos.com
     BrowserAnimationsModule
   ],
   
-  providers: [AuthService, ProveedorService, UsuarioService],
+  providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
