@@ -27,7 +27,7 @@ export class NominaPagoService {
     return this.http.delete(this.url1 + id);
   }
 
-  editarNominaPago(id: string, nominaPago: NominaPago, anho:string, mes:string): Observable<any>{
+  editarNominaPago(id: any, nominaPago: NominaPago, anho:any, mes:any): Observable<any>{
     return this.http.put(this.url1+anho+"/"+mes+"/"+ id, nominaPago);
   }
 

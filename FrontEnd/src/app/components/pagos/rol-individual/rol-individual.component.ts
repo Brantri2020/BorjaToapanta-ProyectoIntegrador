@@ -14,17 +14,19 @@ import { NominaPagoService } from 'src/app/services/nomina-pago.service';
   styleUrls: ['./rol-individual.component.css']
 })
 export class RolIndividualComponent implements OnInit {
-
+/*
   rolIndividualForm: FormGroup;
   titulo = 'Rol Individual';
   id: string | null;
-  mensaje: string = "";
+  anho: string | null;
+  mes:string | null;
+  mensaje: string = "";*/
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private _nominaPagoService: NominaPagoService,
     private aRouter: ActivatedRoute) {
-
+/*
     this.rolIndividualForm = this.fb.group({
       cedula: ['', Validators.required],
       nomina: ['', Validators.required],
@@ -45,16 +47,18 @@ export class RolIndividualComponent implements OnInit {
       institucionFinanciera: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
-
+    this.anho = this.aRouter.snapshot.paramMap.get('anho');
+    this.mes = this.aRouter.snapshot.paramMap.get('mes');
+*/
   }
 
   ngOnInit(): void {
-    this.esEditar();
+    //this.esEditar();
   }
 
 
 
-
+/*
 
   agregarRolIndividual() {
     const ROL_INDIVIDUAL: NominaPago = {
@@ -77,26 +81,27 @@ export class RolIndividualComponent implements OnInit {
       tipoCuenta: this.rolIndividualForm.get('tipoCuenta')?.value,
       institucionFinanciera: this.rolIndividualForm.get('institucionFinanciera')?.value,      
     }
-    if (this.id !== null) {
-      //editamos proveedor
-      this._proveedorService.editarProveedor(this.id, PROVEEDOR).subscribe(data => {
-        this.toastr.success('El proveedor fue actualizado con éxito!', 'Proveedor Actualizado!');
-        this.router.navigate(['/proveedores']);
+    if (this.id !== null || this.id !== "0") {
+      //editamos nomina
+      this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
+        this.toastr.success('El rol individual fue actualizado con éxito!', 'Rol Individual Actualizado!');
+        this.router.navigate(['/nomina-pagos']);
       }, error => {
-        console.log(error);
-        window.alert("HIII");
+        console.log(error);        
         this.mensaje = error.error;
       })
     } else {
       //agregamos proveedor
-      console.log(PROVEEDOR);
-      this._proveedorService.guardarProveedor(PROVEEDOR).subscribe(data => {
+      console.log(ROL_INDIVIDUAL);
+      /*
+      this._nominaPagoService.guardarProveedor(PROVEEDOR).subscribe(data => {
         this.toastr.success('El proveedor fue registrado con éxito!', 'Proveedor Registrado!');
         this.router.navigate(['/proveedores']);
       }, error => {
         console.log(error);
         this.mensaje = error.error;
       })
+      
     }
   }
 
@@ -130,7 +135,7 @@ export class RolIndividualComponent implements OnInit {
     }
   }
 
-
+*/
 
 
 }

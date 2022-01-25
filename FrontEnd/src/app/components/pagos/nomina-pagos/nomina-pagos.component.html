@@ -1,4 +1,4 @@
-<app-menu></app-menu>
+<!--<app-menu></app-menu>-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="padding-left: 50px; padding-right: 50px;">
     
     <a class="navbar-brand" href="nomina-pagos">Nomina Pagos</a>
@@ -70,7 +70,7 @@
 
 
 
-            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaNomForm" (ngSubmit)="buscarNominaPago()">
+            <form class="row g-2" style="justify-content: center;" >
                 <div class="col-auto">
                     <label for="inputPassword2" class="visually-hidden">Buscar</label>
                     <input type="text" class="form-control" formControlName="busqueda" placeholder="Búsqueda">
@@ -144,7 +144,7 @@
                         <td>{{nominaPago.tipoCuenta}}</td>
                         <td>{{nominaPago.institucionFinanciera}}</td>
                         <td>
-                            <i [routerLink]="['/rol-individual', nominaPago.id]" class="far fa-edit text-primary"></i>
+                            <!--<i [routerLink]="['/rol-individual', nominaPago.id, this.anho, this.mes]" class="far fa-edit text-primary"></i>-->
                             <i  class="fas fa-trash text-danger"></i>
                         </td>
                     </tr>
