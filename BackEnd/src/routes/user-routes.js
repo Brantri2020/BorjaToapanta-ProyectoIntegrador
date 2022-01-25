@@ -28,10 +28,7 @@ const {
 const {
     obtenerEmpleados
 } = require('../controllers/empleadoController');
-
-const {
-    obtenerNominasFecha
-} = require('../controllers/nominaController');
+const { obtenerNominasPago, busquedaNominasPago, obtenerNominasPagoOrdenados } = require('../controllers/nominaPagoController');
 
 
 const router = express.Router();
@@ -58,7 +55,11 @@ router.get('/empleados/', obtenerEmpleados);
 
 
 //NOMINAS
-router.get('/nominas/fecha', obtenerNominasFecha);
+
+router.get('/nominasPago/:anho/:mes', obtenerNominasPago);
+router.get('/nominasPago/:anho/:mes/busqueda/:busqueda', busquedaNominasPago);
+router.get('/nominasPago/:anho/:mes/nominasPago-ordenados/:filtro', obtenerNominasPagoOrdenados);
+
 
 //router.get('/students', getAllStudents);
 //router.get('/student/:id', getStudent);

@@ -33,6 +33,8 @@ const obtenerEmpleados = async(req, res, next) => {
     }
 }
 
+
+
 module.exports = {
     obtenerEmpleados
     //busquedaProveedor,

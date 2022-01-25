@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
 })
 export class NominaPagoService {
 
-  url1 = 'http://localhost:3000/api/nominas-pago/';
-  url2 = 'http://localhost:3000/api/nomina-pago/';
+  url1 = 'http://localhost:3000/api/nominasPago/';
+  
   
   constructor(private http: HttpClient,
     public router: Router) { }
 
-  getNominasPago(): Observable<any>{
-    return this.http.get(this.url1);
+  getNominasPago(anho:any,mes:any): Observable<any>{  
+    return this.http.get(this.url1+anho+"/"+mes);
   }
 
-  buscarNominaPago(busqueda: string): Observable<any> {
-    return this.http.get(this.url1 + "busqueda/"+busqueda);
+  buscarNominaPago(busqueda: string, anho: string, mes: string): Observable<any> {
+    return this.http.get(this.url1+anho+"/"+mes+"/busqueda/"+busqueda);
   }
 
   eliminarNominaPago(id: string): Observable<any>{
@@ -28,19 +28,19 @@ export class NominaPagoService {
   }
 
   editarNominaPago(id: string, nominaPago: NominaPago): Observable<any>{
-    return this.http.put(this.url2 + id, nominaPago);
+    return this.http.put(this.url1+ id, nominaPago);
   }
 
   guardarNominaPago(nominaPago: NominaPago): Observable<any>{
-    return this.http.post(this.url2, nominaPago);
+    return this.http.post(this.url1, nominaPago);
   }
 
   obtenerNominaPago(id: string): Observable<any>{
-    return this.http.get(this.url2+id);
+    return this.http.get(this.url1+id);
   }
 
-  obtenerNominaPagoOrdenado(filtro: string): Observable<any>{
-    return this.http.get(this.url1+"nomina-pago-ordenados/"+filtro);
+  obtenerNominasPagoOrdenado(filtro: string,anho:string, mes:string): Observable<any>{
+    return this.http.get(this.url1+anho+"/"+mes+"/nominasPago-ordenados/"+filtro);
   }
 }
 
