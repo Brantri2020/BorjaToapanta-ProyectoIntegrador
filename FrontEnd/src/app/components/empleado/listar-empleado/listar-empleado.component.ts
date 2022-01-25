@@ -18,8 +18,6 @@ export class ListarEmpleadoComponent implements OnInit {
   listEmpleados2: Empleado[] = [];
   i=0;
 
-  
-
   constructor(private _empleadoService: EmpleadoService,
     private toastr: ToastrService,
     private fb: FormBuilder) {
