@@ -26,7 +26,13 @@ const {
 } = require('../controllers/proveedorController');
 
 const {
-    obtenerEmpleados
+    obtenerEmpleados,
+    busquedaEmpleado,
+    eliminarEmpleado,
+    actualizarEmpleado,
+    crearEmpleado,
+    obtenerEmpleado,
+    obtenerEmpleadosOrdenados
 } = require('../controllers/empleadoController');
 
 const {
@@ -55,7 +61,12 @@ router.get('/correo/:correo', obtenerNombre);
 
 //Empleados
 router.get('/empleados/', obtenerEmpleados);
-
+router.get('/empleados/busqueda/:busqueda', busquedaEmpleado);
+router.delete('/empleados/:id', eliminarEmpleado);
+router.put('/empleado/:id', actualizarEmpleado);
+router.post('/empleado', crearEmpleado);
+router.get('/empleado/:id', obtenerEmpleado);
+router.get('/empleados/empleados-ordenados/:filtro', obtenerEmpleadosOrdenados);
 
 //NOMINAS
 router.get('/nominas/fecha', obtenerNominasFecha);
