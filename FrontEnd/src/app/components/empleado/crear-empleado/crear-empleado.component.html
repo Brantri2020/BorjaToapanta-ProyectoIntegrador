@@ -1,1 +1,119 @@
-<p>crear-empleado works!</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="empleadoForm" (ngSubmit)="agregarEmpleado()">
+                        <!--Cédula-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="cedula" class="form-control form-control-lg" placeholder="Ingrese el número de Cédula" minlength="10" maxlength="11" pattern="[0-9\-]*" id="cedulaId">
+                            <div class="text-danger" *ngIf="empleadoForm.get('cedula')?.hasError('required') && empleadoForm.get('cedula')?.touched">
+                                <span>La cédula del empleado <strong>es obligatoria.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('cedula')?.hasError('minlength')">
+                                <span>La cédula del empleado puede contener <strong>mínimo 10 caracteres o máximo 11.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('cedula')?.hasError('pattern')">
+                                <span>La cédula del empleado puede contener <strong>solo números.</strong></span>
+                            </div>
+                        </div>
+                        <!--NOMBRE-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombre" class="form-control form-control-lg" placeholder="Ingrese el nombre" minlength="2" maxlength="100" pattern="[A-Za-záéíóúñüÑ\-\.\, ]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('nombre')?.hasError('required') && empleadoForm.get('nombre')?.touched">
+                                <span>El nombre del empleado <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('nombre')?.hasError('minlength')">
+                                <span>El nombre del empleado puede contener <strong>mínimo 2 caracteres o máximo 100.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('nombre')?.hasError('pattern')">
+                                <span>El nombre del empleado puede contener <strong>solo letras.</strong></span>
+                            </div>
+                        </div>
+                        <!--Cargo-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="cargo" class="form-control form-control-lg" placeholder="Ingrese el cargo" minlength="5" maxlength="25" pattern="[A-Za-záéíóúñü\-\.\, ]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('cargo')?.hasError('required') && empleadoForm.get('cargo')?.touched">
+                                <span>El cargo del empleado <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('cargo')?.hasError('minlength')">
+                                <span>El cargo del empleado puede contener <strong>mínimo 5 caracteres o máximo 25.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('cargo')?.hasError('pattern')">
+                                <span>El cargo del empleado puede contener <strong>sólo letras.</strong></span>
+                            </div>
+                        </div>
+                        <!--Salario-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="salario" class="form-control form-control-lg" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9\$\.\, ]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('required') && empleadoForm.get('salario')?.touched">
+                                <span>El salario del empleado <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('minlength')">
+                                <span>El salario del empleado puede tener el formato <strong>0.00</strong> o <strong>$0.00</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('pattern')">
+                                <span>El salario del empleado puede contener <strong>números, coma o punto y el signo de dólar $.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--Número de Cuenta-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="numeroCuenta" class="form-control form-control-lg" placeholder="Ingrese el número de Cuenta" minlength="5" maxlength="25" pattern="[0-9\-]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('numeroCuenta')?.hasError('required') && empleadoForm.get('numeroCuenta')?.touched">
+                                <span>El número de cuenta del empleado <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('numeroCuenta')?.hasError('minlength')">
+                                <span>El número de cuenta del empleado puede contener <strong>mínimo 5 caracteres o máximo 25.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('numeroCuenta')?.hasError('pattern')">
+                                <span>El número de cuenta del empleado puede contener <strong>números y guón medio.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--Tipo de cuenta -->
+                        <div class="mb-3">
+                            <select class="form-select" formControlName="tipoCuenta" aria-label="Default select example">
+                                <option selected disabled value="">Seleccione el tipo de cuenta</option>
+                                <option value="Ahorros">AHORROS</option>
+                                <option value="Corriente">CORRIENTE</option>                                
+                            </select>
+                            <div class="text-danger" *ngIf="empleadoForm.get('tipoCuenta')?.hasError('required') && empleadoForm.get('tipoCuenta')?.touched">
+                                <span>El tipo de cuenta del empleado <strong>es obligatorio</strong>, seleccione uno.</span>
+                            </div>
+
+                        </div>
+
+                        <!--Institución Financiera-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="institucionFinanciera" class="form-control form-control-lg" placeholder="Ingrese el nombre de la Institución Financiera" minlength="5" maxlength="50" pattern="[A-Za-záéíóúñü\-\.\, ]*">
+                            <div class="text-danger" *ngIf="empleadoForm.get('institucionFinanciera')?.hasError('required') && empleadoForm.get('institucionFinanciera')?.touched">
+                                <span>El nombre de la Institución Financiera del empleado <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('institucionFinanciera')?.hasError('minlength')">
+                                <span>El nombre de la Institución Financiera del empleado puede contener <strong>mínimo 5 caracteres o máximo 50.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="empleadoForm.get('institucionFinanciera')?.hasError('pattern')">
+                                <span>El nombre de la Institución Financiera del empleado puede contener <strong> letras y números.</strong></span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="text-danger" style="text-align: center;">
+                            <span><strong>{{mensaje}}</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <button routerLink="/empleados" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="empleadoForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
