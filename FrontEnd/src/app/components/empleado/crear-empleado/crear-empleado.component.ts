@@ -15,7 +15,7 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class CrearEmpleadoComponent implements OnInit {
 
   empleadoForm: FormGroup;
-  titulo = 'Crear proveedor';
+  titulo = 'Crear Empleado';
   id: string | null;
   mensaje: string = "";
 
@@ -95,5 +95,15 @@ export class CrearEmpleadoComponent implements OnInit {
     }
   }
 
+  /*confirmarVolver(){
+    var resultado = window.confirm('¿Estás seguro de volver?');
+  if (resultado === true) {
+    this.router.navigate(['/empleados']);
+  } else { 
+      this.agregarEmpleado();
+  }
+
+  }
+*/
 
 }

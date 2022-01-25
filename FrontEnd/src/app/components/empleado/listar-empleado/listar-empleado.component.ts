@@ -5,6 +5,8 @@ import { Empleado } from 'src/app/model/empleado';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
+
+
 @Component({
   selector: 'app-listar-empleado',
   templateUrl: './listar-empleado.component.html',
@@ -57,14 +59,22 @@ obtenerEmpleados(){
 
 eliminarEmpleado(id:any){
   
-  this._empleadoService.eliminarEmpleado(id).subscribe(data => {
-    this.toastr.error('El empleado fue eliminado con éxito', 'Empleado eliminado');
-    this.obtenerEmpleados();
+  var resultado = window.confirm('¿Estas seguro de eliminar el empleado?');
+  if (resultado === true) {
+    this._empleadoService.eliminarEmpleado(id).subscribe(data => {
+      this.toastr.error('El empleado fue eliminado con éxito', 'Empleado eliminado');
+      this.obtenerEmpleados();
+      }, error =>{
+        console.log(error);
+      })
+  } else { 
+      this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
+      this.obtenerEmpleados();
+  }
 
-  }, error =>{
-    console.log(error);
-  })
+  
 }
+
 
 ordenarEmpleado(filtro: any) {
   this.i++;
