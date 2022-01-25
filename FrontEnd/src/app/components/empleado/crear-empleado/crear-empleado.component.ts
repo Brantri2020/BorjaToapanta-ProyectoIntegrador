@@ -95,15 +95,9 @@ export class CrearEmpleadoComponent implements OnInit {
     }
   }
 
-  /*confirmarVolver(){
-    var resultado = window.confirm('¿Estás seguro de volver?');
-  if (resultado === true) {
-    this.router.navigate(['/empleados']);
-  } else { 
-      this.agregarEmpleado();
-  }
+  
 
-  }
-*/
+  
+
 
 }
