@@ -87,7 +87,7 @@
 
                         <!--Institución Financiera-->
                         <div class="mb-3">
-                            <input type="text" formControlName="institucionFinanciera" class="form-control form-control-lg" placeholder="Ingrese el nombre de la Institución Financiera" minlength="5" maxlength="50" pattern="[A-Za-záéíóúñü\-\.\, ]*">
+                            <input type="text" formControlName="institucionFinanciera" class="form-control form-control-lg" placeholder="Ingrese el nombre de la Institución Financiera" minlength="5" maxlength="50" pattern="[0-9A-Za-záéíóúñü\-\.\, ]*">
                             <div class="text-danger" *ngIf="empleadoForm.get('institucionFinanciera')?.hasError('required') && empleadoForm.get('institucionFinanciera')?.touched">
                                 <span>El nombre de la Institución Financiera del empleado <strong>es obligatorio.</strong></span>
                             </div>

@@ -60,13 +60,22 @@ obtenerProveedores(){
 
 eliminarProveedor(id:any){
   
-  this._proveedorService.eliminarProveedor(id).subscribe(data => {
-    this.toastr.error('El proveedor fue eliminado con éxito', 'Proveedor eliminado');
-    this.obtenerProveedores();
+  
 
-  }, error =>{
-    console.log(error);
-  })
+  var resultado = window.confirm('¿Estas seguro de eliminar el proveedor?');
+  if (resultado === true) {
+    this._proveedorService.eliminarProveedor(id).subscribe(data => {
+      this.toastr.error('El proveedor fue eliminado con éxito', 'Proveedor eliminado');
+      this.obtenerProveedores();
+  
+    }, error =>{
+      console.log(error);
+    })
+  } else { 
+      this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
+      this.obtenerProveedores();
+  }
+
 }
 
 ordenarProveedor(filtro: any) {
