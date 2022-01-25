@@ -27,8 +27,8 @@ const obtenerNominasPago = async(req, res, next) => {
                                 doc2.id,
                                 doc2.data().cedula,
                                 doc2.data().nombre,
-                                doc2.data().salario,
                                 doc2.data().cargo,
+                                doc2.data().salario, 
                                 "",
                                 "",
                                 "",
@@ -57,8 +57,8 @@ const obtenerNominasPago = async(req, res, next) => {
                     doc.id,
                     doc.data().cedula,
                     doc.data().nomina,
-                    doc.data().salario,
                     doc.data().cargo,
+                    doc.data().salario,                    
                     doc.data().numHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
@@ -106,8 +106,8 @@ const busquedaNominasPago = async(req, res, next) => {
                                 doc2.id,
                                 doc2.data().cedula,
                                 doc2.data().nombre,
-                                doc2.data().salario,
                                 doc2.data().cargo,
+                                doc2.data().salario, 
                                 "",
                                 "",
                                 "",
@@ -147,8 +147,8 @@ const busquedaNominasPago = async(req, res, next) => {
                     doc.id,
                     doc.data().cedula,
                     doc.data().nomina,
-                    doc.data().salario,
                     doc.data().cargo,
+                    doc.data().salario, 
                     doc.data().numHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
@@ -213,15 +213,15 @@ const obtenerNominasPagoOrdenados = async(req, res, next) => {
                 .orderBy(filtro, "asc");
                 const data2 = await empleados.get();                
                 if (data2.empty) {
-                    res.status(404).send('No hay empleados para llenar');
+                    
                 } else {                    
                         data2.forEach(doc2 => {
                             const nominaPag = new NominaPago(
                                 doc2.id,
                                 doc2.data().cedula,
                                 doc2.data().nombre,
-                                doc2.data().salario,
                                 doc2.data().cargo,
+                                doc2.data().salario,                                
                                 "",
                                 "",
                                 "",
@@ -250,8 +250,8 @@ const obtenerNominasPagoOrdenados = async(req, res, next) => {
                     doc.id,
                     doc.data().cedula,
                     doc.data().nomina,
-                    doc.data().salario,
                     doc.data().cargo,
+                    doc.data().salario, 
                     doc.data().numHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,

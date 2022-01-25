@@ -33,8 +33,6 @@ const obtenerEmpleados = async(req, res, next) => {
     }
 }
 
-<<<<<<< HEAD
-=======
 const busquedaEmpleado = async(req, res, next) => {
 
     try {
@@ -157,7 +155,6 @@ const obtenerEmpleadosOrdenados = async(req, res, next) => {
         res.status(400).send(error.message);
     }
 }
->>>>>>> main
 
 
 module.exports = {
