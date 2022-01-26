@@ -37,10 +37,10 @@ export class NominaPagosComponent implements OnInit {
     this.llenarFecha();
     for (var i = 2010; i < 2050; i++) {
       this.listaAnhos.push(i);
-    }    
+    }
     this.obtenerNominasPago(this.anho, this.mes);
     this.cambioFecha();
-    
+
 
 
   }
@@ -79,23 +79,23 @@ export class NominaPagosComponent implements OnInit {
     this.anho = fecha.getFullYear().toString();
     this.mes = this.nombreMeses[fecha.getMonth()];
   }
-  
-    buscarNominaPago() {
-      if (this.busquedaNomForm.get('busqueda')?.value == "") {
-  
-        this.obtenerNominasPago(this.anho, this.mes);
-      } else {
-        this._nominaPagoServices.buscarNominaPago(this.busquedaNomForm.get('busqueda')?.value,this.anho,this.mes).subscribe(data => {
-          this.listNominasPago = data;
-        }, error => {
-          console.log(error);
-        })
-      }
-  
-  
-  
-  
+
+  buscarNominaPago() {
+    if (this.busquedaNomForm.get('busqueda')?.value == "") {
+
+      this.obtenerNominasPago(this.anho, this.mes);
+    } else {
+      this._nominaPagoServices.buscarNominaPago(this.busquedaNomForm.get('busqueda')?.value, this.anho, this.mes).subscribe(data => {
+        this.listNominasPago = data;
+      }, error => {
+        console.log(error);
+      })
     }
+
+
+
+
+  }
 
 
   obtenerNominasPago(anho: any, mes: any) {
@@ -110,7 +110,7 @@ export class NominaPagosComponent implements OnInit {
 
   ordenarNominaPago(filtro: any) {
     this.i++;
-    this._nominaPagoServices.obtenerNominasPagoOrdenado(filtro,this.anho,this.mes).subscribe(data => {
+    this._nominaPagoServices.obtenerNominasPagoOrdenado(filtro, this.anho, this.mes).subscribe(data => {
       if (this.i % 2 == 1) {
         this.listNominasPago = data;
 

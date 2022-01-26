@@ -14,7 +14,7 @@ import { ForgotPasswordComponent } from './components/usuarios/forgot-password/f
 import { VerifyEmailComponent } from './components/usuarios/verify-email/verify-email.component';
 import { AuthService } from './services/auth-service.service';
 import { ProveedorService } from './services/proveedor.service';
-//import { NominaPagoService } from './services/nomina-pago.service';
+import { NominaPagoService } from './services/nomina-pago.service';
 import { UsuarioService } from './services/usuario.service';
 
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
@@ -34,10 +34,10 @@ import { CrearProveedorComponent } from './components/proveedor/crear-proveedor/
 import { ListarProveedorComponent } from './components/proveedor/listar-proveedor/listar-proveedor.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { InicioComponent } from './components/inicio/inicio.component';
-//import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pagos.component';
-//import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
-//import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
-//import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
+import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pagos.component';
+import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
+import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
+import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/crear-empleado.component';
 
 @NgModule({
   declarations: [
@@ -52,11 +52,11 @@ import { InicioComponent } from './components/inicio/inicio.component';
     ListarProveedorComponent,
     MenuComponent,
     InicioComponent,
-    //RolIndividualComponent,
+    RolIndividualComponent,
     InicioComponent,
-    //ListarEmpleadoComponent,
-   // CrearEmpleadoComponent,
-   // NominaPagosComponent
+    ListarEmpleadoComponent,
+   CrearEmpleadoComponent,
+   NominaPagosComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +71,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
     BrowserAnimationsModule
   ],
   
-  providers: [AuthService, ProveedorService, UsuarioService],
-  //providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService],
+  
+  providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

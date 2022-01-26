@@ -1,3 +1,6 @@
+
+
+
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,19 +17,19 @@ import { NominaPagoService } from 'src/app/services/nomina-pago.service';
   styleUrls: ['./rol-individual.component.css']
 })
 export class RolIndividualComponent implements OnInit {
-/*
+
   rolIndividualForm: FormGroup;
   titulo = 'Rol Individual';
   id: string | null;
   anho: string | null;
   mes:string | null;
-  mensaje: string = "";*/
+  mensaje: string = "";
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private _nominaPagoService: NominaPagoService,
     private aRouter: ActivatedRoute) {
-/*
+
     this.rolIndividualForm = this.fb.group({
       cedula: ['', Validators.required],
       nomina: ['', Validators.required],
@@ -49,16 +52,16 @@ export class RolIndividualComponent implements OnInit {
     this.id = this.aRouter.snapshot.paramMap.get('id');
     this.anho = this.aRouter.snapshot.paramMap.get('anho');
     this.mes = this.aRouter.snapshot.paramMap.get('mes');
-*/
+
   }
 
   ngOnInit(): void {
-    //this.esEditar();
+    this.esEditar();
   }
 
 
 
-/*
+
 
   agregarRolIndividual() {
     const ROL_INDIVIDUAL: NominaPago = {
@@ -101,7 +104,7 @@ export class RolIndividualComponent implements OnInit {
         console.log(error);
         this.mensaje = error.error;
       })
-      
+      */
     }
   }
 
@@ -135,7 +138,7 @@ export class RolIndividualComponent implements OnInit {
     }
   }
 
-*/
+
 
 
 }

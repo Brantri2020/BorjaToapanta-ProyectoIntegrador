@@ -1,0 +1,220 @@
+<app-menu></app-menu>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="padding-left: 50px; padding-right: 50px;">
+
+    <a class="navbar-brand" href="nomina-pagos">Nomina Pagos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="generar-nomina">Generar Nómina <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">aaa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="rolIndividualForm" (ngSubmit)="agregarRolIndividual()">
+                        <!--cedula-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="cedula" class="form-control form-control-lg"
+                                placeholder="Ingrese la cédula" id="cedulaId">                            
+                        </div>
+                        <!--nomina-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="nomina" class="form-control form-control-lg"
+                                placeholder="Ingrese el nombre">                            
+                        </div>
+                        <!--cargo-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="cargo" class="form-control form-control-lg"
+                                placeholder="Ingrese el cargo">                            
+                        </div>
+                        <!--nomina-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="salario" class="form-control form-control-lg"
+                                placeholder="Ingrese el salario">                            
+                        </div>
+                        <!--numHorasExtras-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="numHorasExtras" class="form-control form-control-lg"
+                                placeholder="Ingrese el número de horas extra">                            
+                        </div>
+                        <!--valorHorasExtras-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="valorHorasExtras" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de horas extra">                            
+                        </div>                    
+                        <!--sePagaFondosReserva -->
+                        <div class="mb-3">
+                            <select class="form-select" formControlName="sePagaFondosReserva"
+                                aria-label="Default select example">
+                                <option selected disabled value="">Seleccione si se paga fondo de reserva</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <!--fondosReserva-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="fondosReserva" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de fondo de reserva" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('fondosReserva')?.hasError('minlength')">
+                                <span>El valor del fondo de reserca puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('fondosReserva')?.hasError('pattern')">
+                                <span>El valor del fondo de reserva puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--totalIngresos-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="totalIngresos" class="form-control form-control-lg"
+                                placeholder="Ingrese el total de ingresos" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('totalIngresos')?.hasError('minlength')">
+                                <span>El valor del fondo de reserca puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('totalIngresos')?.hasError('pattern')">
+                                <span>El valor del fondo de reserva puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--Iess-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="iess" class="form-control form-control-lg"
+                                placeholder="Ingrese el iess" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('iess')?.hasError('minlength')">
+                                <span>El valor del fondo de reserca puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('iess')?.hasError('pattern')">
+                                <span>El valor del fondo de reserva puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--anticipo-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="anticipo" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de anticipo">                            
+                        </div>   
+
+                        <!--prestamiIess-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="prestamiIess" class="form-control form-control-lg"
+                                placeholder="Ingrese el iess" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('prestamiIess')?.hasError('minlength')">
+                                <span>El valor del prestamiIess puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('prestamiIess')?.hasError('pattern')">
+                                <span>El valor del prestamiIess puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--totalEgreso-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="totalEgreso" class="form-control form-control-lg"
+                                placeholder="Ingrese el total egreso" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('totalEgreso')?.hasError('minlength')">
+                                <span>El valor del totalEgreso puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('totalEgreso')?.hasError('pattern')">
+                                <span>El valor del totalEgreso puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--liquido-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="liquidoRecibir" class="form-control form-control-lg"
+                                placeholder="Ingrese el liquidoRecibir" minlength="1" maxlength="7"
+                                pattern="[0-9\.]*">
+                            <div class="text-danger"
+                                *ngIf="rolIndividualForm.get('liquidoRecibir')?.hasError('minlength')">
+                                <span>El valor del liquidoRecibir puede contener <strong>mínimo 1
+                                        número.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="rolIndividualForm.get('liquidoRecibir')?.hasError('pattern')">
+                                <span>El valor del liquidoRecibir puede contener <strong>solo
+                                        números y punto.</strong></span>
+                            </div>
+                        </div>
+
+                        <!--numero Cuenta-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="numeroCuenta" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de numero de cuenta">                            
+                        </div>   
+
+                        <!--tipoCuenta-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="tipoCuenta" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de tipo cuenta">                            
+                        </div>   
+
+                        <!--institucionFinanciera-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="institucionFinanciera" class="form-control form-control-lg"
+                                placeholder="Ingrese el valor de institucion financiera">                            
+                        </div>                         
+
+                        <div class="text-danger" style="text-align: center;">
+                            <span><strong>{{mensaje}}</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <button routerLink="/nomina-pagos"
+                                class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="rolIndividualForm.invalid"
+                                class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
