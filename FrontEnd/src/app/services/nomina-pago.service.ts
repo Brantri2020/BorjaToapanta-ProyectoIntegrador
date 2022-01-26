@@ -35,8 +35,8 @@ export class NominaPagoService {
     return this.http.post(this.url1, nominaPago);
   }
 
-  obtenerNominaPago(id: string): Observable<any>{
-    return this.http.get(this.url1+id);
+  obtenerNominaPago(id: string,anho:any, mes:any): Observable<any>{
+    return this.http.get(this.url1+anho+"/"+mes+"/"+ id);
   }
 
   obtenerNominasPagoOrdenado(filtro: string,anho:string, mes:string): Observable<any>{

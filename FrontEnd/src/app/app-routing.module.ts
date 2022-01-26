@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'editar-empleado/:id', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] },
   { path: 'nomina-pagos', component: NominaPagosComponent, canActivate: [AuthGuard] },
-  { path: 'rol-individual', component: RolIndividualComponent, canActivate: [AuthGuard] }
+  { path: 'rol-individual/:anho/:mes/:id', component: RolIndividualComponent, canActivate: [AuthGuard] }
   
 ];
 

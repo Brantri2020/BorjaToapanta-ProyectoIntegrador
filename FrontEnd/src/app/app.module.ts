@@ -55,8 +55,8 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
     RolIndividualComponent,
     InicioComponent,
     ListarEmpleadoComponent,
-   CrearEmpleadoComponent,
-   NominaPagosComponent
+    CrearEmpleadoComponent,
+    NominaPagosComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +70,8 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  
-  
+
+
   providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService],
   bootstrap: [AppComponent]
 })

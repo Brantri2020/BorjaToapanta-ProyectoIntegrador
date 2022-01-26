@@ -121,8 +121,8 @@ const obtenerNominaPago = async (req, res, next) => {
                             data2.data().tipoCuenta,
                             data2.data().institucionFinanciera
                         );
-                        nominasPagoArray.push(nominaPag2);                   
-                    res.json(nominasPagoArray);
+                        //nominasPagoArray.push(nominaPag2);                   
+                    res.json(nominaPag2);
                 }
             } catch (error) {
                 res.status(400).send(error.message);

@@ -31,23 +31,23 @@ export class RolIndividualComponent implements OnInit {
     private aRouter: ActivatedRoute) {
 
     this.rolIndividualForm = this.fb.group({
-      cedula: ['', Validators.required],
-      nomina: ['', Validators.required],
-      cargo: ['', Validators.required],
-      salario: ['', Validators.required],
+      cedula: [''],
+      nomina: [''],
+      cargo: [''],
+      salario: [''],
       numHorasExtras: [''],
       valorHorasExtras: [''],
-      sePagaFondosReserva: [''],
-      fondosReserva: [''],
-      totalIngresos: [''],
-      iess: [''],
+      sePagaFondosReserva: ['', Validators.required],
+      fondosReserva: ['', Validators.required],
+      totalIngresos: ['', Validators.required],
+      iess: ['', Validators.required],
       anticipo: [''],
-      prestamiIess: [''],
-      totalEgreso: [''],
-      liquidoRecibir: [''],
-      numeroCuenta: ['', Validators.required],
-      tipoCuenta: ['', Validators.required],
-      institucionFinanciera: ['', Validators.required]
+      prestamiIess: ['', Validators.required],
+      totalEgreso: ['', Validators.required],
+      liquidoRecibir: ['', Validators.required],
+      numeroCuenta: [''],
+      tipoCuenta: [''],
+      institucionFinanciera: ['']
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
     this.anho = this.aRouter.snapshot.paramMap.get('anho');
@@ -95,6 +95,7 @@ export class RolIndividualComponent implements OnInit {
       })
     } else {
       //agregamos proveedor
+      window.alert("holis");
       console.log(ROL_INDIVIDUAL);
       /*
       this._nominaPagoService.guardarProveedor(PROVEEDOR).subscribe(data => {
@@ -110,14 +111,13 @@ export class RolIndividualComponent implements OnInit {
 
   esEditar() {
     if (this.id !== null) {
-      this.titulo = 'Editar Rol';
-      this._nominaPagoService.obtenerNominaPago(this.id).subscribe(data => {
+      
+      this._nominaPagoService.obtenerNominaPago(this.id, this.anho,this.mes).subscribe(data => {
         this.rolIndividualForm.setValue({
-
           cedula: data.cedula,
           nomina: data.nomina,
-          cargo: data.cargo,
           salario: data.salario,
+          cargo: data.cargo,
           numHorasExtras: data.numHorasExtras,
           valorHorasExtras: data.valorHorasExtras,
           sePagaFondosReserva: data.sePagaFondosReserva,
@@ -130,9 +130,7 @@ export class RolIndividualComponent implements OnInit {
           liquidoRecibir: data.liquidoRecibir,
           numeroCuenta: data.numeroCuenta,
           tipoCuenta: data.tipoCuenta,
-          institucionFinanciera: data.institucionFinanciera,
-
-
+          institucionFinanciera: data.institucionFinanciera
         })
       })
     }

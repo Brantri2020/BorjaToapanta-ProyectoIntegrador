@@ -146,7 +146,7 @@
                         <td>{{nominaPago.tipoCuenta}}</td>
                         <td>{{nominaPago.institucionFinanciera}}</td>
                         <td>
-                            <i [routerLink]="['/rol-individual', nominaPago.id, this.anho, this.mes]" class="far fa-edit text-primary"></i>
+                            <i [routerLink]="['/rol-individual', this.anho,this.mes,nominaPago.id]" class="far fa-edit text-primary"></i>
                             <i  class="fas fa-trash text-danger"></i>
                         </td>
                     </tr>
