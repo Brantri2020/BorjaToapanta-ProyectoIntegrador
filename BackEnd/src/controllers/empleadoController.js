@@ -68,7 +68,7 @@ const busquedaEmpleado = async(req, res, next) => {
 
             });
 
-            res.json(empleadosArray);
+            res.json(empleadoArray);
 
         }
     } catch (error) {
