@@ -36,9 +36,6 @@ const {
     obtenerEmpleadosOrdenados
 } = require('../controllers/empleadoController');
 
-
-
-
 const router = express.Router();
 
 // Login
