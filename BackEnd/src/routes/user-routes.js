@@ -36,14 +36,6 @@ const {
     obtenerEmpleadosOrdenados
 } = require('../controllers/empleadoController');
 
-//NOMINA PAGOS
-const {
-    obtenerNominasPago,
-    busquedaNominasPago,
-    obtenerNominasPagoOrdenados,
-    obtenerNominaPago,
-    actualizarRolIndividual
-} = require('../controllers/nominaPagoController');
 
 
 
