@@ -2,11 +2,34 @@
 
 const firebase = require('../db');
 const NominaPago = require("../models/nominaPago");
+const NominaPagoEmpleado = require("../models/nominaPagoEmpleado");
 const firestore = firebase.firestore();
 
 
-const obtenerNominasPago = async (req, res, next) => {
+const obtenerCed = async(req, res, next) => {
+    
+    try {
+        var cedula="";
+        const id = req.params.id;
+        const empleado = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').doc(id);
+        const data = await empleado.get();
+        if (!data.exists) {
+            res.status(404).send('Cedula no encontrada');
+        } else {
 
+            
+                cedula=data.data().cedula;
+        
+            res.json(cedula);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const obtenerNominaPagos = async (req, res, next) => {
+
+    
     try {
         const anho = req.params.anho;
         const mes = req.params.mes;
@@ -100,28 +123,28 @@ const obtenerNominaPago = async (req, res, next) => {
                     res.status(404).send('Nomina de pago no encontrado');
                 } else {
 
-                    
-                        const nominaPag2 = new NominaPago(
-                            0,
-                            data2.data().cedula,
-                            data2.data().nombre,
-                            data2.data().cargo,
-                            data2.data().salario,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            data2.data().numeroCuenta,
-                            data2.data().tipoCuenta,
-                            data2.data().institucionFinanciera
-                        );
-                        //nominasPagoArray.push(nominaPag2);                   
+
+                    const nominaPag2 = new NominaPago(
+                        0,
+                        data2.data().cedula,
+                        data2.data().nombre,
+                        data2.data().cargo,
+                        data2.data().salario,
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        data2.data().numeroCuenta,
+                        data2.data().tipoCuenta,
+                        data2.data().institucionFinanciera
+                    );
+                    //nominasPagoArray.push(nominaPag2);                   
                     res.json(nominaPag2);
                 }
             } catch (error) {
@@ -328,12 +351,12 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
     }
 }
 
-const actualizarRolIndividual = async(req, res, next) => {
+const actualizarRolIndividual = async (req, res, next) => {
     try {
         const id = req.params.id;
         const anho = req.params.anho;
         const mes = req.params.mes;
-        
+
         const data = req.body;
         const nominaPago = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc(id);
         await nominaPago.update(data);
@@ -343,11 +366,103 @@ const actualizarRolIndividual = async(req, res, next) => {
     }
 }
 
+const crearNominaPago = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+        const cedula = req.params.cedula;
+
+        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc().set(data);
+
+        //Guardar todo el resto de empleados
+        try {
+
+            firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+
+
+
+                    var nominaPagEmp = {
+                        "cedula": doc.data().cedula,
+                        "nomina": doc.data().nombre,
+                        "cargo": doc.data().cargo,
+                        "salario": doc.data().salario,
+                        "numHorasExtras": "",
+                        "valorHorasExtras": "",
+                        "sePagaFondosReserva": "",
+                        "fondosReserva": "",
+                        "totalIngresos": "",
+                        "iess": "",
+                        "anticipo": "",
+                        "prestamiIess": "",
+                        "totalEgreso": "",
+                        "liquidoRecibir": "",
+                        "numeroCuenta": doc.data().numeroCuenta,
+                        "tipoCuenta": doc.data().tipoCuenta,
+                        "institucionFinanciera": doc.data().institucionFinanciera
+                    }
+
+
+
+                    if (doc.data().cedula.toString() !== cedula) {                        
+                        try {
+                            firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc().set(nominaPagEmp);
+                        } catch (error) {
+                            console.log(error.message);
+                        }
+                    } else {
+
+
+                    }
+
+                });
+            })
+                .catch(error => {
+                    console.log("Error no puedo obtener estos datos: ", error)
+                })
+        } catch (error) {
+            console.log(error.message);
+        }
+
+        res.json('Nomina de pago guardada exitosamente');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+
+const comprobarIdNominaPago = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+
+        const nominaPago1 = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc(id);
+        const data2 = await nominaPago1.get();
+
+        if (!data2.exists) {
+            res.json("No");
+        } else {
+            res.json("Si");
+        }
+
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+
 module.exports = {
-    obtenerNominasPago,
+    obtenerNominaPagos,
     busquedaNominasPago,
     obtenerNominasPagoOrdenados,
     obtenerNominaPago,
-    actualizarRolIndividual
-
+    actualizarRolIndividual,
+    obtenerCed,
+    crearNominaPago,
+    comprobarIdNominaPago,
+    
 }

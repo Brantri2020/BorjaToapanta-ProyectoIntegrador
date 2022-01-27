@@ -31,17 +31,26 @@ export class NominaPagoService {
     return this.http.put(this.url1+anho+"/"+mes+"/"+ id, nominaPago);
   }
 
-  guardarNominaPago(nominaPago: NominaPago): Observable<any>{
-    return this.http.post(this.url1, nominaPago);
+  guardarNominaPago(nominaPago: NominaPago, anho:any, mes:any, cedula:any): Observable<any>{
+    return this.http.post(this.url1+anho+"/"+mes+"/"+cedula, nominaPago);
   }
 
   obtenerNominaPago(id: string,anho:any, mes:any): Observable<any>{
     return this.http.get(this.url1+anho+"/"+mes+"/"+ id);
   }
 
+  obtenerCedula(id: any): Observable<any>{
+    return this.http.get(this.url1+"ced/"+id);
+  }
+
   obtenerNominasPagoOrdenado(filtro: string,anho:string, mes:string): Observable<any>{
     return this.http.get(this.url1+anho+"/"+mes+"/nominasPago-ordenados/"+filtro);
   }
+
+  comprobarIdNominaPago(id: any,anho:any, mes:any): Observable<any>{
+    return this.http.get(this.url1+"comprobar/"+anho+"/"+mes+"/"+ id);
+  }
+
 }
 
 

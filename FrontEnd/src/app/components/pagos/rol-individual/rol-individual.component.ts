@@ -11,18 +11,19 @@ import { MustMatch } from 'src/app/services/must-match.validator';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
 
 
+
 @Component({
   selector: 'app-rol-individual',
   templateUrl: './rol-individual.component.html',
   styleUrls: ['./rol-individual.component.css']
 })
 export class RolIndividualComponent implements OnInit {
-
+  listNominasPago: NominaPago[] = [];
   rolIndividualForm: FormGroup;
   titulo = 'Rol Individual';
   id: string | null;
   anho: string | null;
-  mes:string | null;
+  mes: string | null;
   mensaje: string = "";
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -82,37 +83,65 @@ export class RolIndividualComponent implements OnInit {
       liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value,
       numeroCuenta: this.rolIndividualForm.get('numeroCuenta')?.value,
       tipoCuenta: this.rolIndividualForm.get('tipoCuenta')?.value,
-      institucionFinanciera: this.rolIndividualForm.get('institucionFinanciera')?.value,      
+      institucionFinanciera: this.rolIndividualForm.get('institucionFinanciera')?.value,
     }
-    if (this.id !== null || this.id !== "0") {
-      //editamos nomina
-      this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
-        this.toastr.success('El rol individual fue actualizado con éxito!', 'Rol Individual Actualizado!');
-        this.router.navigate(['/nomina-pagos']);
-      }, error => {
-        console.log(error);        
-        this.mensaje = error.error;
-      })
-    } else {
-      //agregamos proveedor
-      window.alert("holis");
-      console.log(ROL_INDIVIDUAL);
-      /*
-      this._nominaPagoService.guardarProveedor(PROVEEDOR).subscribe(data => {
-        this.toastr.success('El proveedor fue registrado con éxito!', 'Proveedor Registrado!');
-        this.router.navigate(['/proveedores']);
-      }, error => {
-        console.log(error);
-        this.mensaje = error.error;
-      })
-      */
-    }
+
+
+
+
+    this._nominaPagoService.comprobarIdNominaPago(this.id, this.anho, this.mes).subscribe(data => {
+
+      if(data=="Si"){
+        //editamos nomina
+        this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
+          this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
+          this.router.navigate(['/nomina-pagos']);
+        }, error => {
+          console.log(error);        
+          this.mensaje = error.error;
+        })
+      }else{
+        
+
+        this._nominaPagoService.obtenerCedula(this.id).subscribe(data => {
+      
+          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL,this.anho,this.mes,data).subscribe(data => {
+            this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
+            this.router.navigate(['/nomina-pagos']);
+            
+          }, error => {
+            console.log(error);
+            this.mensaje = error.error;
+          })
+          
+    
+        }, error => {
+          console.log(error);
+        })
+
+        
+          //agregamos nomina ---          
+          
+          
+      }
+      
+       
+
+
+    }, error => {
+      console.log(error);
+      this.mensaje = error.error;
+    })
+
+
+        
   }
+
 
   esEditar() {
     if (this.id !== null) {
-      
-      this._nominaPagoService.obtenerNominaPago(this.id, this.anho,this.mes).subscribe(data => {
+
+      this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
         this.rolIndividualForm.setValue({
           cedula: data.cedula,
           nomina: data.nomina,
@@ -134,6 +163,20 @@ export class RolIndividualComponent implements OnInit {
         })
       })
     }
+  }
+
+  obtenerCedula(id: any) {
+    var cedulita ="";
+    this._nominaPagoService.obtenerCedula(id).subscribe(data => {
+      
+      cedulita= data.toString();
+      
+
+    }, error => {
+      console.log(error);
+    })
+return cedulita;
+
   }
 
 

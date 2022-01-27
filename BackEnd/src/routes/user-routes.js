@@ -35,12 +35,7 @@ const {
     obtenerEmpleadosOrdenados
 } = require('../controllers/empleadoController');
 
-//NOMINA PAGOS
-const { obtenerNominasPago, 
-    busquedaNominasPago, 
-    obtenerNominasPagoOrdenados,
-    obtenerNominaPago,
-    actualizarRolIndividual } = require('../controllers/nominaPagoController');
+
 
 
 const router = express.Router();
@@ -72,12 +67,28 @@ router.get('/empleado/:id', obtenerEmpleado);
 router.get('/empleados/empleados-ordenados/:filtro', obtenerEmpleadosOrdenados);
 
 //NOMINAS
+//NOMINA PAGOS
+const { obtenerNominaPagos,
+    busquedaNominasPago,
+    obtenerNominasPagoOrdenados,
+    obtenerNominaPago,
+    actualizarRolIndividual,
+    crearNominaPago,
+    comprobarIdNominaPago
+} = require('../controllers/nominaPagoController');
 
-router.get('/nominasPago/:anho/:mes', obtenerNominasPago);
+const { obtenerCed
+} = require('../controllers/nominaPagoController');
+router.get('/nominasPago/ced/:id', obtenerCed);
+router.get('/nominasPago/:anho/:mes', obtenerNominaPagos);
 router.get('/nominasPago/:anho/:mes/busqueda/:busqueda', busquedaNominasPago);
 router.get('/nominasPago/:anho/:mes/nominasPago-ordenados/:filtro', obtenerNominasPagoOrdenados);
 router.get('/nominasPago/:anho/:mes/:id', obtenerNominaPago);
 router.put('/nominasPago/:anho/:mes/:id', actualizarRolIndividual);
+router.post('/nominasPago/:anho/:mes/:cedula', crearNominaPago);
+router.get('/nominasPago/comprobar/:anho/:mes/:id', comprobarIdNominaPago);
+
+
 
 //router.get('/students', getAllStudents);
 //router.get('/student/:id', getStudent);

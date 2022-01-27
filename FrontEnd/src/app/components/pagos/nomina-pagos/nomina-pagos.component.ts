@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NominaPago } from 'src/app/model/nominaPago';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nomina-pagos',
@@ -27,13 +28,15 @@ export class NominaPagosComponent implements OnInit {
 
   constructor(private _nominaPagoServices: NominaPagoService,
     private toastr: ToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private router: Router,) {
     this.busquedaNomForm = this.fb.group({
       busqueda: ['',]
     });
   }
 
   ngOnInit(): void {
+    this.router.navigate(['/nomina-pagos']); 
     this.llenarFecha();
     for (var i = 2010; i < 2050; i++) {
       this.listaAnhos.push(i);
@@ -107,6 +110,9 @@ export class NominaPagosComponent implements OnInit {
       console.log(error);
     })
   }
+
+
+  
 
   ordenarNominaPago(filtro: any) {
     this.i++;

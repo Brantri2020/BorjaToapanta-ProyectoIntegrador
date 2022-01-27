@@ -101,6 +101,7 @@ const actualizarEmpleado = async(req, res, next) => {
 const crearEmpleado = async(req, res, next) => {
     try {
         const data = req.body;
+        console.log(data);
 
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').doc().set(data);
 
