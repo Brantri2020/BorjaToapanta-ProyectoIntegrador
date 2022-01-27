@@ -25,6 +25,7 @@ const {
     //deleteStudent
 } = require('../controllers/proveedorController');
 
+//Empleado
 const {
     obtenerEmpleados,
     busquedaEmpleado,
@@ -35,6 +36,14 @@ const {
     obtenerEmpleadosOrdenados
 } = require('../controllers/empleadoController');
 
+//NOMINA PAGOS
+const {
+    obtenerNominasPago,
+    busquedaNominasPago,
+    obtenerNominasPagoOrdenados,
+    obtenerNominaPago,
+    actualizarRolIndividual
+} = require('../controllers/nominaPagoController');
 
 
 
@@ -68,7 +77,8 @@ router.get('/empleados/empleados-ordenados/:filtro', obtenerEmpleadosOrdenados);
 
 //NOMINAS
 //NOMINA PAGOS
-const { obtenerNominaPagos,
+const {
+    obtenerNominaPagos,
     busquedaNominasPago,
     obtenerNominasPagoOrdenados,
     obtenerNominaPago,
@@ -77,7 +87,8 @@ const { obtenerNominaPagos,
     comprobarIdNominaPago
 } = require('../controllers/nominaPagoController');
 
-const { obtenerCed
+const {
+    obtenerCed
 } = require('../controllers/nominaPagoController');
 router.get('/nominasPago/ced/:id', obtenerCed);
 router.get('/nominasPago/:anho/:mes', obtenerNominaPagos);
@@ -87,6 +98,28 @@ router.get('/nominasPago/:anho/:mes/:id', obtenerNominaPago);
 router.put('/nominasPago/:anho/:mes/:id', actualizarRolIndividual);
 router.post('/nominasPago/:anho/:mes/:cedula', crearNominaPago);
 router.get('/nominasPago/comprobar/:anho/:mes/:id', comprobarIdNominaPago);
+
+//Salario
+const {
+    obtenerSalarios,
+    busquedaSalario,
+    eliminarSalario,
+    actualizarSalario,
+    crearSalario,
+    obtenerSalario,
+    obtenerSalariosOrdenados
+} = require('../controllers/salarioController');
+router.get('/salarios/', obtenerSalarios);
+router.get('/salarios/busqueda/:busqueda', busquedaSalario);
+router.delete('/salarios/:id', eliminarSalario);
+router.put('/salario/:id', actualizarSalario);
+router.post('/salario', crearSalario);
+router.get('/salario/:id', obtenerSalario);
+router.get('/salarios/salarios-ordenados/:filtro', obtenerSalariosOrdenados);
+
+
+
+
 
 
 

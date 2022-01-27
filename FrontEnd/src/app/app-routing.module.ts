@@ -16,6 +16,8 @@ import { CrearEmpleadoComponent } from './components/empleado/crear-empleado/cre
 import { ListarEmpleadoComponent } from './components/empleado/listar-empleado/listar-empleado.component';
 import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pagos.component';
 import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
+import { CrearSalarioComponent } from './components/pagos/salario/crear-salario/crear-salario.component';
+import { ListarSalarioComponent } from './components/pagos/salario/listar-salario/listar-salario.component';
 
 
 
@@ -34,7 +36,10 @@ const routes: Routes = [
   { path: 'editar-empleado/:id', component: CrearEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'proveedores', component: ListarProveedorComponent, canActivate: [AuthGuard] },
   { path: 'nomina-pagos', component: NominaPagosComponent, canActivate: [AuthGuard] },
-  { path: 'rol-individual/:anho/:mes/:id', component: RolIndividualComponent, canActivate: [AuthGuard] }
+  { path: 'rol-individual/:anho/:mes/:id', component: RolIndividualComponent, canActivate: [AuthGuard]},
+  { path: 'salarios', component: ListarSalarioComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-salario', component: CrearSalarioComponent, canActivate: [AuthGuard] },
+  { path: 'editar-salario/:id', component: CrearSalarioComponent, canActivate: [AuthGuard] }
   
 ];
 
