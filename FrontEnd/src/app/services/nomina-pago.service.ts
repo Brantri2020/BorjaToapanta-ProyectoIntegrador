@@ -51,6 +51,10 @@ export class NominaPagoService {
     return this.http.get(this.url1+"comprobar/"+anho+"/"+mes+"/"+ id);
   }
 
+  eliminarNominasPago(anho: any, mes: any): Observable<any>{
+    return this.http.delete(this.url1+"eliminar/"+anho+"/"+mes);
+  }
+
 }
 
 

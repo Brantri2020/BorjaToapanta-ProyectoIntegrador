@@ -6,10 +6,10 @@ const NominaPagoEmpleado = require("../models/nominaPagoEmpleado");
 const firestore = firebase.firestore();
 
 
-const obtenerCed = async(req, res, next) => {
-    
+const obtenerCed = async (req, res, next) => {
+
     try {
-        var cedula="";
+        var cedula = "";
         const id = req.params.id;
         const empleado = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').doc(id);
         const data = await empleado.get();
@@ -17,9 +17,9 @@ const obtenerCed = async(req, res, next) => {
             res.status(404).send('Cedula no encontrada');
         } else {
 
-            
-                cedula=data.data().cedula;
-        
+
+            cedula = data.data().cedula;
+
             res.json(cedula);
         }
     } catch (error) {
@@ -29,7 +29,7 @@ const obtenerCed = async(req, res, next) => {
 
 const obtenerNominaPagos = async (req, res, next) => {
 
-    
+
     try {
         const anho = req.params.anho;
         const mes = req.params.mes;
@@ -378,7 +378,7 @@ const crearNominaPago = async (req, res, next) => {
         //Guardar todo el resto de empleados
         try {
 
-            firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').get().then((querySnapshot) => {
+            await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
 
 
@@ -405,7 +405,7 @@ const crearNominaPago = async (req, res, next) => {
 
 
 
-                    if (doc.data().cedula.toString() !== cedula) {                        
+                    if (doc.data().cedula.toString() !== cedula) {
                         try {
                             firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc().set(nominaPagEmp);
                         } catch (error) {
@@ -453,6 +453,40 @@ const comprobarIdNominaPago = async (req, res, next) => {
     }
 }
 
+const eliminarNominasPago = async (req, res, next) => {
+
+
+    try {
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+        const nominas = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + '/' + mes);
+        const data = await nominas.get();
+        const nominasIdArray = [];
+        if (data.empty) {
+            res.status(404).send('No se encontraron nominas id');
+        } else {
+            data.forEach(doc => {
+                nominasIdArray.push(doc.id);
+                try {
+                    
+                    firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + '/' + mes).doc(doc.id).delete();
+
+                } catch (error) {
+                    res.status(400).send(error.message);
+                }
+
+
+            });
+            res.json('Proveedor eliminado correctamente');
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+
+
+
+}
+
 
 
 module.exports = {
@@ -464,5 +498,5 @@ module.exports = {
     obtenerCed,
     crearNominaPago,
     comprobarIdNominaPago,
-    
+    eliminarNominasPago
 }

@@ -139,13 +139,15 @@
                         <td>{{nominaPago.institucionFinanciera}}</td>
                         <td>
                             <i [routerLink]="['/rol-individual', this.anho,this.mes,nominaPago.id]" class="far fa-edit text-primary"></i>
-                            <i class="fas fa-trash text-danger"></i>
+                            <i (click)="eliminarNominaPago(nominaPago.id)" class="fas fa-trash text-danger"></i>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <h5 style="text-align: start; margin-top: 10px;" *ngIf="listNominasPago.length == 0">No hay nominas de pago para mostrar
             </h5>
+
+            <button class="btn btn-danger float-center" (click)="eliminarNominasPago(this.anho,this.mes)" >Eliminar nómina de pago</button>
         </div>
 
     </div>

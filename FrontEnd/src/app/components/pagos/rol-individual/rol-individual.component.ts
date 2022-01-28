@@ -104,8 +104,8 @@ export class RolIndividualComponent implements OnInit {
         
 
         this._nominaPagoService.obtenerCedula(this.id).subscribe(data => {
-      
-          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL,this.anho,this.mes,data).subscribe(data => {
+          
+          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL,this.anho,this.mes,data.toString()).subscribe(data => {
             this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
             this.router.navigate(['/nomina-pagos']);
             

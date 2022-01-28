@@ -36,7 +36,7 @@ export class NominaPagosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.navigate(['/nomina-pagos']); 
+    this.router.navigate(['/nomina-pagos']);
     this.llenarFecha();
     for (var i = 2010; i < 2050; i++) {
       this.listaAnhos.push(i);
@@ -100,6 +100,29 @@ export class NominaPagosComponent implements OnInit {
 
   }
 
+  eliminarNominasPago(anho: any, mes: any) {
+
+    var resultado = window.confirm('¿Estas seguro de eliminar las nominas de pago?');
+    if (resultado === true) {
+      this._nominaPagoServices.eliminarNominasPago(anho, mes).subscribe(data => {
+        this.toastr.error('Las nominas de pago fueron eliminada con éxito', 'Nomias de pago eliminadas');
+
+        this.router.navigate(['/nomina-pagos']);
+        this.obtenerNominasPago(anho, mes);
+
+      }, error => {
+        console.log(error);
+      })
+    } else {
+      this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
+
+      this.router.navigate(['/nomina-pagos']);
+    }
+
+    
+
+  }
+
 
   obtenerNominasPago(anho: any, mes: any) {
     this._nominaPagoServices.getNominasPago(anho, mes).subscribe(data => {
@@ -112,7 +135,7 @@ export class NominaPagosComponent implements OnInit {
   }
 
 
-  
+
 
   ordenarNominaPago(filtro: any) {
     this.i++;
@@ -129,18 +152,52 @@ export class NominaPagosComponent implements OnInit {
     })
   }
 
-  /*
-    eliminarNominaPago(id: any) {
-  
-      this._nominaPagoServices.eliminarNominaPago(id).subscribe(data => {
+
+  eliminarNominaPago(id: any) {
+    
+    
+    this._nominaPagoServices.obtenerNominaPago(id, this.anho, this.mes).subscribe(data => {
+      
+      const ROL_INDIVIDUAL= {
+
+        cedula: data.cedula,
+        nomina: data.nomina,
+        cargo: data.cargo,
+        salario: data.salario,
+        numHorasExtras: "",
+        valorHorasExtras: "",
+        sePagaFondosReserva: "",
+        fondosReserva: "",
+        totalIngresos: "",
+        iess: "",
+        anticipo: "",
+        prestamiIess: "",
+        totalEgreso: "",
+        liquidoRecibir: "",
+        numeroCuenta: data.numeroCuenta,
+        tipoCuenta: data.tipoCuenta,
+        institucionFinanciera: data.institucionFinanciera
+      }
+      
+      this._nominaPagoServices.editarNominaPago(id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
         this.toastr.error('La nómina de pago fué eliminada con éxito', 'Nómina de pago eliminada');
-        this.obtenerNominasPago();
-  
+        this.router.navigate(['/nomina-pagos']);
+        this.obtenerNominasPago(this.anho, this.mes);
+        
       }, error => {
         console.log(error);
+        
       })
-    }
-  */
+      
+    }, error => {
+      
+      console.log(error);
+    })
+
+    this.obtenerNominasPago(this.anho, this.mes);
+
+  }
+
 
 
 

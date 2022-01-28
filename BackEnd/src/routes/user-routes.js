@@ -73,7 +73,8 @@ const {
     obtenerNominaPago,
     actualizarRolIndividual,
     crearNominaPago,
-    comprobarIdNominaPago
+    comprobarIdNominaPago,
+    eliminarNominasPago
 } = require('../controllers/nominaPagoController');
 
 const {
@@ -87,6 +88,7 @@ router.get('/nominasPago/:anho/:mes/:id', obtenerNominaPago);
 router.put('/nominasPago/:anho/:mes/:id', actualizarRolIndividual);
 router.post('/nominasPago/:anho/:mes/:cedula', crearNominaPago);
 router.get('/nominasPago/comprobar/:anho/:mes/:id', comprobarIdNominaPago);
+router.delete('/nominasPago/eliminar/:anho/:mes', eliminarNominasPago);
 
 //Salario
 const {

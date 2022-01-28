@@ -96,6 +96,8 @@ const eliminarProveedor = async(req, res, next) => {
     }
 }
 
+
+
 const actualizarProveedor = async(req, res, next) => {
     try {
         const id = req.params.id;
