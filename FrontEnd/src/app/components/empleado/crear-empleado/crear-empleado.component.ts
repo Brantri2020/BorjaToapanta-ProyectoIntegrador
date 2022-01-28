@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Empleado } from 'src/app/model/empleado';
 import { MustMatch } from 'src/app/services/must-match.validator';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { Salario } from 'src/app/model/salario';
+import { SalarioService } from 'src/app/services/salario.service';
+
 
 
 @Component({
@@ -18,8 +21,10 @@ export class CrearEmpleadoComponent implements OnInit {
   titulo = 'Crear Empleado';
   id: string | null;
   mensaje: string = "";
+  listSalarios: Salario[] = [];
 
-  constructor(private fb: FormBuilder,
+  constructor(private _salarioService: SalarioService,
+    private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
     private _empleadoService: EmpleadoService,
@@ -37,6 +42,9 @@ export class CrearEmpleadoComponent implements OnInit {
       this.id = this.aRouter.snapshot.paramMap.get('id');
 
      }
+     
+
+    
 
   ngOnInit(): void {
     this.esEditar();
@@ -96,8 +104,20 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   
+  obtenerSalarios(){
+    this._salarioService.getSalarios().subscribe(data =>{
+      console.log(data);
+      this.listSalarios= data;
+    
+    },error =>{
+      console.log(error);
+    })
+    return  this.listSalarios;
+  }
+  
 
   
 
 
 }
+
