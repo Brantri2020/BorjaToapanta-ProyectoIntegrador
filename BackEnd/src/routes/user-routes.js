@@ -3,11 +3,6 @@ const {
     addUser,
     getAllEmails,
     obtenerNombre
-
-    // getAllStudents, 
-    // getStudent,
-    //updateStudent,
-    //deleteStudent
 } = require('../controllers/userController');
 
 const {
@@ -19,10 +14,6 @@ const {
     obtenerProveedor,
     obtenerProveedoresOrdenados
 
-    // getAllStudents, 
-    // getStudent,
-    //updateStudent,
-    //deleteStudent
 } = require('../controllers/proveedorController');
 
 //Empleado
@@ -64,7 +55,7 @@ router.post('/empleado', crearEmpleado);
 router.get('/empleado/:id', obtenerEmpleado);
 router.get('/empleados/empleados-ordenados/:filtro', obtenerEmpleadosOrdenados);
 
-//NOMINAS
+
 //NOMINA PAGOS
 const {
     obtenerNominaPagos,
@@ -109,15 +100,6 @@ router.get('/salario/:id', obtenerSalario);
 router.get('/salarios/salarios-ordenados/:filtro', obtenerSalariosOrdenados);
 
 
-
-
-
-
-
-//router.get('/students', getAllStudents);
-//router.get('/student/:id', getStudent);
-//router.put('/student/:id', updateStudent);
-//router.delete('/student/:id', deleteStudent);
 
 
 module.exports = {
