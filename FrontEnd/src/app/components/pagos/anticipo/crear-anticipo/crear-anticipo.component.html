@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="anticipoForm" (ngSubmit)="agregarAnticipo()">
+
+                        <!--Cédula Empleado-->
+                        <div class="mb-3">
+                            <select class="form-select" formControlName="cedula" aria-label="Default select example" placeholder="Seleccione el empleado">
+                                <option selected disabled value="" >Seleccione el empleado</option>
+                                <option value="{{listEmpleados.cedula}} {{listEmpleados.nombre}}" *ngFor="let listEmpleados of emple">{{listEmpleados.cedula}} {{listEmpleados.nombre}}</option>
+                            </select>
+                            <div class="text-danger" *ngIf="anticipoForm.get('cedula')?.hasError('required') && anticipoForm.get('cedula')?.touched">
+                                <span>El empleado <strong>es obligatorio</strong>, seleccione uno.</span>
+                            </div>
+                        </div>
+
+
+                        <!--Valor Anticipo-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="valorAnticipo" class="form-control form-control-lg" placeholder="Ingrese el valor del Anticipo" minlength="4" maxlength="8" pattern="[0-9\.\, ]*">
+                            <div class="text-danger" *ngIf="anticipoForm.get('valorAnticipo')?.hasError('required') && anticipoForm.get('cargo')?.touched">
+                                <span>El valor del Anticipo <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="anticipoForm.get('valorAnticipo')?.hasError('minlength')">
+                                <span>El valor del Anticipo puede tener <strong>mínimo 4 caracteres o máximo 8.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="anticipoForm.get('valorAnticipo')?.hasError('pattern')">
+                                <span>El valor del Anticipo tiene el formato <strong>0.00</strong></span>
+                            </div>
+                        </div>
+                        <!--Fecha Anticipo-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="fechaAnticipo" class="form-control form-control-lg" placeholder="Ingrese la fecha del Anticipo" minlength="10" maxlength="10" pattern="[0-9\/ ]*">
+                            <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('required') && anticipoForm.get('salario')?.touched">
+                                <span>La fecha del Anticipo <strong>es obligatoria.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('minlength')">
+                                <span>La fecha del Anticipo solo puede tener el formato <strong>DD/MM/AAAA</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('pattern')">
+                                <span>La fecha del Anticipo puede contener <strong>números y el símbolo /</strong></span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="text-danger" style="text-align: center;">
+                            <span><strong>{{mensaje}}</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <button routerLink="/anticipos" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="anticipoForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

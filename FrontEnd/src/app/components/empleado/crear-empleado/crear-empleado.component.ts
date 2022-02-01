@@ -22,6 +22,8 @@ export class CrearEmpleadoComponent implements OnInit {
   id: string | null;
   mensaje: string = "";
   listSalarios: Salario[] = [];
+  salar = [{"cargo":""}];
+  salario2: string[] = [];
 
   constructor(private _salarioService: SalarioService,
     private fb: FormBuilder,
@@ -47,41 +49,50 @@ export class CrearEmpleadoComponent implements OnInit {
     
 
   ngOnInit(): void {
+      //obtener salarios
+        this._salarioService.getSalarios().subscribe(res =>{      
+        this.salar=res;
+        }, err => console.log(err))
+
+
     this.esEditar();
   }
 
   agregarEmpleado() {
+
+    
+
     const EMPLEADO: Empleado = {
-      cedula: this.empleadoForm.get('cedula')?.value,
-      nombre: this.empleadoForm.get('nombre')?.value,
-      cargo: this.empleadoForm.get('cargo')?.value,
-      salario: this.empleadoForm.get('salario')?.value,
-      numeroCuenta: this.empleadoForm.get('numeroCuenta')?.value,
-      tipoCuenta: this.empleadoForm.get('tipoCuenta')?.value,
-      institucionFinanciera: this.empleadoForm.get('institucionFinanciera')?.value
-    }
-    if (this.id !== null) {
-      //editamos empleado
-      this._empleadoService.editarEmpleado(this.id, EMPLEADO).subscribe(data => {
-        this.toastr.success('El empleado fue actualizado con éxito!', 'Empleado Actualizado!');
-        this.router.navigate(['/empleados']);
-      }, error => {
-        console.log(error);
-        window.alert("HIII");
-        this.mensaje = error.error;
-      })
-    } else {
-      //agregamos empleado
-      console.log(EMPLEADO);
-      this._empleadoService.guardarEmpleado(EMPLEADO).subscribe(data => {
-        this.toastr.success('El empleado fue registrado con éxito!', 'Empleado Registrado!');
-        this.router.navigate(['/empleados']);
-      }, error => {
-        console.log(error);
-        this.mensaje = error.error;
-      })
-    }
+    cedula: this.empleadoForm.get('cedula')?.value,
+    nombre: this.empleadoForm.get('nombre')?.value,
+    cargo: this.empleadoForm.get('cargo')?.value,
+    salario: this.empleadoForm.get('salario')?.value,
+    numeroCuenta: this.empleadoForm.get('numeroCuenta')?.value,
+    tipoCuenta: this.empleadoForm.get('tipoCuenta')?.value,
+    institucionFinanciera: this.empleadoForm.get('institucionFinanciera')?.value
   }
+  if (this.id !== null) {
+    //editamos empleado
+    this._empleadoService.editarEmpleado(this.id, EMPLEADO).subscribe(data => {
+      this.toastr.success('El empleado fue actualizado con éxito!', 'Empleado Actualizado!');
+      this.router.navigate(['/empleados']);
+    }, error => {
+      console.log(error);
+      window.alert("HIII");
+      this.mensaje = error.error;
+    })
+  } else {
+    //agregamos empleado
+    console.log(EMPLEADO);
+    this._empleadoService.guardarEmpleado(EMPLEADO).subscribe(data => {
+      this.toastr.success('El empleado fue registrado con éxito!', 'Empleado Registrado!');
+      this.router.navigate(['/empleados']);
+    }, error => {
+      console.log(error);
+      this.mensaje = error.error;
+    })
+  }
+}
 
   esEditar() {
     if (this.id !== null) {
@@ -104,6 +115,9 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   
+  
+  
+
   obtenerSalarios(){
     this._salarioService.getSalarios().subscribe(data =>{
       console.log(data);
@@ -112,12 +126,21 @@ export class CrearEmpleadoComponent implements OnInit {
     },error =>{
       console.log(error);
     })
-    return  this.listSalarios;
   }
-  
+
+  probarFuncion(){
+    this.obtenerSalarios();
+    this.listSalarios.forEach(element => {
+      if (this.empleadoForm.get('cargo')?.value=='salario.cargo'){
+        window.alert("salario.salario");
+      }
+    });
+  }
+
 
   
-
 
 }
+
+
 

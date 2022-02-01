@@ -99,6 +99,24 @@ router.post('/salario', crearSalario);
 router.get('/salario/:id', obtenerSalario);
 router.get('/salarios/salarios-ordenados/:filtro', obtenerSalariosOrdenados);
 
+//Anticipo
+const {
+    obtenerAnticipos,
+    busquedaAnticipo,
+    eliminarAnticipo,
+    actualizarAnticipo,
+    crearAnticipo,
+    obtenerAnticipo,
+    obtenerAnticiposOrdenados
+} = require('../controllers/anticipoController');
+router.get('/anticipos/:anho/:mes', obtenerAnticipos);
+router.get('/anticipos/:anho/:mes/busqueda/:busqueda', busquedaAnticipo);
+router.delete('/anticipos/:anho/:mes/:id', eliminarAnticipo);
+router.put('/anticipo/:anho/:mes/:id', actualizarAnticipo);
+router.post('/anticipo/:anho/:mes', crearAnticipo);
+router.get('/anticipo/:anho/:mes/:id', obtenerAnticipo);
+router.get('/anticipos/:anho/:mes/salarios-ordenados/:filtro', obtenerAnticiposOrdenados);
+
 
 
 
