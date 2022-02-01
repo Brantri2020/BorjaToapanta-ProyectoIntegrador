@@ -1,0 +1,118 @@
+<app-menu></app-menu>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="padding-left: 50px; padding-right: 50px;">
+
+    <a class="navbar-brand" href="nomina-pagos">Anticipos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="nomina-pagos">Nómina de Pagos <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Anticipos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="nuevo-anticipo">Generar Anticipo <span class="sr-only">(current)</span></a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Salarios
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="salarios">Salarios <span class="sr-only">(current)</span></a>
+                    <a class="dropdown-item" href="nuevo-salario">Añadir Salarios <span class="sr-only">(current)</span></a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<!--TABLA-->
+<div class="container mt-5">
+
+    <div class="card">
+        <div class="card-body text-center table-responsive">
+            <div class="row ">
+                <div class="col-3">
+                    <select class="form-select" name="mesSelect" id="mesSelect" aria-label="Default select example">
+                        <option selected disabled value="">Mes</option>
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Septiembre">Septiembre</option>
+                        <option value="Octubre">Octubre</option>
+                        <option value="Noviembre">Noviembre</option>
+                        <option value="Diciembre">Diciembre</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <span class="titulo">ANTICIPOS</span>
+                    <br>
+                    <span class="titulo">{{mes}} {{anho}}</span>
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    <select class="form-select" name="anhoSelect" id="anhoSelect" aria-label="Default select example">
+                        <option selected disabled value="">Año</option>
+                        <option *ngFor="let anho of listaAnhos" value = {{anho}}>{{anho}}</option>                        
+                    </select>
+                </div>
+
+            </div>
+
+
+
+
+
+            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaAntForm" (ngSubmit)="buscarAnticipo()">
+                <div class="col-auto">
+                    <label for="inputPassword2" class="visually-hidden">Buscar</label>
+                    <input type="text" class="form-control" formControlName="busqueda" placeholder="Búsqueda">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">BUSCAR</button>
+                </div>
+            </form>
+
+
+
+
+
+            <table *ngIf="listAnticipo.length > 0" class="table table-striped table-hover align-middle mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col" (click)="ordenarAnticipo('cedulaEmpleado')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Cédula Empleado</th>
+                        <th scope="col" (click)="ordenarAnticipo('valorAnticipo')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Valor del Anticipo</th>
+                        <th scope="col" (click)="ordenarAnticipo('fechaAnticipo')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Fecha del Anticipo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let anticipo of listAnticipo">
+                        <td>{{anticipo.cedulaEmpleado}}</td>
+                        <td>{{anticipo.valorAnticipo}}</td>
+                        <td>{{anticipo.fechaAnticipo}}</td>
+                        <td>
+                            <i [routerLink]="['/editar-anticipo', anticipo.id]" class="far fa-edit text-primary"></i>
+                            <i (click)="eliminarAnticipo(anticipo.id)" class="fas fa-trash text-danger"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 style="text-align: start; margin-top: 10px;" *ngIf="listAnticipo.length == 0">No hay anticipos para mostrar
+            </h5>
+
+
+        </div>
+
+    </div>
+</div>

@@ -18,6 +18,8 @@ import { NominaPagosComponent } from './components/pagos/nomina-pagos/nomina-pag
 import { RolIndividualComponent } from './components/pagos/rol-individual/rol-individual.component';
 import { CrearSalarioComponent } from './components/pagos/salario/crear-salario/crear-salario.component';
 import { ListarSalarioComponent } from './components/pagos/salario/listar-salario/listar-salario.component';
+import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-anticipo/crear-anticipo.component';
+import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anticipo/listar-anticipo.component';
 
 
 
@@ -39,7 +41,11 @@ const routes: Routes = [
   { path: 'rol-individual/:anho/:mes/:id', component: RolIndividualComponent, canActivate: [AuthGuard]},
   { path: 'salarios', component: ListarSalarioComponent, canActivate: [AuthGuard] },
   { path: 'nuevo-salario', component: CrearSalarioComponent, canActivate: [AuthGuard] },
-  { path: 'editar-salario/:id', component: CrearSalarioComponent, canActivate: [AuthGuard] }
+  { path: 'editar-salario/:id', component: CrearSalarioComponent, canActivate: [AuthGuard] },
+  { path: 'anticipos', component: ListarAnticipoComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-anticipo', component: CrearAnticipoComponent, canActivate: [AuthGuard] },
+  { path: 'editar-anticipo/:id', component: CrearAnticipoComponent, canActivate: [AuthGuard] },
+  
   
 ];
 
