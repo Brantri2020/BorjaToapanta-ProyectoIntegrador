@@ -39,7 +39,7 @@
 
                         <!--Cargo-->
                         <div class="mb-3">
-                            <select class="form-select" formControlName="cargo" aria-label="Default select example">
+                            <select class="form-select" formControlName="cargo" aria-label="Default select example" id=selectCargo>
                                 <option selected disabled value="" >Seleccione el cargo</option>
                                 <option value="{{listSalarios.cargo}}" *ngFor="let listSalarios of salar">{{listSalarios.cargo}}</option>
                             </select>
@@ -53,16 +53,8 @@
 
                         <!--Salario-->
                         <div class="mb-3">
-                            <input type="text" formControlName="salario" class="form-control form-control-lg" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9\$\.\, ]*">
-                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('required') && empleadoForm.get('salario')?.touched">
-                                <span>El salario del empleado <strong>es obligatorio.</strong></span>
-                            </div>
-                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('minlength')">
-                                <span>El salario del empleado puede tener el formato <strong>0.00</strong> o <strong>$0.00</strong></span>
-                            </div>
-                            <div class="text-danger" *ngIf="empleadoForm.get('salario')?.hasError('pattern')">
-                                <span>El salario del empleado puede contener <strong>números, coma o punto y el signo de dólar $.</strong></span>
-                            </div>
+                            <input readonly type="text" formControlName="salario" class="form-control form-control-lg" placeholder={{sal}}>
+
                         </div>
 
 
