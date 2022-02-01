@@ -21,15 +21,15 @@
                         </div>
                         <!--Salario-->
                         <div class="mb-3">
-                            <input type="text" formControlName="salario" class="form-control form-control-lg" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9\$\.\, ]*">
+                            <input type="text" formControlName="salario" class="form-control form-control-lg" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                             <div class="text-danger" *ngIf="salarioForm.get('salario')?.hasError('required') && salarioForm.get('salario')?.touched">
                                 <span>El salario <strong>es obligatorio.</strong></span>
                             </div>
                             <div class="text-danger" *ngIf="salarioForm.get('salario')?.hasError('minlength')">
-                                <span>El salario puede tener el formato <strong>0.00</strong> o <strong>$0.00</strong></span>
+                                <span>El salario puede tener el formato <strong>0.00</strong></span>
                             </div>
                             <div class="text-danger" *ngIf="salarioForm.get('salario')?.hasError('pattern')">
-                                <span>El salario puede contener <strong>números, coma o punto y el signo de dólar $.</strong></span>
+                                <span>El salario puede contener <strong>números incluyendo el punto.</strong></span>
                             </div>
                         </div>
 

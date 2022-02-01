@@ -11,7 +11,7 @@
         totalIngresos,
         iess,
         anticipo,
-        prestamiIess,
+        prestamoIess,
         totalEgreso,
         liquidoRecibir,
         numeroCuenta,
@@ -29,7 +29,7 @@
             this.totalIngresos=totalIngresos;
             this.iess=iess;
             this.anticipo=anticipo;
-            this.prestamiIess=prestamiIess;
+            this.prestamoIess=prestamoIess;
             this.totalEgreso=totalEgreso;
             this.liquidoRecibir=liquidoRecibir;
             this.numeroCuenta=numeroCuenta;

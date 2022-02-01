@@ -89,7 +89,7 @@ const obtenerNominaPagos = async (req, res, next) => {
                     doc.data().totalIngresos,
                     doc.data().iess,
                     doc.data().anticipo,
-                    doc.data().prestamiIess,
+                    doc.data().prestamoIess,
                     doc.data().totalEgreso,
                     doc.data().liquidoRecibir,
                     doc.data().numeroCuenta,
@@ -157,6 +157,7 @@ const obtenerNominaPago = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
 
 
 const busquedaNominasPago = async (req, res, next) => {
@@ -232,7 +233,7 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().totalIngresos,
                     doc.data().iess,
                     doc.data().anticipo,
-                    doc.data().prestamiIess,
+                    doc.data().prestamoIess,
                     doc.data().totalEgreso,
                     doc.data().liquidoRecibir,
                     doc.data().numeroCuenta,
@@ -251,7 +252,7 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().totalIngresos == nombre ||
                     doc.data().iess == nombre ||
                     doc.data().anticipo == nombre ||
-                    doc.data().prestamiIess == nombre ||
+                    doc.data().prestamoIess == nombre ||
                     doc.data().totalEgreso == nombre ||
                     doc.data().liquidoRecibir == nombre ||
                     doc.data().numeroCuenta == nombre ||
@@ -335,7 +336,7 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                     doc.data().totalIngresos,
                     doc.data().iess,
                     doc.data().anticipo,
-                    doc.data().prestamiIess,
+                    doc.data().prestamoIess,
                     doc.data().totalEgreso,
                     doc.data().liquidoRecibir,
                     doc.data().numeroCuenta,
@@ -395,7 +396,7 @@ const crearNominaPago = async (req, res, next) => {
                         "totalIngresos": "",
                         "iess": "",
                         "anticipo": "",
-                        "prestamiIess": "",
+                        "prestamoIess": "",
                         "totalEgreso": "",
                         "liquidoRecibir": "",
                         "numeroCuenta": doc.data().numeroCuenta,
@@ -408,6 +409,7 @@ const crearNominaPago = async (req, res, next) => {
                     if (doc.data().cedula.toString() !== cedula) {
                         try {
                             firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes).doc().set(nominaPagEmp);
+                            
                         } catch (error) {
                             console.log(error.message);
                         }

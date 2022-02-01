@@ -99,7 +99,7 @@
                         <th scope="col" (click)="ordenarNominaPago('totalIngresos')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Total Ingresos</th>
                         <th scope="col" (click)="ordenarNominaPago('iess')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">IESS</th>
                         <th scope="col" (click)="ordenarNominaPago('anticipo')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Anticipo</th>
-                        <th scope="col" (click)="ordenarNominaPago('prestamiIess')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Préstamo IESS</th>
+                        <th scope="col" (click)="ordenarNominaPago('prestamoIess')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Préstamo IESS</th>
                         <th scope="col" (click)="ordenarNominaPago('totalEgreso')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Total Egreso</th>
                         <th scope="col" (click)="ordenarNominaPago('liquidoRecibir')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;">Líquido Recibir</th>
                         <th scope="col" (click)="ordenarNominaPago('numeroCuenta')" onMouseover="this.style.color='blue'" onMouseout="this.style.color='black'" style=" cursor: pointer;"># Cuenta</th>
@@ -114,7 +114,7 @@
                         <td>{{nominaPago.cedula}}</td>
                         <td>{{nominaPago.nomina}}</td>
                         <td>{{nominaPago.cargo}}</td>
-                        <td>{{nominaPago.salario}}</td>
+                        <td>{{nominaPago.salario}}</td>                        
                         <td>{{nominaPago.numHorasExtras}}</td>
                         <td>{{nominaPago.valorHorasExtras}}</td>
                         <td>{{nominaPago.sePagaFondosReserva}}</td>
@@ -122,7 +122,7 @@
                         <td>{{nominaPago.totalIngresos}}</td>
                         <td>{{nominaPago.iess}}</td>
                         <td>{{nominaPago.anticipo}}</td>
-                        <td>{{nominaPago.prestamiIess}}</td>
+                        <td>{{nominaPago.prestamoIess}}</td>
                         <td>{{nominaPago.totalEgreso}}</td>
                         <td>{{nominaPago.liquidoRecibir}}</td>
                         <td>{{nominaPago.numeroCuenta}}</td>
@@ -138,7 +138,7 @@
             <h5 style="text-align: start; margin-top: 10px;" *ngIf="listNominasPago.length == 0">No hay nominas de pago para mostrar
             </h5>
 
-            <button class="btn btn-danger float-center" (click)="eliminarNominasPago(this.anho,this.mes)" >Eliminar nómina de pago</button>
+            <button class="btn btn-danger float-center" (click)="eliminarNominasPago(this.anho,this.mes)" >Eliminar nóminas de pago</button>
         </div>
 
     </div>

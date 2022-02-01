@@ -429,3 +429,17 @@ body {
     width: 100px;
 }
 
+
+/*Form roles*/
+
+.formRol {
+    display: flex;
+    align-items: center;    
+ }
+
+ .label-rol{
+    font-weight: bold; 
+    font-size: 120%;
+    text-align: end;
+ }
+ 

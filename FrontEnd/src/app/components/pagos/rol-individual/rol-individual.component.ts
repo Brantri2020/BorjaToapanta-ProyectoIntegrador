@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NominaPago } from 'src/app/model/nominaPago';
+import { NominaPagoMenosInfo } from 'src/app/model/nominaPagoMenosInfo';
 import { MustMatch } from 'src/app/services/must-match.validator';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
 
@@ -32,23 +33,18 @@ export class RolIndividualComponent implements OnInit {
     private aRouter: ActivatedRoute) {
 
     this.rolIndividualForm = this.fb.group({
-      cedula: [''],
-      nomina: [''],
-      cargo: [''],
-      salario: [''],
-      numHorasExtras: [''],
-      valorHorasExtras: [''],
-      sePagaFondosReserva: ['', Validators.required],
+      cedula: ['', Validators.required],
+      nomina: ['', Validators.required],
+      cargo: ['', Validators.required],
+      salario:  ['', Validators.required],      
+      valorHorasExtras: ['', Validators.required],
       fondosReserva: ['', Validators.required],
       totalIngresos: ['', Validators.required],
       iess: ['', Validators.required],
-      anticipo: [''],
-      prestamiIess: ['', Validators.required],
+      anticipo: ['', Validators.required],
+      prestamoIess: ['', Validators.required],
       totalEgreso: ['', Validators.required],
-      liquidoRecibir: ['', Validators.required],
-      numeroCuenta: [''],
-      tipoCuenta: [''],
-      institucionFinanciera: ['']
+      liquidoRecibir: ['', Validators.required]
     });
     this.id = this.aRouter.snapshot.paramMap.get('id');
     this.anho = this.aRouter.snapshot.paramMap.get('anho');
@@ -62,28 +58,47 @@ export class RolIndividualComponent implements OnInit {
 
 
 
+sePagaFondoReserva(){
+  var fondoReserva = "No";
+
+  if(this.rolIndividualForm.get('fondosReserva')?.value!=="0.00"){
+    fondoReserva="Si";
+  }
+
+  return fondoReserva;
+}
+
+horasExtras(){
+  var horasExtras = "0";
+
+  if(this.rolIndividualForm.get('valorHorasExtras')?.value!="0.00"){
+    horasExtras="1";
+  }
+
+  return horasExtras;
+}
 
 
   agregarRolIndividual() {
-    const ROL_INDIVIDUAL: NominaPago = {
+    
+    var fondoReserva: string= this.sePagaFondoReserva();
+    var horasExtras: string= this.horasExtras();
+    const ROL_INDIVIDUAL: NominaPagoMenosInfo = {
 
       cedula: this.rolIndividualForm.get('cedula')?.value,
       nomina: this.rolIndividualForm.get('nomina')?.value,
       cargo: this.rolIndividualForm.get('cargo')?.value,
       salario: this.rolIndividualForm.get('salario')?.value,
-      numHorasExtras: this.rolIndividualForm.get('numHorasExtras')?.value,
+      numHorasExtras: horasExtras.toString(),
       valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,
-      sePagaFondosReserva: this.rolIndividualForm.get('sePagaFondosReserva')?.value,
+      sePagaFondosReserva: fondoReserva.toString(),
       fondosReserva: this.rolIndividualForm.get('fondosReserva')?.value,
       totalIngresos: this.rolIndividualForm.get('totalIngresos')?.value,
       iess: this.rolIndividualForm.get('iess')?.value,
       anticipo: this.rolIndividualForm.get('anticipo')?.value,
-      prestamiIess: this.rolIndividualForm.get('prestamiIess')?.value,
+      prestamoIess: this.rolIndividualForm.get('prestamoIess')?.value,
       totalEgreso: this.rolIndividualForm.get('totalEgreso')?.value,
-      liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value,
-      numeroCuenta: this.rolIndividualForm.get('numeroCuenta')?.value,
-      tipoCuenta: this.rolIndividualForm.get('tipoCuenta')?.value,
-      institucionFinanciera: this.rolIndividualForm.get('institucionFinanciera')?.value,
+      liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value      
     }
 
 
@@ -140,26 +155,23 @@ export class RolIndividualComponent implements OnInit {
 
   esEditar() {
     if (this.id !== null) {
+      
 
-      this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
+      this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {        
+        console.log(data);
         this.rolIndividualForm.setValue({
           cedula: data.cedula,
           nomina: data.nomina,
-          salario: data.salario,
-          cargo: data.cargo,
-          numHorasExtras: data.numHorasExtras,
-          valorHorasExtras: data.valorHorasExtras,
-          sePagaFondosReserva: data.sePagaFondosReserva,
+          cargo: data.cargo,   
+          salario: data.salario,                 
+          valorHorasExtras: data.valorHorasExtras,          
           fondosReserva: data.fondosReserva,
           totalIngresos: data.totalIngresos,
           iess: data.iess,
           anticipo: data.anticipo,
-          prestamiIess: data.prestamiIess,
+          prestamoIess: data.prestamoIess,
           totalEgreso: data.totalEgreso,
-          liquidoRecibir: data.liquidoRecibir,
-          numeroCuenta: data.numeroCuenta,
-          tipoCuenta: data.tipoCuenta,
-          institucionFinanciera: data.institucionFinanciera
+          liquidoRecibir: data.liquidoRecibir
         })
       })
     }

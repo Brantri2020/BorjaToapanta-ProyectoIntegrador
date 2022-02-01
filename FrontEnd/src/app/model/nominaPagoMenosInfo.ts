@@ -1,4 +1,4 @@
-export class NominaPago {
+export class NominaPagoMenosInfo {
     id?: number;
     cedula: string;
     nomina: string;
@@ -13,17 +13,14 @@ export class NominaPago {
     anticipo: string;
     prestamoIess: string;
     totalEgreso: string;
-    liquidoRecibir: string;
-    numeroCuenta: string;
-    tipoCuenta: string;
-    institucionFinanciera: string;
+    liquidoRecibir: string;    
 
 
     constructor(cedula: string,
         nomina: string,
         cargo: string,
-        salario: string,        
-        numHorasExtras:string,
+        salario: string,    
+        numHorasExtras: string,    
         valorHorasExtras: string,
         sePagaFondosReserva: string,
         fondosReserva: string,
@@ -32,14 +29,11 @@ export class NominaPago {
         anticipo: string,
         prestamoIess: string,
         totalEgreso: string,
-        liquidoRecibir: string,
-        numeroCuenta: string,
-        tipoCuenta: string,
-        institucionFinanciera: string) {
+        liquidoRecibir: string) {
             this.cedula= cedula;
             this.nomina=nomina;
             this.salario=salario;
-            this.cargo=cargo;            
+            this.cargo=cargo;      
             this.numHorasExtras=numHorasExtras;
             this.valorHorasExtras=valorHorasExtras;
             this.sePagaFondosReserva=sePagaFondosReserva;
@@ -49,9 +43,6 @@ export class NominaPago {
             this.anticipo=anticipo;
             this.prestamoIess=prestamoIess;
             this.totalEgreso=totalEgreso;
-            this.liquidoRecibir=liquidoRecibir;
-            this.numeroCuenta=numeroCuenta;
-            this.tipoCuenta=tipoCuenta;
-            this.institucionFinanciera=institucionFinanciera;            
+            this.liquidoRecibir=liquidoRecibir;                 
     }
 }

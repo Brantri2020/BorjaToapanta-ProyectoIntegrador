@@ -119,7 +119,7 @@ export class NominaPagosComponent implements OnInit {
       this.router.navigate(['/nomina-pagos']);
     }
 
-    
+
 
   }
 
@@ -153,12 +153,13 @@ export class NominaPagosComponent implements OnInit {
   }
 
 
-  eliminarNominaPago(id: any) {
-    
-    
+
+eliminarNominaPago(id: any) {
+  var resultado = window.confirm('¿Estas seguro de eliminar la nómina de pago?');
+  if (resultado === true) {
     this._nominaPagoServices.obtenerNominaPago(id, this.anho, this.mes).subscribe(data => {
-      
-      const ROL_INDIVIDUAL= {
+
+      const ROL_INDIVIDUAL = {
 
         cedula: data.cedula,
         nomina: data.nomina,
@@ -171,34 +172,34 @@ export class NominaPagosComponent implements OnInit {
         totalIngresos: "",
         iess: "",
         anticipo: "",
-        prestamiIess: "",
+        prestamoIess: "",
         totalEgreso: "",
-        liquidoRecibir: "",
-        numeroCuenta: data.numeroCuenta,
-        tipoCuenta: data.tipoCuenta,
-        institucionFinanciera: data.institucionFinanciera
+        liquidoRecibir: ""
       }
-      
+
       this._nominaPagoServices.editarNominaPago(id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
         this.toastr.error('La nómina de pago fué eliminada con éxito', 'Nómina de pago eliminada');
         this.router.navigate(['/nomina-pagos']);
         this.obtenerNominasPago(this.anho, this.mes);
-        
+
       }, error => {
         console.log(error);
-        
+
       })
-      
+
     }, error => {
-      
+
       console.log(error);
     })
 
     this.obtenerNominasPago(this.anho, this.mes);
 
+  } else {
+    this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
+    
   }
 
-
+}
 
 
 }
