@@ -73,7 +73,7 @@ export class CrearEmpleadoComponent implements OnInit {
     cedula: this.empleadoForm.get('cedula')?.value,
     nombre: this.empleadoForm.get('nombre')?.value,
     cargo: this.empleadoForm.get('cargo')?.value,
-    salario: this.empleadoForm.get('salario')?.value,
+    salario: this.sal,
     numeroCuenta: this.empleadoForm.get('numeroCuenta')?.value,
     tipoCuenta: this.empleadoForm.get('tipoCuenta')?.value,
     institucionFinanciera: this.empleadoForm.get('institucionFinanciera')?.value
