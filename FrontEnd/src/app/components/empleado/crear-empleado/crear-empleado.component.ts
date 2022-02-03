@@ -24,6 +24,8 @@ export class CrearEmpleadoComponent implements OnInit {
   listSalarios: Salario[] = [];
   salar = [{"cargo":""}];
   salario2: string[] = [];
+  cargoSelec ="";
+  sal = "";
 
   constructor(private _salarioService: SalarioService,
     private fb: FormBuilder,
@@ -36,14 +38,16 @@ export class CrearEmpleadoComponent implements OnInit {
         cedula: ['', Validators.required],
         nombre: ['', Validators.required],
         cargo: ['', Validators.required],
-        salario: ['', Validators.required],
+        salario: [''],
         numeroCuenta: ['', Validators.required],
         tipoCuenta: ['', Validators.required],
         institucionFinanciera: ['', Validators.required]
       });
       this.id = this.aRouter.snapshot.paramMap.get('id');
+      
 
      }
+     
      
 
     
@@ -53,9 +57,12 @@ export class CrearEmpleadoComponent implements OnInit {
         this._salarioService.getSalarios().subscribe(res =>{      
         this.salar=res;
         }, err => console.log(err))
+        
 
 
     this.esEditar();
+    this.ponerSalario();
+    
   }
 
   agregarEmpleado() {
@@ -115,7 +122,29 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   
-  
+  ponerSalario(){
+    const selectElementCargo = document.getElementById('selectCargo');
+    
+
+    if (selectElementCargo === null) {
+      this.sal ="";
+
+    } else {
+      
+      selectElementCargo.addEventListener('change', (event) => {
+        this.cargoSelec = (<HTMLInputElement>selectElementCargo).value;
+        this.obtenerSalarios();
+        this.listSalarios.forEach(element => {
+          var car = element.cargo;
+          if (car === this.cargoSelec){
+            
+            this.sal = element.salario;
+          }
+        });
+      });
+    }
+    //return this.sal;
+  }
   
 
   obtenerSalarios(){
