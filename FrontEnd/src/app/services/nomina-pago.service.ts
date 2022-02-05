@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NominaPago } from '../model/nominaPago';
 import { Router } from '@angular/router';
-import { NominaPagoMenosInfo } from '../model/nominaPagoMenosInfo';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +28,11 @@ export class NominaPagoService {
     return this.http.delete(this.url1 + id);
   }
 
-  editarNominaPago(id: any, nominaPago: NominaPagoMenosInfo, anho:any, mes:any): Observable<any>{
+  editarNominaPago(id: any, nominaPago: NominaPago, anho:any, mes:any): Observable<any>{
     return this.http.put(this.url1+anho+"/"+mes+"/"+ id, nominaPago);
   }
 
-  guardarNominaPago(nominaPago: NominaPagoMenosInfo, anho:any, mes:any, cedula:any): Observable<any>{
+  guardarNominaPago(nominaPago: NominaPago, anho:any, mes:any, cedula:any): Observable<any>{
     return this.http.post(this.url1+anho+"/"+mes+"/"+cedula, nominaPago);
   }
 
