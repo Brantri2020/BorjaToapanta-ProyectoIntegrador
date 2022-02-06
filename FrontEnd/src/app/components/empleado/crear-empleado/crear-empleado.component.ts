@@ -23,7 +23,7 @@ export class CrearEmpleadoComponent implements OnInit {
   mensaje: string = "";
   listSalarios: Salario[] = [];
   salar = [{ "cargo": "" }];
-  salario2: string[] = [];
+  //salario2: string[] = [];
   cargoSelec = "";
   sal = "";
 
@@ -62,6 +62,7 @@ export class CrearEmpleadoComponent implements OnInit {
 
     this.esEditar();
     this.ponerSalario();
+    
 
   }
 

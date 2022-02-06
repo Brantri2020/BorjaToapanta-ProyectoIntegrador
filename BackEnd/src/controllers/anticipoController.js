@@ -5,7 +5,10 @@ const Anticipo = require("../models/Anticipo");
 const firestore = firebase.firestore();
 
 const obtenerAnticipos = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
 
+    console.log(anho);
     try {
         const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes);
         const data = await anticipos.get();
@@ -76,6 +79,9 @@ const eliminarAnticipo = async(req, res, next) => {
 
 
 const actualizarAnticipo = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const id = req.params.id;
         const data = req.body;
@@ -88,6 +94,9 @@ const actualizarAnticipo = async(req, res, next) => {
 }
 
 const crearAnticipo = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const data = req.body;
         console.log(data);

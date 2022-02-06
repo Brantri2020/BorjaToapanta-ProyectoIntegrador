@@ -6,15 +6,21 @@
                     <span class="titulo">{{ titulo | uppercase}}</span>
                     <form class="mt-3" [formGroup]="anticipoForm" (ngSubmit)="agregarAnticipo()">
 
-                        <!--Cédula Empleado-->
+                        <!--Nombre Empleado-->
                         <div class="mb-3">
-                            <select class="form-select" formControlName="cedula" aria-label="Default select example" placeholder="Seleccione el empleado">
+                            <select class="form-select" formControlName="nombreEmpleado" aria-label="Default select example" placeholder="Seleccione el empleado" id="selectNombre">
                                 <option selected disabled value="" >Seleccione el empleado</option>
-                                <option value="{{listEmpleados.cedula}} {{listEmpleados.nombre}}" *ngFor="let listEmpleados of emple">{{listEmpleados.cedula}} {{listEmpleados.nombre}}</option>
+                                <option value="{{listEmpleados.nombre}}" *ngFor="let listEmpleados of emple">{{listEmpleados.nombre}}</option>
                             </select>
                             <div class="text-danger" *ngIf="anticipoForm.get('cedula')?.hasError('required') && anticipoForm.get('cedula')?.touched">
                                 <span>El empleado <strong>es obligatorio</strong>, seleccione uno.</span>
                             </div>
+                        </div>
+
+                        <!--Cedula Empleado-->
+                        <div class="mb-3">
+                            <input readonly type="text" formControlName="cedulaEmpleado" class="form-control form-control-lg" value={{cedEmple}}>
+
                         </div>
 
 
@@ -33,15 +39,15 @@
                         </div>
                         <!--Fecha Anticipo-->
                         <div class="mb-3">
-                            <input type="text" formControlName="fechaAnticipo" class="form-control form-control-lg" placeholder="Ingrese la fecha del Anticipo" minlength="10" maxlength="10" pattern="[0-9\/ ]*">
+                            <input type="text" formControlName="fechaAnticipo" class="form-control form-control-lg" placeholder="Ingrese la fecha del Anticipo" minlength="10" maxlength="10" pattern="[0-9\- ]*">
                             <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('required') && anticipoForm.get('salario')?.touched">
                                 <span>La fecha del Anticipo <strong>es obligatoria.</strong></span>
                             </div>
                             <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('minlength')">
-                                <span>La fecha del Anticipo solo puede tener el formato <strong>DD/MM/AAAA</strong></span>
+                                <span>La fecha del Anticipo solo puede tener el formato <strong>AAAA-MM-DD</strong></span>
                             </div>
                             <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('pattern')">
-                                <span>La fecha del Anticipo puede contener <strong>números y el símbolo /</strong></span>
+                                <span>La fecha del Anticipo puede contener <strong>números y el guión medio</strong></span>
                             </div>
                         </div>
 
