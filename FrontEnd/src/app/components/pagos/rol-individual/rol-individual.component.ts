@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NominaPago } from 'src/app/model/nominaPago';
-import { NominaPagoMenosInfo } from 'src/app/model/nominaPagoMenosInfo';
+//import { NominaPagoMenosInfo } from 'src/app/model/nominaPagoMenosInfo';
 import { MustMatch } from 'src/app/services/must-match.validator';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
 
@@ -26,6 +26,9 @@ export class RolIndividualComponent implements OnInit {
   anho: string | null;
   mes: string | null;
   mensaje: string = "";
+  numeroCuenta = "";
+  tipoCuenta = "";
+  institucionFinanciera = "";
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
@@ -36,7 +39,7 @@ export class RolIndividualComponent implements OnInit {
       cedula: ['', Validators.required],
       nomina: ['', Validators.required],
       cargo: ['', Validators.required],
-      salario:  ['', Validators.required],      
+      salario: ['', Validators.required],
       valorHorasExtras: ['', Validators.required],
       fondosReserva: ['', Validators.required],
       totalIngresos: ['', Validators.required],
@@ -58,32 +61,32 @@ export class RolIndividualComponent implements OnInit {
 
 
 
-sePagaFondoReserva(){
-  var fondoReserva = "No";
+  sePagaFondoReserva() {
+    var fondoReserva = "No";
 
-  if(this.rolIndividualForm.get('fondosReserva')?.value!=="0.00"){
-    fondoReserva="Si";
+    if (this.rolIndividualForm.get('fondosReserva')?.value !== "0.00") {
+      fondoReserva = "Si";
+    }
+
+    return fondoReserva;
   }
 
-  return fondoReserva;
-}
+  horasExtras() {
+    var horasExtras = "0";
 
-horasExtras(){
-  var horasExtras = "0";
+    if (this.rolIndividualForm.get('valorHorasExtras')?.value != "0.00") {
+      horasExtras = "1";
+    }
 
-  if(this.rolIndividualForm.get('valorHorasExtras')?.value!="0.00"){
-    horasExtras="1";
+    return horasExtras;
   }
-
-  return horasExtras;
-}
 
 
   agregarRolIndividual() {
-    
-    var fondoReserva: string= this.sePagaFondoReserva();
-    var horasExtras: string= this.horasExtras();
-    const ROL_INDIVIDUAL: NominaPagoMenosInfo = {
+
+    var fondoReserva: string = this.sePagaFondoReserva();
+    var horasExtras: string = this.horasExtras();
+    const ROL_INDIVIDUAL: NominaPago = {
 
       cedula: this.rolIndividualForm.get('cedula')?.value,
       nomina: this.rolIndividualForm.get('nomina')?.value,
@@ -98,7 +101,10 @@ horasExtras(){
       anticipo: this.rolIndividualForm.get('anticipo')?.value,
       prestamoIess: this.rolIndividualForm.get('prestamoIess')?.value,
       totalEgreso: this.rolIndividualForm.get('totalEgreso')?.value,
-      liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value      
+      liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value,
+      numeroCuenta: this.numeroCuenta,
+      tipoCuenta: this.tipoCuenta,
+      institucionFinanciera: this.institucionFinanciera
     }
 
 
@@ -106,41 +112,41 @@ horasExtras(){
 
     this._nominaPagoService.comprobarIdNominaPago(this.id, this.anho, this.mes).subscribe(data => {
 
-      if(data=="Si"){
+      if (data == "Si") {
         //editamos nomina
         this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
           this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
           this.router.navigate(['/nomina-pagos']);
         }, error => {
-          console.log(error);        
+          console.log(error);
           this.mensaje = error.error;
         })
-      }else{
-        
+      } else {
+
 
         this._nominaPagoService.obtenerCedula(this.id).subscribe(data => {
-          
-          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL,this.anho,this.mes,data.toString()).subscribe(data => {
+
+          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL, this.anho, this.mes, data.toString()).subscribe(data => {
             this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
             this.router.navigate(['/nomina-pagos']);
-            
+
           }, error => {
             console.log(error);
             this.mensaje = error.error;
           })
-          
-    
+
+
         }, error => {
           console.log(error);
         })
 
-        
-          //agregamos nomina ---          
-          
-          
+
+        //agregamos nomina ---          
+
+
       }
-      
-       
+
+
 
 
     }, error => {
@@ -149,22 +155,22 @@ horasExtras(){
     })
 
 
-        
+
   }
 
 
   esEditar() {
     if (this.id !== null) {
-      
 
-      this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {        
+
+      this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
         console.log(data);
         this.rolIndividualForm.setValue({
           cedula: data.cedula,
           nomina: data.nomina,
-          cargo: data.cargo,   
-          salario: data.salario,                 
-          valorHorasExtras: data.valorHorasExtras,          
+          cargo: data.cargo,
+          salario: data.salario,
+          valorHorasExtras: data.valorHorasExtras,
           fondosReserva: data.fondosReserva,
           totalIngresos: data.totalIngresos,
           iess: data.iess,
@@ -173,21 +179,26 @@ horasExtras(){
           totalEgreso: data.totalEgreso,
           liquidoRecibir: data.liquidoRecibir
         })
+        this.numeroCuenta = data.numeroCuenta;
+        this.tipoCuenta = data.tipoCuenta;
+        this.institucionFinanciera = data.institucionFinanciera;
+
+
       })
     }
   }
 
   obtenerCedula(id: any) {
-    var cedulita ="";
+    var cedulita = "";
     this._nominaPagoService.obtenerCedula(id).subscribe(data => {
-      
-      cedulita= data.toString();
-      
+
+      cedulita = data.toString();
+
 
     }, error => {
       console.log(error);
     })
-return cedulita;
+    return cedulita;
 
   }
 
