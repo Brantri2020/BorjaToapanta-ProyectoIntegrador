@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AnticipoService {
 
   url1 = 'http://localhost:3000/api/anticipos/';
-  url2 = 'http://localhost:3000/api/anticipo/';
+  
 
   constructor(private http: HttpClient,
     public router: Router) { }
@@ -19,7 +19,7 @@ export class AnticipoService {
     return this.http.get(this.url1+anho+"/"+mes);
   }
 
-  buscarAnticipo(busqueda: string,anho:any,mes:any): Observable<any> {
+  buscarAnticipo(busqueda: string,anho:string,mes:string): Observable<any> {
     return this.http.get(this.url1 +anho+"/"+mes+ "busqueda/"+busqueda);
   }
 
@@ -27,19 +27,19 @@ export class AnticipoService {
     return this.http.delete(this.url1 + id);
   }
 
-  editarAnticipo(id: string, anticipo: Anticipo,anho:any,mes:any): Observable<any>{
-    return this.http.put(this.url2 +anho+"/"+mes+ id, anticipo);
+  editarAnticipo(id: any, anticipo: Anticipo,anho:any,mes:any): Observable<any>{
+    return this.http.put(this.url1 +anho+"/"+mes+ id, anticipo);
   }
 
   guardarAnticipo(anticipo: Anticipo,anho:any,mes:any): Observable<any>{
-    return this.http.post(this.url2+anho+"/"+mes, anticipo);
+    return this.http.post(this.url1+anho+"/"+mes, anticipo);
   }
 
   obtenerAnticipo(id: string,anho:any,mes:any): Observable<any>{
-    return this.http.get(this.url2+anho+"/"+mes+id);
+    return this.http.get(this.url1+anho+"/"+mes+id);
   }
 
-  obtenerAnticipoOrdenado(filtro: string,anho:any,mes:any): Observable<any>{
+  obtenerAnticipoOrdenado(filtro: string,anho:string,mes:string): Observable<any>{
     return this.http.get(this.url1+anho+"/"+mes+"anticipos-ordenados/"+filtro);
   }
 }
