@@ -39,16 +39,12 @@
                         </div>
                         <!--Fecha Anticipo-->
                         <div class="mb-3">
-                            <input type="text" formControlName="fechaAnticipo" class="form-control form-control-lg" placeholder="Ingrese la fecha del Anticipo" minlength="10" maxlength="10" pattern="[0-9\- ]*">
+
+                            <input type="date" formControlName="fechaAnticipo" class="form-control form-control-lg" name="fecha" max={{hoy}} #fecha>
                             <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('required') && anticipoForm.get('salario')?.touched">
                                 <span>La fecha del Anticipo <strong>es obligatoria.</strong></span>
                             </div>
-                            <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('minlength')">
-                                <span>La fecha del Anticipo solo puede tener el formato <strong>AAAA-MM-DD</strong></span>
-                            </div>
-                            <div class="text-danger" *ngIf="anticipoForm.get('fechaAnticipo')?.hasError('pattern')">
-                                <span>La fecha del Anticipo puede contener <strong>números y el guión medio</strong></span>
-                            </div>
+
                         </div>
 
 

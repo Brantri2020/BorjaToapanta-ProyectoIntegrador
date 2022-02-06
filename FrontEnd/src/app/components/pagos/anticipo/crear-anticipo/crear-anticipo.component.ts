@@ -26,10 +26,12 @@ export class CrearAnticipoComponent implements OnInit {
   nombreSelec = "";
   anho = "";
   mes = "";
-  mes1 = "";
+  fhoy = new Date(Date.now());
+  
+  hoy = this.fhoy.toLocaleDateString('en-GB').split('/').reverse().join('-');
   
   
-  //salario2: string[] = [];
+  
 
   constructor(private _anticipoService: AnticipoService,
     private fb: FormBuilder,
@@ -69,34 +71,12 @@ export class CrearAnticipoComponent implements OnInit {
     valorAnticipo: this.anticipoForm.get('valorAnticipo')?.value,
     fechaAnticipo: this.anticipoForm.get('fechaAnticipo')?.value
   }
-  const fecha = new Date(this.anticipoForm.get('fechaAnticipo')?.value);
+  
+  let fecha: Date = new Date(this.anticipoForm.get('fechaAnticipo')?.value.concat('T00:00:00'))
+  let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   this.anho = fecha.getFullYear().toString();
-  this.mes1 = (fecha.getMonth()+1).toString();
-  if (this.mes1 == "1"){
-    this.mes = "Enero";
-  }else if (this.mes1 == "2"){
-    this.mes = "Febrero";
-  }else if (this.mes1 == "3"){
-    this.mes = "Marzo";
-  }else if (this.mes1 == "4"){
-    this.mes = "Abril";
-  }else if (this.mes1 == "5"){
-    this.mes = "Mayo";
-  }else if (this.mes1 == "6"){
-    this.mes = "Junio";
-  }else if (this.mes1 == "7"){
-    this.mes = "Julio";
-  }else if (this.mes1 == "8"){
-    this.mes = "Agosto";
-  }else if (this.mes1 == "9"){
-    this.mes = "Septiembre";
-  }else if (this.mes1 == "10"){
-    this.mes = "Octubre";
-  }else if (this.mes1 == "11"){
-    this.mes = "Noviembre";
-  }else{
-    this.mes = "Diciembre";
-  }
+  this.mes = meses[fecha.getUTCMonth()];
+  
 
   if (this.id !== null) {
     //editamos anticipo
