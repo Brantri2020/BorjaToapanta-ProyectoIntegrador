@@ -574,11 +574,18 @@ const obtenerHorasExtrasPorCedula = async (req, res, next) => {
         } else {
 
             var horasExtras = "";
+            var cantidadHorasSuma=0;
+            var valorFinalHoras=0;
+            var valorFinalStr="";
             data.forEach(doc => {
-
+                cantidadHorasSuma+= parseInt(doc.data().cantidadHoras);
+                valorFinalHoras+=parseFloat(doc.data().valorFinalHoras);
+                if(!valorFinalHoras.toString().includes(".")){
+                    valorFinalStr = valorFinalHoras.toString()+".00";
+                }                
                 horasExtras = {
-                    "cantidadHoras": doc.data().cantidadHoras,
-                    "valorFinalHoras": doc.data().valorFinalHoras
+                    "cantidadHoras": cantidadHorasSuma,
+                    "valorFinalHoras": valorFinalStr
                 }
 
 
