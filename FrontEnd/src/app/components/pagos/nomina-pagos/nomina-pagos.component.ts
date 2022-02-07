@@ -126,7 +126,7 @@ export class NominaPagosComponent implements OnInit {
 
   obtenerNominasPago(anho: any, mes: any) {
     this._nominaPagoServices.getNominasPago(anho, mes).subscribe(data => {
-      console.log(data);
+      
       this.listNominasPago = data;
 
     }, error => {
@@ -165,7 +165,7 @@ export class NominaPagosComponent implements OnInit {
           nomina: data.nomina,
           cargo: data.cargo,
           salario: data.salario,
-          numHorasExtras: "",
+          numeroHorasExtras: "",
           valorHorasExtras: "",
           sePagaFondosReserva: "",
           fondosReserva: "",
