@@ -210,7 +210,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-2 col-form-label label-rol">TOTAL INGRESOS</label>
                             <div class="col-sm-4">
-                                <input type="text" style="height: 10px;" formControlName="totalIngresos" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de ingresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="totalIngresos" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de ingresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('totalIngresos')?.hasError('required') && rolIndividualForm.get('totalIngresos')?.touched">
                                     <span>El total de ingresos <strong>es obligatorio.</strong></span>
                                 </div>
@@ -224,7 +224,7 @@
                             </div>
                             <label class="col-sm-2 col-form-label label-rol">TOTAL EGRESOS</label>
                             <div class="col-sm-4">
-                                <input type="text" style="height: 10px;" formControlName="totalEgreso" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de egresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="totalEgreso" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de egresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('totalEgreso')?.hasError('required') && rolIndividualForm.get('totalEgreso')?.touched">
                                     <span>El total de egresos <strong>es obligatorio.</strong></span>
                                 </div>
@@ -244,7 +244,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-6 col-form-label label-rol">LÍQUIDO A PAGAR</label>
                             <div class="col-sm-3">
-                                <input type="text" style="height: 10px;" formControlName="liquidoRecibir" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el líquido a pagar" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="liquidoRecibir" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el líquido a pagar" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('liquidoRecibir')?.hasError('required') && rolIndividualForm.get('liquidoRecibir')?.touched">
                                     <span>El líquido a recibir <strong>es obligatorio.</strong></span>
                                 </div>

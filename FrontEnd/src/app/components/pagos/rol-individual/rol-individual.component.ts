@@ -41,7 +41,7 @@ export class RolIndividualComponent implements OnInit {
       cargo: ['', Validators.required],
       salario: ['', Validators.required],
       valorHorasExtras: ['', Validators.required],
-      numeroHorasExtras:['', ],
+      numeroHorasExtras: ['',],
       fondosReserva: ['', Validators.required],
       totalIngresos: ['', Validators.required],
       iess: ['', Validators.required],
@@ -58,6 +58,10 @@ export class RolIndividualComponent implements OnInit {
 
   ngOnInit(): void {
     this.esEditar();
+    window.alert(this.rolIndividualForm.get('salario')?.value);
+    this.rolIndividualForm.controls['totalIngresos'].setValue(parseFloat(this.rolIndividualForm.get('salario')?.value)+parseFloat(this.rolIndividualForm.get('valorHorasExtras')?.value)+parseFloat(this.rolIndividualForm.get('fondosReserva')?.value));
+    this.rolIndividualForm.controls['totalEgreso'].setValue(parseFloat(this.rolIndividualForm.get('iess')?.value)+parseFloat(this.rolIndividualForm.get('anticipo')?.value)+parseFloat(this.rolIndividualForm.get('prestamoIess')?.value));
+    this.rolIndividualForm.controls['liquidoRecibir'].setValue(parseFloat(this.rolIndividualForm.get('totalIngresos')?.value)-parseFloat(this.rolIndividualForm.get('totalEgreso')?.value));
   }
 
 
@@ -72,12 +76,12 @@ export class RolIndividualComponent implements OnInit {
     return fondoReserva;
   }
 
-  
+
 
 
   agregarRolIndividual() {
 
-    var fondoReserva: string = this.sePagaFondoReserva();    
+    var fondoReserva: string = this.sePagaFondoReserva();
     const ROL_INDIVIDUAL: NominaPago = {
 
       cedula: this.rolIndividualForm.get('cedula')?.value,
@@ -85,7 +89,7 @@ export class RolIndividualComponent implements OnInit {
       cargo: this.rolIndividualForm.get('cargo')?.value,
       salario: this.rolIndividualForm.get('salario')?.value,
       numeroHorasExtras: this.rolIndividualForm.get('numeroHorasExtras')?.value,
-      valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,      
+      valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,
       sePagaFondosReserva: fondoReserva.toString(),
       fondosReserva: this.rolIndividualForm.get('fondosReserva')?.value,
       totalIngresos: this.rolIndividualForm.get('totalIngresos')?.value,
@@ -163,7 +167,7 @@ export class RolIndividualComponent implements OnInit {
           cargo: data.cargo,
           salario: data.salario,
           valorHorasExtras: data.valorHorasExtras,
-          numeroHorasExtras: data.numeroHorasExtras,          
+          numeroHorasExtras: data.numeroHorasExtras,
           fondosReserva: data.fondosReserva,
           totalIngresos: data.totalIngresos,
           iess: data.iess,
@@ -176,19 +180,44 @@ export class RolIndividualComponent implements OnInit {
         this.tipoCuenta = data.tipoCuenta;
         this.institucionFinanciera = data.institucionFinanciera;
 
-        var ced = data.cedula.toString();        
+        var ced = data.cedula.toString();
+
+        //fondos reserva
+        if (data.fondosReserva.toString() == "") {
+          this.rolIndividualForm.controls['fondosReserva'].setValue("0.00");
+        }
+        //Ingresos
+        if (data.totalIngresos.toString() == "") {
+          this.rolIndividualForm.controls['totalIngresos'].setValue("0.00");
+        }
+        //aporte iess
+        if (data.iess.toString() == "") {
+          this.rolIndividualForm.controls['iess'].setValue("0.00");
+        }
+        //prestamo iess
+        if (data.prestamoIess.toString() == "") {
+          this.rolIndividualForm.controls['prestamoIess'].setValue("0.00");
+        }
+        //total egresos
+        if (data.totalEgreso.toString() == "") {
+          this.rolIndividualForm.controls['totalEgreso'].setValue("0.00");
+        }
+        //liquido a pagar
+        if(data.liquidoRecibir.toString() == ""){
+          this.rolIndividualForm.controls['liquidoRecibir'].setValue("0.00");
+        }
 
         if (data.anticipo.toString() == "") {
 
           this.obtenerAnticipoPorCedula(ced)
-            .then((data: any) => {              
+            .then((data: any) => {
               this.rolIndividualForm.controls['anticipo'].setValue(data);
             })
         }
         if (data.valorHorasExtras.toString() == "") {
 
           this.obtenerHorasExtrasPorCedula(ced)
-            .then((data: any) => {              
+            .then((data: any) => {
               this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
               this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
 
@@ -196,6 +225,7 @@ export class RolIndividualComponent implements OnInit {
         }
       })
     }
+   
   }
 
   obtenerCedula(id: any) {
@@ -213,7 +243,7 @@ export class RolIndividualComponent implements OnInit {
   }
 
 
-  obtenerAnticipoPorCedula(cedula: any) {    
+  obtenerAnticipoPorCedula(cedula: any) {
     return new Promise(resolve => {
       this._nominaPagoService.obtenerAnticipoPorCedula(this.anho, this.mes, cedula).subscribe(data => {
         resolve(data);
@@ -221,12 +251,20 @@ export class RolIndividualComponent implements OnInit {
     })
   }
 
-  obtenerHorasExtrasPorCedula(cedula: any) {    
+  obtenerHorasExtrasPorCedula(cedula: any) {
     return new Promise(resolve => {
       this._nominaPagoService.obtenerHorasExtrasPorCedula(this.anho, this.mes, cedula).subscribe(data => {
         resolve(data);
       })
     })
+  }
+
+
+  calculos(){
+    window.alert(this.rolIndividualForm.get('salario')?.value.toString());
+    //this.rolIndividualForm.controls['totalIngresos'].setValue(parseFloat(this.rolIndividualForm.get('salario')?.value)+parseFloat(this.rolIndividualForm.get('valorHorasExtras')?.value)+parseFloat(this.rolIndividualForm.get('fondosReserva')?.value));
+    //this.rolIndividualForm.controls['totalEgreso'].setValue(parseFloat(this.rolIndividualForm.get('iess')?.value)+parseFloat(this.rolIndividualForm.get('anticipo')?.value)+parseFloat(this.rolIndividualForm.get('prestamoIess')?.value));
+    //this.rolIndividualForm.controls['liquidoRecibir'].setValue(parseFloat(this.rolIndividualForm.get('totalIngresos')?.value)-parseFloat(this.rolIndividualForm.get('totalEgreso')?.value));
   }
 
 }
