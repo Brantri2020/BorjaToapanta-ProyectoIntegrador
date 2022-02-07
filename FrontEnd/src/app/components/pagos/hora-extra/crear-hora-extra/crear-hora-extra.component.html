@@ -12,7 +12,7 @@
                                 <option selected disabled value="" >Seleccione el empleado</option>
                                 <option value="{{listEmpleados.nombre}}" *ngFor="let listEmpleados of emple">{{listEmpleados.nombre}}</option>
                             </select>
-                            <div class="text-danger" *ngIf="horaExtraForm.get('cedula')?.hasError('required') && horaExtraForm.get('cedula')?.touched">
+                            <div class="text-danger" *ngIf="horaExtraForm.get('nombreEmpleado')?.hasError('required') && horaExtraForm.get('nombreEmpleado')?.touched">
                                 <span>El empleado <strong>es obligatorio</strong>, seleccione uno.</span>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
 
                         <!--Cantidad Horas-->
                         <div class="mb-3">
-                            <input type="text" formControlName="cantidadHoras" class="form-control form-control-lg" placeholder="Ingrese la cantidad de Horas Extra" minlength="1" maxlength="3" pattern="[0-9]*">
+                            <input type="text" formControlName="cantidadHoras" id="cantidadHoras" class="form-control form-control-lg" placeholder="Ingrese la cantidad de Horas Extra" minlength="1" maxlength="3" pattern="[0-9]*">
                             <div class="text-danger" *ngIf="horaExtraForm.get('cantidadHoras')?.hasError('required') && horaExtraForm.get('cantidadHoras')?.touched">
                                 <span>La cantidad de horas extra <strong>es obligatorio.</strong></span>
                             </div>
@@ -39,7 +39,7 @@
 
                         <!--Valor por Hora-->
                         <div class="mb-3">
-                            <input type="text" formControlName="valorXHora" class="form-control form-control-lg" placeholder="Ingrese el valor de la Hora Extra" minlength="4" maxlength="8" pattern="[0-9\.\, ]*">
+                            <input type="text" formControlName="valorXHora" id="valorXHora" class="form-control form-control-lg" placeholder="Ingrese el valor de la Hora Extra" minlength="4" maxlength="8" pattern="[0-9\.\, ]*">
                             <div class="text-danger" *ngIf="horaExtraForm.get('valorXHora')?.hasError('required') && horaExtraForm.get('valorXHora')?.touched">
                                 <span>El valor por Hora Extra <strong>es obligatorio.</strong></span>
                             </div>
@@ -52,11 +52,12 @@
                         </div>
 
 
-                        <!--Valor Total-->
+                        <!--Valor Total
                         <div class="mb-3">
 
                             <input readonly type="text" formControlName="valorFinalHoras" class="form-control form-control-lg" value={{valFinal}}>
                         </div>
+                    -->
 
                         <!--Fecha Hora Extra-->
                         <div class="mb-3">

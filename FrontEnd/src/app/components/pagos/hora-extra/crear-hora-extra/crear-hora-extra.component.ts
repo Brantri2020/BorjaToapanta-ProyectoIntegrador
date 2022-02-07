@@ -55,18 +55,23 @@ export class CrearHoraExtraComponent implements OnInit {
       this.emple=res;
       }, err => console.log(err))
 
-      this.valFinal=(parseFloat(this.horaExtraForm.get('valorXHora')?.value)
-      *parseFloat(this.horaExtraForm.get('cantidadHoras')?.value)).toString();
+      //this.valFinal=(parseFloat(this.horaExtraForm.get('valorXHora')?.value)
+      //*parseFloat(this.horaExtraForm.get('cantidadHoras')?.value)).toString();
 
 
   this.esEditar();
   this.ponerCedula();
-  //this.calcularValorFinal();
+  
+  
+  
   }
 
   agregarHoraExtra() {
+    this.calcularValorFinal();
+    
     const HORAEXTRA: HoraExtra = {
     cedulaEmpleado: this.cedEmple,
+    nombreEmpleado: this.horaExtraForm.get('nombreEmpleado')?.value,
     cantidadHoras: this.horaExtraForm.get('cantidadHoras')?.value,
     valorXHora: this.horaExtraForm.get('valorXHora')?.value,
     valorFinalHoras: this.valFinal,
@@ -108,6 +113,7 @@ export class CrearHoraExtraComponent implements OnInit {
         this.horaExtraForm.setValue({
 
           cedulaEmpleado: data.cedulaEmpleado,
+          nombreEmpleado: data.nombreEmpleado,
           cantidadHoras: data.cantidadHoras,
           valorXHora: data.valorXHora,
           valorFinalHoras: data.valorFinalHoras,
@@ -152,8 +158,22 @@ export class CrearHoraExtraComponent implements OnInit {
   }
 
   calcularValorFinal(){
-    
-    this.valFinal=(parseFloat(this.horaExtraForm.get('valorXHora')?.value)*parseInt(this.horaExtraForm.get('cantidadHoras')?.value)).toString();
+
+    const numHora = document.getElementById('cantidadHoras');
+    const valHora = document.getElementById('valorXHora');
+
+    if (numHora === null && valHora === null ) {
+      this.valFinal = "";
+
+    } else {
+      const val1= (parseFloat(this.horaExtraForm.get('valorXHora')?.value));
+      const val2= (parseFloat(this.horaExtraForm.get('cantidadHoras')?.value));
+      const val3 = val1 * val2;
+      this.valFinal = val3.toString();
+
+      
+      
+    }
 
   }
 
