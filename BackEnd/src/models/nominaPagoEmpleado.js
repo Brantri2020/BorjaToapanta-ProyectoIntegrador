@@ -3,7 +3,7 @@ class NominaPagoEmpleado {
         nomina,
         cargo,
         salario,
-        numHorasExtras,
+        numeroHorasExtras,
         valorHorasExtras,
         sePagaFondosReserva,
         fondosReserva,
@@ -20,7 +20,7 @@ class NominaPagoEmpleado {
             this.nomina=nomina;
             this.salario=salario;
             this.cargo=cargo;
-            this.numHorasExtras=numHorasExtras;
+            this.numeroHorasExtras=numeroHorasExtras;
             this.valorHorasExtras=valorHorasExtras;
             this.sePagaFondosReserva=sePagaFondosReserva;
             this.fondosReserva=fondosReserva;

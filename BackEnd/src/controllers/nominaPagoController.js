@@ -29,12 +29,6 @@ const obtenerCed = async (req, res, next) => {
 }
 
 
-function obtenerAnticipoCedula(cedula, Anticipo){
-
-
-
-}
-
 
 const obtenerNominaPagos = async (req, res, next) => {
 
@@ -42,38 +36,38 @@ const obtenerNominaPagos = async (req, res, next) => {
     try {
         const anho = req.params.anho;
         const mes = req.params.mes;
-/*
-
-        //ANTICIPO
-        const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes);
-        const dataAnticipo = await anticipos.get();
-        const anticiposArray = [];
-        if (dataAnticipo.empty) {
-
-            console.log("VACIO");
-
-        } else {
-
-            try {
-
-                dataAnticipo.forEach(doc3 => {
-                    const anticipo = new Anticipo(
-                        doc3.id,
-                        doc3.data().cedulaEmpleado,
-                        doc3.data().valorAnticipo,
-                        doc3.data().fechaAnticipo
-                    );
-                    anticiposArray.push(anticipo);
-                });
-
-            }
-            catch (error) {
-                res.status(400).send(error.message);
-            }
-            console.log(anticiposArray);
-        }
-
-*/
+        /*
+        
+                //ANTICIPO
+                const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes);
+                const dataAnticipo = await anticipos.get();
+                const anticiposArray = [];
+                if (dataAnticipo.empty) {
+        
+                    console.log("VACIO");
+        
+                } else {
+        
+                    try {
+        
+                        dataAnticipo.forEach(doc3 => {
+                            const anticipo = new Anticipo(
+                                doc3.id,
+                                doc3.data().cedulaEmpleado,
+                                doc3.data().valorAnticipo,
+                                doc3.data().fechaAnticipo
+                            );
+                            anticiposArray.push(anticipo);
+                        });
+        
+                    }
+                    catch (error) {
+                        res.status(400).send(error.message);
+                    }
+                    console.log(anticiposArray);
+                }
+        
+        */
 
         const nominasPago = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes);
         const data = await nominasPago.get();
@@ -124,7 +118,7 @@ const obtenerNominaPagos = async (req, res, next) => {
                     doc.data().nomina,
                     doc.data().cargo,
                     doc.data().salario,
-                    doc.data().numHorasExtras,
+                    doc.data().numeroHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
@@ -268,7 +262,7 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().nomina,
                     doc.data().cargo,
                     doc.data().salario,
-                    doc.data().numHorasExtras,
+                    doc.data().numeroHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
@@ -287,7 +281,7 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().nomina == nombre ||
                     doc.data().salario == nombre ||
                     doc.data().cargo == nombre ||
-                    doc.data().numHorasExtras == nombre ||
+                    doc.data().numeroHorasExtras == nombre ||
                     doc.data().valorHorasExtras == nombre ||
                     doc.data().sePagaFondosReserva == nombre ||
                     doc.data().fondosReserva == nombre ||
@@ -371,7 +365,7 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                     doc.data().nomina,
                     doc.data().cargo,
                     doc.data().salario,
-                    doc.data().numHorasExtras,
+                    doc.data().numeroHorasExtras,
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
@@ -431,7 +425,7 @@ const crearNominaPago = async (req, res, next) => {
                         "nomina": doc.data().nombre,
                         "cargo": doc.data().cargo,
                         "salario": doc.data().salario,
-                        "numHorasExtras": "",
+                        "numeroHorasExtras": "",
                         "valorHorasExtras": "",
                         "sePagaFondosReserva": "",
                         "fondosReserva": "",
@@ -531,6 +525,75 @@ const eliminarNominasPago = async (req, res, next) => {
 
 }
 
+const obtenerAnticipoPorCedula = async (req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+    const cedula = req.params.cedula;
+
+
+
+    try {
+        const anticipo = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
+        const data = await anticipo.get();
+        if (data.empty) {
+            res.json('0.00');
+        } else {
+
+            var valorDeAnticipo = "";
+            data.forEach(doc => {
+
+                valorDeAnticipo = doc.data().valorAnticipo;
+
+            });
+            res.json(valorDeAnticipo);
+
+
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const obtenerHorasExtrasPorCedula = async (req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+    const cedula = req.params.cedula;
+
+
+
+    try {
+        const anticipo = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
+        const data = await anticipo.get();
+        if (data.empty) {
+            var horasExtras = {
+                cantidadHoras: "0",
+                valorFinalHoras: "0.00"
+            }
+
+            res.json(horasExtras);
+        } else {
+
+            var horasExtras = "";
+            data.forEach(doc => {
+
+                horasExtras = {
+                    "cantidadHoras": doc.data().cantidadHoras,
+                    "valorFinalHoras": doc.data().valorFinalHoras
+                }
+
+
+
+            });
+            res.json(horasExtras);
+
+
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 
 
 module.exports = {
@@ -542,5 +605,7 @@ module.exports = {
     obtenerCed,
     crearNominaPago,
     comprobarIdNominaPago,
-    eliminarNominasPago
+    eliminarNominasPago,
+    obtenerAnticipoPorCedula,
+    obtenerHorasExtrasPorCedula
 }

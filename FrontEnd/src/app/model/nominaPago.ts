@@ -4,7 +4,7 @@ export class NominaPago {
     nomina: string;
     cargo: string;
     salario: string;    
-    numHorasExtras: string;
+    numeroHorasExtras: string;
     valorHorasExtras: string;
     sePagaFondosReserva: string;
     fondosReserva: string;
@@ -23,7 +23,7 @@ export class NominaPago {
         nomina: string,
         cargo: string,
         salario: string,        
-        numHorasExtras:string,
+        numeroHorasExtras:string,
         valorHorasExtras: string,
         sePagaFondosReserva: string,
         fondosReserva: string,
@@ -40,7 +40,7 @@ export class NominaPago {
             this.nomina=nomina;
             this.salario=salario;
             this.cargo=cargo;            
-            this.numHorasExtras=numHorasExtras;
+            this.numeroHorasExtras=numeroHorasExtras;
             this.valorHorasExtras=valorHorasExtras;
             this.sePagaFondosReserva=sePagaFondosReserva;
             this.fondosReserva=fondosReserva;
