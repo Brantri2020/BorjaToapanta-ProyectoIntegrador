@@ -77,6 +77,8 @@
                         <option selected disabled value="">Año</option>
                         <option *ngFor="let anho of listaAnhos" value = {{anho}}>{{anho}}</option>                        
                     </select>
+                    <br>
+                    <button class="btn btn-success float-end" routerLink="/nueva-hora-extra">Generar HORA EXTRA</button>
                 </div>
 
             </div>
@@ -93,6 +95,8 @@
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-3">BUSCAR</button>
                 </div>
+
+
             </form>
 
 

@@ -36,6 +36,9 @@ const obtenerHorasExtra = async(req, res, next) => {
 }
 
 const busquedaHoraExtra = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
 
     try {
         const nombre = req.params.busqueda;
@@ -77,6 +80,9 @@ const busquedaHoraExtra = async(req, res, next) => {
 }
 
 const eliminarHoraExtra = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const id = req.params.id;
         await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + '/' + mes).doc(doc.id).delete();
@@ -119,6 +125,9 @@ const crearHoraExtra = async(req, res, next) => {
 }
 
 const obtenerHoraExtra = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const id = req.params.id;
         const horaExtra = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + "/" + mes).doc(id);
@@ -135,6 +144,9 @@ const obtenerHoraExtra = async(req, res, next) => {
 
 // ordenar
 const obtenerHorasExtraOrdenadas = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const filtro = req.params.filtro;
         const horaExtra = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + "/" + mes)
