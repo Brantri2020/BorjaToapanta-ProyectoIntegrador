@@ -166,17 +166,19 @@ export class CrearHoraExtraComponent implements OnInit {
       this.valFinal = "";
 
     } else {
-      const val1= (parseFloat(this.horaExtraForm.get('valorXHora')?.value));
-      const val2= (parseFloat(this.horaExtraForm.get('cantidadHoras')?.value));
-      const val3 = val1 * val2;
-      this.valFinal = val3.toString();
-
+      const val1= parseFloat(this.horaExtraForm.get('valorXHora')?.value).toFixed(2);
+      const val2= parseFloat(this.horaExtraForm.get('cantidadHoras')?.value).toFixed(2);
+      const val3 = parseFloat(val1) * parseFloat(val2);
+      const val4 = val3.toFixed(2);
       
       
+      this.valFinal = val4.toString();
+     
     }
 
   }
 
+   
   
   
 }

@@ -97,7 +97,7 @@ export class ListarHoraExtraComponent implements OnInit {
   
     var resultado = window.confirm('¿Estas seguro de eliminar la hora extra?');
     if (resultado === true) {
-      this._horaExtraServices.eliminarHoraExtra(id).subscribe(data => {
+      this._horaExtraServices.eliminarHoraExtra(id,this.anho,this.mes).subscribe(data => {
         this.toastr.error('La hora extra fue eliminada con éxito', 'Hora extra eliminada');
         this.obtenerHoraExtra(this.anho, this.mes);
         }, error =>{

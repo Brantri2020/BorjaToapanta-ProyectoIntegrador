@@ -22,8 +22,8 @@ export class HoraExtraService {
       return this.http.get(this.url1 +anho+"/"+mes+ "busqueda/"+busqueda);
     }
   
-    eliminarHoraExtra(id: string): Observable<any>{
-      return this.http.delete(this.url1 + id);
+    eliminarHoraExtra(id: string,anho:string,mes:string): Observable<any>{
+      return this.http.delete(this.url1+anho+"/"+mes+ "/" + id);
     }
   
     editarHoraExtra(id: any, horaExtra: HoraExtra,anho:any,mes:any): Observable<any>{

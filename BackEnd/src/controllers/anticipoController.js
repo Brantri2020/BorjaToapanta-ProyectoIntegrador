@@ -71,9 +71,11 @@ const busquedaAnticipo = async(req, res, next) => {
 }
 
 const eliminarAnticipo = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
     try {
         const id = req.params.id;
-        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + '/' + mes).doc(doc.id).delete();
+        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + '/' + mes).doc(id).delete();
         res.json('Anticipo eliminado correctamente');
     } catch (error) {
         res.status(400).send(error.message);
@@ -113,6 +115,9 @@ const crearAnticipo = async(req, res, next) => {
 }
 
 const obtenerAnticipo = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
     try {
         const id = req.params.id;
         const anticipo = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes).doc(id);

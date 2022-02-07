@@ -85,7 +85,7 @@ const eliminarHoraExtra = async(req, res, next) => {
 
     try {
         const id = req.params.id;
-        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + '/' + mes).doc(doc.id).delete();
+        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + '/' + mes).doc(id).delete();
         res.json('Hora Extra eliminada correctamente');
     } catch (error) {
         res.status(400).send(error.message);

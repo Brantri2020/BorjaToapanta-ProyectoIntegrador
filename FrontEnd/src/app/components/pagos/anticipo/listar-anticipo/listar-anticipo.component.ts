@@ -96,7 +96,7 @@ export class ListarAnticipoComponent implements OnInit {
   
     var resultado = window.confirm('¿Estas seguro de eliminar el anticipo?');
     if (resultado === true) {
-      this._anticipoServices.eliminarAnticipo(id).subscribe(data => {
+      this._anticipoServices.eliminarAnticipo(id,this.anho,this.mes).subscribe(data => {
         this.toastr.error('El anticipo fue eliminado con éxito', 'Anticipo eliminado');
         this.obtenerAnticipo(this.anho, this.mes);
         }, error =>{
