@@ -1,7 +1,8 @@
 class HoraExtra {
-    constructor(id, cedulaEmpleado, cantidadHoras, valorXHora, valorFinalHoras, fechaHoraExtra) {
+    constructor(id, cedulaEmpleado, nombreEmpleado, cantidadHoras, valorXHora, valorFinalHoras, fechaHoraExtra) {
         this.id = id;
         this.cedulaEmpleado = cedulaEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
         this.cantidadHoras = cantidadHoras;
         this.valorXHora = valorXHora;
         this.valorFinalHoras = valorFinalHoras;

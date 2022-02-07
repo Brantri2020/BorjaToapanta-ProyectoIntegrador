@@ -20,6 +20,7 @@ const obtenerHorasExtra = async(req, res, next) => {
                 const horasExtra = new HoraExtra(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().cantidadHoras,
                     doc.data().valorXHora,
                     doc.data().valorFinalHoras,
@@ -48,6 +49,7 @@ const busquedaHoraExtra = async(req, res, next) => {
                 const horaExtra = new HoraExtra(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().cantidadHoras,
                     doc.data().valorXHora,
                     doc.data().valorFinalHoras,
@@ -55,6 +57,7 @@ const busquedaHoraExtra = async(req, res, next) => {
                 );
 
                 if (doc.data().cedulaEmpleado == nombre ||
+                    doc.data().nombreEmpleado == nombre ||
                     doc.data().cantidadHoras == nombre ||
                     doc.data().valorXHora == nombre ||
                     doc.data().valorFinalHoras == nombre ||
@@ -145,6 +148,7 @@ const obtenerHorasExtraOrdenadas = async(req, res, next) => {
                 const horaExtra = new HoraExtra(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().cantidadHoras,
                     doc.data().valorXHora,
                     doc.data().valorFinalHoras,

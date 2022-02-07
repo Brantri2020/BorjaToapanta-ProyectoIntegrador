@@ -20,6 +20,7 @@ const obtenerAnticipos = async(req, res, next) => {
                 const anticipo = new Anticipo(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().valorAnticipo,
                     doc.data().fechaAnticipo
                 );
@@ -46,11 +47,13 @@ const busquedaAnticipo = async(req, res, next) => {
                 const anticipo = new Anticipo(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().valorAnticipo,
                     doc.data().fechaAnticipo
                 );
 
                 if (doc.data().cedulaEmpleado == nombre ||
+                    doc.data().nombreEmpleado == nombre ||
                     doc.data().valorAnticipo == nombre ||
                     doc.data().fechaAnticipo == nombre) {
                     anticipoArray.push(anticipo);
@@ -139,6 +142,7 @@ const obtenerAnticiposOrdenados = async(req, res, next) => {
                 const anticipo = new Anticipo(
                     doc.id,
                     doc.data().cedulaEmpleado,
+                    doc.data().nombreEmpleado,
                     doc.data().valorAnticipo,
                     doc.data().fechaAnticipo
                 );

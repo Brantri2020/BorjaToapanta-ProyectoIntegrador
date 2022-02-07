@@ -5,9 +5,6 @@ import { HoraExtra } from 'src/app/model/horaExtra';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HoraExtraService } from 'src/app/services/hora-extra.service';
 import { Router } from '@angular/router';
-import { EmpleadoService } from 'src/app/services/empleado.service';
-import { Empleado } from 'src/app/model/empleado';
-import { HoraExtra2 } from 'src/app/model/horaExtra2';
 
 @Component({
   selector: 'app-listar-hora-extra',
@@ -19,8 +16,6 @@ export class ListarHoraExtraComponent implements OnInit {
   busquedaHEForm: FormGroup;
   listHoraExtra: HoraExtra[] = [];
   listHoraExtra2: HoraExtra[] = [];
-  listEmpleado: Empleado[] = [];
-  listHoraExtra3: HoraExtra2[] = [];
   nombreEmp = "";
   listaAnhos: any = [];
   i = 0;
@@ -31,7 +26,6 @@ export class ListarHoraExtraComponent implements OnInit {
   ];
 
   constructor(private _horaExtraServices: HoraExtraService,
-    private _empleadoServices: EmpleadoService,
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router,) {
@@ -41,7 +35,7 @@ export class ListarHoraExtraComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.navigate(['/horasExtra']);
+    this.router.navigate(['/horas-extra']);
     this.llenarFecha();
     for (var i = 2010; i < 2050; i++) {
       this.listaAnhos.push(i);
@@ -49,7 +43,7 @@ export class ListarHoraExtraComponent implements OnInit {
     this.obtenerHoraExtra(this.anho, this.mes);
     this.cambioFecha();
     
-    //this.obtenerEmpleado(this.anho, this.mes);
+    
   }
 
   cambioFecha() {
@@ -122,7 +116,7 @@ export class ListarHoraExtraComponent implements OnInit {
         console.log(data);
       this.listHoraExtra = data;
 
-      this.obtenerNombre(this.listHoraExtra);
+      
       
     }, error => {
       console.log(error);
@@ -145,38 +139,7 @@ export class ListarHoraExtraComponent implements OnInit {
     })
   }
 
-  obtenerNombre(listHoraExtra: HoraExtra[]){
-    //this.obtenerAnticipo(anho,mes);
-
-    this._empleadoServices.getEmpleados().subscribe(data => {
-      console.log(data);
-    
-    this.listEmpleado = data;
-    
-    listHoraExtra.forEach(element => {
-      this.listEmpleado.forEach(element1 => {
-        if (element1.cedula == element.cedulaEmpleado) {
-
-          //this.nombreEmp = element1.nombre;
-          const HORAEXTRA2: HoraExtra2 = {
-            cedulaEmpleado: element.cedulaEmpleado,
-            nombreEmpleado: element1.nombre,
-            cantidadHoras: element.cantidadHoras,
-            valorXHora: element.valorXHora,
-            valorFinalHoras: element.valorFinalHoras,
-            fechaHoraExtra: element.fechaHoraExtra
-          };
-          this.listHoraExtra3.push(HORAEXTRA2);
-
-        }
-        
-      });
-    });
-  }, error => {
-    console.log(error);
-  })
-     
-  }
+  
 
   
 

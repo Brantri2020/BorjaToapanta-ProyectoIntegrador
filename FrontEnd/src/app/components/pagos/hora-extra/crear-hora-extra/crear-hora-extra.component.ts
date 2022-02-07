@@ -67,6 +67,7 @@ export class CrearHoraExtraComponent implements OnInit {
   agregarHoraExtra() {
     const HORAEXTRA: HoraExtra = {
     cedulaEmpleado: this.cedEmple,
+    nombreEmpleado: this.horaExtraForm.get('nombreEmpleado')?.value,
     cantidadHoras: this.horaExtraForm.get('cantidadHoras')?.value,
     valorXHora: this.horaExtraForm.get('valorXHora')?.value,
     valorFinalHoras: this.valFinal,
@@ -108,6 +109,7 @@ export class CrearHoraExtraComponent implements OnInit {
         this.horaExtraForm.setValue({
 
           cedulaEmpleado: data.cedulaEmpleado,
+          nombreEmpleado: data.nombreEmpleado,
           cantidadHoras: data.cantidadHoras,
           valorXHora: data.valorXHora,
           valorFinalHoras: data.valorFinalHoras,

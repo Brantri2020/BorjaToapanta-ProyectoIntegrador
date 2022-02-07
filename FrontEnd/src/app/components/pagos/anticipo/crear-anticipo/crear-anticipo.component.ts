@@ -68,6 +68,7 @@ export class CrearAnticipoComponent implements OnInit {
   agregarAnticipo() {
     const ANTICIPO: Anticipo = {
     cedulaEmpleado: this.cedEmple,
+    nombreEmpleado: this.anticipoForm.get('nombreEmpleado')?.value,
     valorAnticipo: this.anticipoForm.get('valorAnticipo')?.value,
     fechaAnticipo: this.anticipoForm.get('fechaAnticipo')?.value
   }
@@ -108,6 +109,7 @@ export class CrearAnticipoComponent implements OnInit {
         this.anticipoForm.setValue({
 
           cedulaEmpleado: data.cedulaEmpleado,
+          nombreEmpleado: data.nombreEmpleado,
           valorAnticipo: data.valorAnticipo,
           fechaAnticipo: data.fechaAnticipo
 

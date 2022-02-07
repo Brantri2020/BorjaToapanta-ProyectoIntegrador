@@ -4,9 +4,7 @@ import { Anticipo } from 'src/app/model/anticipo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnticipoService } from 'src/app/services/anticipo.service';
 import { Router } from '@angular/router';
-import { EmpleadoService } from 'src/app/services/empleado.service';
-import { Empleado } from 'src/app/model/empleado';
-import { Anticipo2 } from 'src/app/model/anticipo2';
+
 
 @Component({
   selector: 'app-listar-anticipo',
@@ -18,9 +16,6 @@ export class ListarAnticipoComponent implements OnInit {
   busquedaAntForm: FormGroup;
   listAnticipo: Anticipo[] = [];
   listAnticipo2: Anticipo[] = [];
-  listEmpleado: Empleado[] = [];
-  listAnticipo3: Anticipo2[] = [];
-  nombreEmp = "";
   listaAnhos: any = [];
   i = 0;
   anho = "";
@@ -30,7 +25,6 @@ export class ListarAnticipoComponent implements OnInit {
   ];
 
   constructor(private _anticipoServices: AnticipoService,
-    private _empleadoServices: EmpleadoService,
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router,) {
@@ -121,7 +115,7 @@ export class ListarAnticipoComponent implements OnInit {
         console.log(data);
       this.listAnticipo = data;
 
-      this.obtenerNombre(this.listAnticipo);
+      
       
     }, error => {
       console.log(error);
@@ -144,37 +138,7 @@ export class ListarAnticipoComponent implements OnInit {
     })
   }
 
-  obtenerNombre(listAnticipo: Anticipo[]){
-    //this.obtenerAnticipo(anho,mes);
-
-    this._empleadoServices.getEmpleados().subscribe(data => {
-      console.log(data);
-    
-    this.listEmpleado = data;
-    
-    listAnticipo.forEach(element => {
-      this.listEmpleado.forEach(element1 => {
-        if (element1.cedula == element.cedulaEmpleado) {
-
-          //this.nombreEmp = element1.nombre;
-          const ANTICIPO2: Anticipo2 = {
-            cedulaEmpleado: element.cedulaEmpleado,
-            nombreEmpleado: element1.nombre,
-            valorAnticipo: element.valorAnticipo,
-            fechaAnticipo: element.fechaAnticipo
-          };
-          this.listAnticipo3.push(ANTICIPO2);
-
-        }
-        
-      });
-    });
-  }, error => {
-    console.log(error);
-  })
-     
-  }
-
+  
   
 
 }
