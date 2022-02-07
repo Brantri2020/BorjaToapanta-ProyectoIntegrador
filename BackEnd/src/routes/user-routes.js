@@ -115,8 +115,25 @@ router.delete('/anticipos/:anho/:mes/:id', eliminarAnticipo);
 router.put('/anticipos/:anho/:mes/:id', actualizarAnticipo);
 router.post('/anticipos/:anho/:mes', crearAnticipo);
 router.get('/anticipos/:anho/:mes/:id', obtenerAnticipo);
-router.get('/anticipos/:anho/:mes/salarios-ordenados/:filtro', obtenerAnticiposOrdenados);
+router.get('/anticipos/:anho/:mes/anticipos-ordenados/:filtro', obtenerAnticiposOrdenados);
 
+//Hora Extra
+const {
+    obtenerHorasExtra,
+    busquedaHoraExtra,
+    eliminarHoraExtra,
+    actualizarHoraExtra,
+    crearHoraExtra,
+    obtenerHoraExtra,
+    obtenerHorasExtraOrdenadas
+} = require('../controllers/horaExtraController');
+router.get('/horasExtra/:anho/:mes', obtenerHorasExtra);
+router.get('/horasExtra/:anho/:mes/busqueda/:busqueda', busquedaHoraExtra);
+router.delete('/horasExtra/:anho/:mes/:id', eliminarHoraExtra);
+router.put('/horasExtra/:anho/:mes/:id', actualizarHoraExtra);
+router.post('/horasExtra/:anho/:mes', crearHoraExtra);
+router.get('/horasExtra/:anho/:mes/:id', obtenerHoraExtra);
+router.get('/horasExtra/:anho/:mes/horas-extra-ordenadas/:filtro', obtenerHorasExtraOrdenadas);
 
 
 

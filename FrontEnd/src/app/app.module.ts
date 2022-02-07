@@ -42,6 +42,8 @@ import { ListarSalarioComponent } from './components/pagos/salario/listar-salari
 import { CrearSalarioComponent } from './components/pagos/salario/crear-salario/crear-salario.component';
 import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anticipo/listar-anticipo.component';
 import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-anticipo/crear-anticipo.component';
+import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
+import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-antici
     ListarSalarioComponent,
     CrearSalarioComponent,
     ListarAnticipoComponent,
-    CrearAnticipoComponent
+    CrearAnticipoComponent,
+    ListarHoraExtraComponent,
+    CrearHoraExtraComponent
   ],
   imports: [
     BrowserModule,

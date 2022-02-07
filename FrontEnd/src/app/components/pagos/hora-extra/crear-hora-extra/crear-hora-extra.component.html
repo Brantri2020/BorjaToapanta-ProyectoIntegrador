@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="horaExtraForm" (ngSubmit)="agregarHoraExtra()">
+
+                        <!--Nombre Empleado-->
+                        <div class="mb-3">
+                            <select class="form-select" formControlName="nombreEmpleado" aria-label="Default select example" placeholder="Seleccione el empleado" id="selectNombre">
+                                <option selected disabled value="" >Seleccione el empleado</option>
+                                <option value="{{listEmpleados.nombre}}" *ngFor="let listEmpleados of emple">{{listEmpleados.nombre}}</option>
+                            </select>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('cedula')?.hasError('required') && horaExtraForm.get('cedula')?.touched">
+                                <span>El empleado <strong>es obligatorio</strong>, seleccione uno.</span>
+                            </div>
+                        </div>
+
+                        <!--Cedula Empleado-->
+                        <div class="mb-3">
+                            <input readonly type="text" formControlName="cedulaEmpleado" class="form-control form-control-lg" value={{cedEmple}}>
+
+                        </div>
+
+                        <!--Cantidad Horas-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="cantidadHoras" class="form-control form-control-lg" placeholder="Ingrese la cantidad de Horas Extra" minlength="1" maxlength="3" pattern="[0-9]*">
+                            <div class="text-danger" *ngIf="horaExtraForm.get('cantidadHoras')?.hasError('required') && horaExtraForm.get('cantidadHoras')?.touched">
+                                <span>La cantidad de horas extra <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('cantidadHoras')?.hasError('minlength')">
+                                <span>La cantidad de horas extra puede tener <strong>mínimo 1 número o máximo 3.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('cantidadHoras')?.hasError('pattern')">
+                                <span>La cantidad de horas extra puede tener <strong>sólo números</strong></span>
+                            </div>
+                        </div>
+
+                        <!--Valor por Hora-->
+                        <div class="mb-3">
+                            <input type="text" formControlName="valorXHora" class="form-control form-control-lg" placeholder="Ingrese el valor de la Hora Extra" minlength="4" maxlength="8" pattern="[0-9\.\, ]*">
+                            <div class="text-danger" *ngIf="horaExtraForm.get('valorXHora')?.hasError('required') && horaExtraForm.get('valorXHora')?.touched">
+                                <span>El valor por Hora Extra <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('valorXHora')?.hasError('minlength')">
+                                <span>El valor por Hora Extra puede tener <strong>mínimo 4 caracteres o máximo 8.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('valorXHora')?.hasError('pattern')">
+                                <span>El valor por Hora Extra tiene el formato <strong>0.00</strong></span>
+                            </div>
+                        </div>
+
+
+                        <!--Valor Total-->
+                        <div class="mb-3">
+
+                            <input readonly type="text" formControlName="valorFinalHoras" class="form-control form-control-lg" value={{valFinal}}>
+                        </div>
+
+                        <!--Fecha Hora Extra-->
+                        <div class="mb-3">
+
+                            <input type="date" formControlName="fechaHoraExtra" class="form-control form-control-lg" name="fecha" max={{hoy}} #fecha>
+                            <div class="text-danger" *ngIf="horaExtraForm.get('fechaHoraExtra')?.hasError('required') && horaExtraForm.get('fechaHoraExtra')?.touched">
+                                <span>La fecha de la Hora Extra <strong>es obligatoria.</strong></span>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="text-danger" style="text-align: center;">
+                            <span><strong>{{mensaje}}</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <button routerLink="/horas-extra" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="horaExtraForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

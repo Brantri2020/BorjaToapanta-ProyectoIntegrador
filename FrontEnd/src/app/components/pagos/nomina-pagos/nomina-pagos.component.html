@@ -7,6 +7,17 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Horas Extra
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="horas-extra">Horas Extras <span class="sr-only">(current)</span></a>
+                    <a class="dropdown-item" href="nueva-hora-extra">Generar Nueva Hora Extra <span class="sr-only">(current)</span></a>
+                </div>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Anticipos
@@ -114,7 +125,7 @@
                         <td>{{nominaPago.cedula}}</td>
                         <td>{{nominaPago.nomina}}</td>
                         <td>{{nominaPago.cargo}}</td>
-                        <td>{{nominaPago.salario}}</td>                        
+                        <td>{{nominaPago.salario}}</td>
                         <td>{{nominaPago.numHorasExtras}}</td>
                         <td>{{nominaPago.valorHorasExtras}}</td>
                         <td>{{nominaPago.sePagaFondosReserva}}</td>
@@ -138,7 +149,7 @@
             <h5 style="text-align: start; margin-top: 10px;" *ngIf="listNominasPago.length == 0">No hay nominas de pago para mostrar
             </h5>
 
-            <button class="btn btn-danger float-center" (click)="eliminarNominasPago(this.anho,this.mes)" >Eliminar nómina de pago</button>
+            <button class="btn btn-danger float-center" (click)="eliminarNominasPago(this.anho,this.mes)">Eliminar nómina de pago</button>
         </div>
 
     </div>

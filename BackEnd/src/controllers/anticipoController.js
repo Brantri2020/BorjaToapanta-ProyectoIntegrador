@@ -128,7 +128,7 @@ const obtenerAnticipo = async(req, res, next) => {
 const obtenerAnticiposOrdenados = async(req, res, next) => {
     try {
         const filtro = req.params.filtro;
-        const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes)
+        const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes)
             .orderBy(filtro, "asc");
         const data = await anticipos.get();
         const anticiposArray = [];
