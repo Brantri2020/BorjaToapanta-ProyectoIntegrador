@@ -80,6 +80,8 @@ export class CrearAnticipoComponent implements OnInit {
   
 
   if (this.id !== null) {
+    //poner nombre
+
     //editamos anticipo
     this._anticipoService.editarAnticipo(this.id, ANTICIPO, this.anho, this.mes).subscribe(data => {  /************* */
       this.toastr.success('El anticipo fue actualizado con éxito!', 'Anticipo Actualizado!');
@@ -114,6 +116,8 @@ export class CrearAnticipoComponent implements OnInit {
           fechaAnticipo: data.fechaAnticipo
 
         })
+
+        
       })
     }
   }
