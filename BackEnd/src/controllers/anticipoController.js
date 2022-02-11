@@ -34,6 +34,9 @@ const obtenerAnticipos = async(req, res, next) => {
 }
 
 const busquedaAnticipo = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
+
 
     try {
         const nombre = req.params.busqueda;
@@ -134,6 +137,8 @@ const obtenerAnticipo = async(req, res, next) => {
 
 // ordenar
 const obtenerAnticiposOrdenados = async(req, res, next) => {
+    const anho = req.params.anho;
+    const mes = req.params.mes;
     try {
         const filtro = req.params.filtro;
         const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes)

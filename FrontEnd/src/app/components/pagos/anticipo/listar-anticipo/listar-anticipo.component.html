@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="padding-left: 50px; padding-right: 50px;">
 
-    <a class="navbar-brand" href="nomina-pagos">Anticipos</a>
+    <a class="navbar-brand" href="anticipos">Anticipos</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -115,7 +115,7 @@
                         <td>{{anticipo.valorAnticipo}}</td>
                         <td>{{anticipo.fechaAnticipo}}</td>
                         <td>
-                            <i [routerLink]="['/editar-anticipo', anticipo.id]" class="far fa-edit text-primary"></i>
+                            <i [routerLink]="['/editar-anticipo', this.anho,this.mes, anticipo.id]" class="far fa-edit text-primary"></i>
                             <i (click)="eliminarAnticipo(anticipo.id)" class="fas fa-trash text-danger"></i>
                         </td>
                     </tr>

@@ -19,6 +19,7 @@ import { RolIndividualComponent } from './components/pagos/rol-individual/rol-in
 import { CrearSalarioComponent } from './components/pagos/salario/crear-salario/crear-salario.component';
 import { ListarSalarioComponent } from './components/pagos/salario/listar-salario/listar-salario.component';
 import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-anticipo/crear-anticipo.component';
+import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actualizar-anticipo/actualizar-anticipo.component';
 import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anticipo/listar-anticipo.component';
 import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
@@ -46,7 +47,7 @@ const routes: Routes = [
   { path: 'editar-salario/:id', component: CrearSalarioComponent, canActivate: [AuthGuard] },
   { path: 'anticipos', component: ListarAnticipoComponent, canActivate: [AuthGuard] },
   { path: 'nuevo-anticipo', component: CrearAnticipoComponent, canActivate: [AuthGuard] },
-  { path: 'editar-anticipo/:id', component: CrearAnticipoComponent, canActivate: [AuthGuard] },
+  { path: 'editar-anticipo/:anho/:mes/:id', component: ActualizarAnticipoComponent, canActivate: [AuthGuard] },
   { path: 'horas-extra', component: ListarHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'nueva-hora-extra', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'editar-horaExtra/:id', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },

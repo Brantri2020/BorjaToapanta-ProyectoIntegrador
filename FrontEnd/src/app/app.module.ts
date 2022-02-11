@@ -44,6 +44,7 @@ import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anti
 import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-anticipo/crear-anticipo.component';
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
 import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
+import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actualizar-anticipo/actualizar-anticipo.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hor
     ListarAnticipoComponent,
     CrearAnticipoComponent,
     ListarHoraExtraComponent,
-    CrearHoraExtraComponent
+    CrearHoraExtraComponent,
+    ActualizarAnticipoComponent
   ],
   imports: [
     BrowserModule,

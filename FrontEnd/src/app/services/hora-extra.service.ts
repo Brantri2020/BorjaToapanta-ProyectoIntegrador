@@ -19,7 +19,7 @@ export class HoraExtraService {
     }
   
     buscarHoraExtra(busqueda: string,anho:string,mes:string): Observable<any> {
-      return this.http.get(this.url1 +anho+"/"+mes+ "busqueda/"+busqueda);
+      return this.http.get(this.url1 +anho+"/"+mes+ "/busqueda/"+busqueda);
     }
   
     eliminarHoraExtra(id: string,anho:string,mes:string): Observable<any>{
@@ -27,7 +27,7 @@ export class HoraExtraService {
     }
   
     editarHoraExtra(id: any, horaExtra: HoraExtra,anho:any,mes:any): Observable<any>{
-      return this.http.put(this.url1 +anho+"/"+mes+ id, horaExtra);
+      return this.http.put(this.url1 +anho+"/"+mes+ "/"+ id, horaExtra);
     }
   
     guardarHoraExtra(horaExtra: HoraExtra,anho:any,mes:any): Observable<any>{
@@ -35,11 +35,11 @@ export class HoraExtraService {
     }
   
     obtenerHoraExtra(id: string,anho:any,mes:any): Observable<any>{
-      return this.http.get(this.url1+anho+"/"+mes+id);
+      return this.http.get(this.url1+anho+"/"+mes+"/"+id);
     }
   
     obtenerHoraExtraOrdenada(filtro: string,anho:string,mes:string): Observable<any>{
-      return this.http.get(this.url1+anho+"/"+mes+"horas-extra-ordenadas/"+filtro);
+      return this.http.get(this.url1+anho+"/"+mes+"/horas-extra-ordenadas/"+filtro);
     }
 
 }

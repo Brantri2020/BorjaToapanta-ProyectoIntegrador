@@ -20,7 +20,7 @@ export class AnticipoService {
   }
 
   buscarAnticipo(busqueda: string,anho:string,mes:string): Observable<any> {
-    return this.http.get(this.url1 +anho+"/"+mes+ "busqueda/"+busqueda);
+    return this.http.get(this.url1 +anho+"/"+mes+ "/busqueda/"+busqueda);
   }
 
   eliminarAnticipo(id: string,anho:string,mes:string): Observable<any>{
@@ -28,7 +28,7 @@ export class AnticipoService {
   }
 
   editarAnticipo(id: any, anticipo: Anticipo,anho:any,mes:any): Observable<any>{
-    return this.http.put(this.url1 +anho+"/"+mes+ id, anticipo);
+    return this.http.put(this.url1 +anho+"/"+mes+"/"+ id, anticipo);
   }
 
   guardarAnticipo(anticipo: Anticipo,anho:any,mes:any): Observable<any>{
@@ -40,6 +40,6 @@ export class AnticipoService {
   }
 
   obtenerAnticipoOrdenado(filtro: string,anho:string,mes:string): Observable<any>{
-    return this.http.get(this.url1+anho+"/"+mes+"anticipos-ordenados/"+filtro);
+    return this.http.get(this.url1+anho+"/"+mes+"/anticipos-ordenados/"+filtro);
   }
 }
