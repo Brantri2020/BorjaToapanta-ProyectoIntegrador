@@ -58,11 +58,9 @@ export class RolIndividualComponent implements OnInit {
 
   ngOnInit(): void {
     this.esEditar();
-    window.alert(this.rolIndividualForm.get('salario')?.value);
-    this.rolIndividualForm.controls['totalIngresos'].setValue(parseFloat(this.rolIndividualForm.get('salario')?.value)+parseFloat(this.rolIndividualForm.get('valorHorasExtras')?.value)+parseFloat(this.rolIndividualForm.get('fondosReserva')?.value));
-    this.rolIndividualForm.controls['totalEgreso'].setValue(parseFloat(this.rolIndividualForm.get('iess')?.value)+parseFloat(this.rolIndividualForm.get('anticipo')?.value)+parseFloat(this.rolIndividualForm.get('prestamoIess')?.value));
-    this.rolIndividualForm.controls['liquidoRecibir'].setValue(parseFloat(this.rolIndividualForm.get('totalIngresos')?.value)-parseFloat(this.rolIndividualForm.get('totalEgreso')?.value));
+    
   }
+
 
 
 
@@ -203,7 +201,7 @@ export class RolIndividualComponent implements OnInit {
           this.rolIndividualForm.controls['totalEgreso'].setValue("0.00");
         }
         //liquido a pagar
-        if(data.liquidoRecibir.toString() == ""){
+        if (data.liquidoRecibir.toString() == "") {
           this.rolIndividualForm.controls['liquidoRecibir'].setValue("0.00");
         }
 
@@ -223,9 +221,11 @@ export class RolIndividualComponent implements OnInit {
 
             })
         }
+
+        
       })
     }
-   
+    
   }
 
   obtenerCedula(id: any) {
@@ -260,11 +260,17 @@ export class RolIndividualComponent implements OnInit {
   }
 
 
-  calculos(){
-    window.alert(this.rolIndividualForm.get('salario')?.value.toString());
-    //this.rolIndividualForm.controls['totalIngresos'].setValue(parseFloat(this.rolIndividualForm.get('salario')?.value)+parseFloat(this.rolIndividualForm.get('valorHorasExtras')?.value)+parseFloat(this.rolIndividualForm.get('fondosReserva')?.value));
-    //this.rolIndividualForm.controls['totalEgreso'].setValue(parseFloat(this.rolIndividualForm.get('iess')?.value)+parseFloat(this.rolIndividualForm.get('anticipo')?.value)+parseFloat(this.rolIndividualForm.get('prestamoIess')?.value));
-    //this.rolIndividualForm.controls['liquidoRecibir'].setValue(parseFloat(this.rolIndividualForm.get('totalIngresos')?.value)-parseFloat(this.rolIndividualForm.get('totalEgreso')?.value));
+ 
+
+  calcularValores(salario: any, valorHorasExtras: any, fondosReserva: any, iess:any, anticipo:any, prestamoIess:any) {
+
+    
+    //ingresos      
+    this.rolIndividualForm.controls['totalIngresos'].setValue((parseFloat(salario + valorHorasExtras + fondosReserva).toFixed(2)).toString());
+   
+    //egresos
+    window.alert(fondosReserva);
+    this.rolIndividualForm.controls['totalEgreso'].setValue((parseFloat(iess + anticipo + prestamoIess).toFixed(2)).toString());
   }
 
 }
