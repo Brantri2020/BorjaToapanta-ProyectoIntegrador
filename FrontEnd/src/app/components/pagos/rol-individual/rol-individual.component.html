@@ -55,7 +55,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-3 col-form-label label-rol">CÉDULA</label>
                             <div class="col-sm-9">
-                                <input readonly type="text" style="height: 10px;" formControlName="cedula" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese la cédula" minlength="10" maxlength="15" pattern="[0-9]*">
+                                <input readonly type="text" style="height: 10px;" formControlName="cedula" id ="cedul" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese la cédula" minlength="10" maxlength="15" pattern="[0-9]*">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('cedula')?.hasError('required') && rolIndividualForm.get('cedula')?.touched">
                                     <span>La cédula <strong>es obligatoria.</strong></span>
                                 </div>
@@ -115,7 +115,7 @@
                             <!--Salario-->
                             <label class="col-sm-2 col-form-label label-rol">SALARIO</label>
                             <div class="col-sm-4">
-                                <input readonly type="text" style="height: 10px;" formControlName="salario" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="salario" id="salario" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el salario" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('salario')?.hasError('required') && rolIndividualForm.get('salario')?.touched">
                                     <span>El salario <strong>es obligatorio.</strong></span>
                                 </div>
@@ -129,7 +129,7 @@
                             <!--Aporte IESS-->
                             <label class="col-sm-2 col-form-label label-rol">APORTE IESS</label>
                             <div class="col-sm-4">
-                                <input type="text" style="height: 10px;" formControlName="iess" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el aporte IESS" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input type="text" style="height: 10px;" id="iessDato" formControlName="iess" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el aporte IESS" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('iess')?.hasError('required') && rolIndividualForm.get('iess')?.touched">
                                     <span>El aporte de IESS <strong>es obligatorio.</strong></span>
                                 </div>
@@ -145,7 +145,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-2 col-form-label label-rol">VALOR HORAS EXTRAS</label>
                             <div class="col-sm-4">
-                                <input readonly type="text" style="height: 10px;" formControlName="valorHorasExtras" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese las horas extras" minlength="4" maxlength="15" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="valorHorasExtras" id="valorHorasExtras" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese las horas extras" minlength="4" maxlength="15" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('valorHorasExtras')?.hasError('required') && rolIndividualForm.get('valorHorasExtras')?.touched">
                                     <span>Las horas extras <strong>son obligatorias.</strong></span>
                                 </div>
@@ -177,7 +177,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-2 col-form-label label-rol">FONDOS RESERVA</label>
                             <div class="col-sm-4">
-                                <input type="text" style="height: 10px;" formControlName="fondosReserva" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el fondo de reserva" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input type="text" style="height: 10px;" formControlName="fondosReserva" id="fondosReserva" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el fondo de reserva" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('fondosReserva')?.hasError('required') && rolIndividualForm.get('fondosReserva')?.touched">
                                     <span>El fondo de reserva <strong>es obligatorio.</strong></span>
                                 </div>
@@ -191,7 +191,7 @@
                             </div>
                             <label class="col-sm-2 col-form-label label-rol">PRÉSTAMO IESS</label>
                             <div class="col-sm-4">
-                                <input type="text" style="height: 10px;" formControlName="prestamoIess" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el préstamo de IESS" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input type="text" style="height: 10px;" id="prestamoIess" formControlName="prestamoIess" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el préstamo de IESS" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('prestamoIess')?.hasError('required') && rolIndividualForm.get('prestamoIess')?.touched">
                                     <span>El préstamo iess <strong>es obligatorio.</strong></span>
                                 </div>
@@ -210,7 +210,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-2 col-form-label label-rol">TOTAL INGRESOS</label>
                             <div class="col-sm-4">
-                                <input readonly type="text" style="height: 10px;" formControlName="totalIngresos" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de ingresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
+                                <input readonly type="text" style="height: 10px;" formControlName="totalIngresos" id="totalIngresos" class="form-control form-control-lg col-sm-2 col-form-label" placeholder="Ingrese el total de ingresos" minlength="4" maxlength="10" pattern="[0-9]*.[0-9]{2}">
                                 <div class="text-danger" *ngIf="rolIndividualForm.get('totalIngresos')?.hasError('required') && rolIndividualForm.get('totalIngresos')?.touched">
                                     <span>El total de ingresos <strong>es obligatorio.</strong></span>
                                 </div>

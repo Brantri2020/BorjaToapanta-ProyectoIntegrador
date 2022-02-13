@@ -66,8 +66,8 @@ const {
     crearNominaPago,
     comprobarIdNominaPago,
     eliminarNominasPago,
-    obtenerAnticipoPorCedula,
-    obtenerHorasExtrasPorCedula
+    obtenerAnticipoHorasExtrasPorCedula,
+    //obtenerHorasExtrasPorCedula
 } = require('../controllers/nominaPagoController');
 
 const {
@@ -82,8 +82,8 @@ router.put('/nominasPago/:anho/:mes/:id', actualizarRolIndividual);
 router.post('/nominasPago/:anho/:mes/:cedula', crearNominaPago);
 router.get('/nominasPago/comprobar/:anho/:mes/:id', comprobarIdNominaPago);
 router.delete('/nominasPago/eliminar/:anho/:mes', eliminarNominasPago);
-router.get('/nominasPago/anticipo/:anho/:mes/:cedula', obtenerAnticipoPorCedula);
-router.get('/nominasPago/horasExtras/:anho/:mes/:cedula', obtenerHorasExtrasPorCedula);
+router.get('/nominasPago/anticipoHorasExtras/:anho/:mes/:cedula', obtenerAnticipoHorasExtrasPorCedula);
+//router.get('/nominasPago/horasExtras/:anho/:mes/:cedula', obtenerHorasExtrasPorCedula);
 
 
 

@@ -525,27 +525,95 @@ const eliminarNominasPago = async (req, res, next) => {
 
 }
 
-const obtenerAnticipoPorCedula = async (req, res, next) => {
+const obtenerAnticipoHorasExtrasPorCedula = async (req, res, next) => {
     const anho = req.params.anho;
     const mes = req.params.mes;
     const cedula = req.params.cedula;
 
 
+    var valorDeAnticipo = 0;
+    var valorAnticipoFinalStr = "";
+    var salarioStr="";
+
+    try {
+        
+        const salario = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').where("cedula", "==", cedula);
+        const data3 = await salario.get();
+        
+        if (data3.empty) {
+            salarioStr="0.00"
+            
+        } else {            
+            data3.forEach(doc => {
+                
+                salarioStr=doc.data().salario;
+                //console.log(salarioStr);
+            });
+            
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
 
     try {
         const anticipo = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
         const data = await anticipo.get();
         if (data.empty) {
-            res.json('0.00');
+            valorAnticipoFinalStr='0.00';
+        } else {
+            data.forEach(doc => {
+                valorDeAnticipo += parseFloat(doc.data().valorAnticipo);
+                valorAnticipoFinalStr=valorDeAnticipo.toString();
+                if (!valorDeAnticipo.toString().includes(".")) {
+                    valorAnticipoFinalStr = valorDeAnticipo.toString() + ".00";
+                }
+            });
+            
+
+
+        }
+        
+        
+
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+    try {
+        const horasExtrasD = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
+        const data2 = await horasExtrasD.get();
+        
+        if (data2.empty) {
+            var horasExtras = {
+                "cantidadHoras": "0",
+                "valorFinalHoras": "0.00",
+                "valorAnticipo": valorAnticipoFinalStr,
+                "salario": salarioStr
+            }
+
+            res.json(horasExtras);
         } else {
 
-            var valorDeAnticipo = "";
-            data.forEach(doc => {
+            var horasExtras = "";
+            var cantidadHorasSuma = 0;
+            var valorFinalHoras = 0;
+            var valorFinalStr = "";
+            data2.forEach(doc => {
+                cantidadHorasSuma += parseInt(doc.data().cantidadHoras);
+                valorFinalHoras += parseFloat(doc.data().valorFinalHoras);
+                if (!valorFinalHoras.toString().includes(".")) {
+                    valorFinalStr = valorFinalHoras.toString() + ".00";
+                }
+                horasExtras = {
+                    "cantidadHoras": cantidadHorasSuma,
+                    "valorFinalHoras": valorFinalStr,
+                    "valorAnticipo": valorAnticipoFinalStr,
+                    "salario":salarioStr
+                }
 
-                valorDeAnticipo = doc.data().valorAnticipo;
+
 
             });
-            res.json(valorDeAnticipo);
+            res.json(horasExtras);
 
 
         }
@@ -553,7 +621,7 @@ const obtenerAnticipoPorCedula = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
-
+/*
 const obtenerHorasExtrasPorCedula = async (req, res, next) => {
     const anho = req.params.anho;
     const mes = req.params.mes;
@@ -574,15 +642,15 @@ const obtenerHorasExtrasPorCedula = async (req, res, next) => {
         } else {
 
             var horasExtras = "";
-            var cantidadHorasSuma=0;
-            var valorFinalHoras=0;
-            var valorFinalStr="";
+            var cantidadHorasSuma = 0;
+            var valorFinalHoras = 0;
+            var valorFinalStr = "";
             data.forEach(doc => {
-                cantidadHorasSuma+= parseInt(doc.data().cantidadHoras);
-                valorFinalHoras+=parseFloat(doc.data().valorFinalHoras);
-                if(!valorFinalHoras.toString().includes(".")){
-                    valorFinalStr = valorFinalHoras.toString()+".00";
-                }                
+                cantidadHorasSuma += parseInt(doc.data().cantidadHoras);
+                valorFinalHoras += parseFloat(doc.data().valorFinalHoras);
+                if (!valorFinalHoras.toString().includes(".")) {
+                    valorFinalStr = valorFinalHoras.toString() + ".00";
+                }
                 horasExtras = {
                     "cantidadHoras": cantidadHorasSuma,
                     "valorFinalHoras": valorFinalStr
@@ -600,7 +668,7 @@ const obtenerHorasExtrasPorCedula = async (req, res, next) => {
     }
 }
 
-
+*/
 
 
 module.exports = {
@@ -613,6 +681,6 @@ module.exports = {
     crearNominaPago,
     comprobarIdNominaPago,
     eliminarNominasPago,
-    obtenerAnticipoPorCedula,
-    obtenerHorasExtrasPorCedula
+    obtenerAnticipoHorasExtrasPorCedula,
+    //obtenerHorasExtrasPorCedula
 }

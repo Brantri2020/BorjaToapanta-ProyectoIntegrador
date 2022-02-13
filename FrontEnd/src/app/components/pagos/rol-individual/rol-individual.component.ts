@@ -29,6 +29,15 @@ export class RolIndividualComponent implements OnInit {
   numeroCuenta = "";
   tipoCuenta = "";
   institucionFinanciera = "";
+  salarioSum: any;
+  valorHorasExtrasSum: any;
+  fondosReservaSum: any;
+  totalIngresosSum: any;
+  iessSum: any;
+  anticipoSum: any;
+  prestamoIessSum: any;
+  liquidoRecibirSum: any;
+  totalEgresoSum: any;
   constructor(private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
@@ -53,12 +62,11 @@ export class RolIndividualComponent implements OnInit {
     this.id = this.aRouter.snapshot.paramMap.get('id');
     this.anho = this.aRouter.snapshot.paramMap.get('anho');
     this.mes = this.aRouter.snapshot.paramMap.get('mes');
-
   }
 
   ngOnInit(): void {
     this.esEditar();
-    
+
   }
 
 
@@ -156,6 +164,7 @@ export class RolIndividualComponent implements OnInit {
   esEditar() {
     if (this.id !== null) {
 
+      window.alert(this.id);
       this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
         console.log(data);
 
@@ -204,73 +213,159 @@ export class RolIndividualComponent implements OnInit {
         if (data.liquidoRecibir.toString() == "") {
           this.rolIndividualForm.controls['liquidoRecibir'].setValue("0.00");
         }
-
-        if (data.anticipo.toString() == "") {
-
-          this.obtenerAnticipoPorCedula(ced)
-            .then((data: any) => {
-              this.rolIndividualForm.controls['anticipo'].setValue(data);
-            })
-        }
-        if (data.valorHorasExtras.toString() == "") {
-
-          this.obtenerHorasExtrasPorCedula(ced)
-            .then((data: any) => {
-              this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
-              this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
-
-            })
-        }
-
+        /*
+                if (data.anticipo.toString() == "") {
         
+                  this.obtenerAnticipoPorCedula(ced)
+                    .then((data: any) => {
+                      this.rolIndividualForm.controls['anticipo'].setValue(data);
+                    })
+                }
+                if (data.valorHorasExtras.toString() == "") {
+        
+                  this.obtenerHorasExtrasPorCedula(ced)
+                    .then((data: any) => {
+                      this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
+                      this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
+        
+                    })
+                }
+                */
+
+
+        this.calcularValores();
+
+
+
+
+
       })
     }
-    
-  }
-
-  obtenerCedula(id: any) {
-    var cedulita = "";
-    this._nominaPagoService.obtenerCedula(id).subscribe(data => {
-
-      cedulita = data.toString();
-
-
-    }, error => {
-      console.log(error);
-    })
-    return cedulita;
 
   }
 
 
-  obtenerAnticipoPorCedula(cedula: any) {
+  obtenerAnticipoHorasExtrasPorCedula(cedula: any) {
     return new Promise(resolve => {
-      this._nominaPagoService.obtenerAnticipoPorCedula(this.anho, this.mes, cedula).subscribe(data => {
+      this._nominaPagoService.obtenerAnticipoHorasExtrasPorCedula(this.anho, this.mes, cedula).subscribe(data => {
         resolve(data);
       })
     })
   }
-
-  obtenerHorasExtrasPorCedula(cedula: any) {
-    return new Promise(resolve => {
-      this._nominaPagoService.obtenerHorasExtrasPorCedula(this.anho, this.mes, cedula).subscribe(data => {
-        resolve(data);
+  /*
+    obtenerAnticipoPorCedula(cedula: any) {
+      return new Promise(resolve => {
+        this._nominaPagoService.obtenerAnticipoPorCedula(this.anho, this.mes, cedula).subscribe(data => {
+          resolve(data);
+        })
       })
-    })
-  }
+    }
+  
+    obtenerHorasExtrasPorCedula(cedula: any) {
+      return new Promise(resolve => {
+        this._nominaPagoService.obtenerHorasExtrasPorCedula(this.anho, this.mes, cedula).subscribe(data => {
+          resolve(data);
+        })
+      })
+    }
+  
+  */
 
 
- 
+  calcularValores() {
+    var ced = "";
 
-  calcularValores(salario: any, valorHorasExtras: any, fondosReserva: any, iess:any, anticipo:any, prestamoIess:any) {
+    var cedulaDato = document.getElementById('cedul');
+    var valorCedula = "";
+    if (cedulaDato !== null) {
+      valorCedula = (<HTMLInputElement>cedulaDato).value;
+    }
 
-    
-    //ingresos      
-    this.rolIndividualForm.controls['totalIngresos'].setValue((parseFloat(salario + valorHorasExtras + fondosReserva).toFixed(2)).toString());
-   
-    //egresos
-    window.alert(fondosReserva);
-    this.rolIndividualForm.controls['totalEgreso'].setValue((parseFloat(iess + anticipo + prestamoIess).toFixed(2)).toString());
+
+    var fondosReservaDato = document.getElementById('fondosReserva');
+    var iessDato = document.getElementById('iessDato');
+    var prestamoIessDato = document.getElementById('prestamoIess');
+
+    var valorPrestamoIess = 0.00;
+    if (prestamoIessDato !== null) {
+      valorPrestamoIess = parseFloat((<HTMLInputElement>prestamoIessDato).value);
+    }
+
+    if (prestamoIessDato == null) { } else {
+      prestamoIessDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
+    }
+
+    var valorIess = 0.00;
+    if (iessDato !== null) {
+      valorIess = parseFloat((<HTMLInputElement>iessDato).value);
+    }
+
+    if (iessDato == null) { } else {
+      iessDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
+    }
+
+    var valorFondosReserva = 0.00;
+    if (fondosReservaDato !== null) {
+      valorFondosReserva = parseFloat((<HTMLInputElement>fondosReservaDato).value);
+    }
+
+    if (fondosReservaDato == null) { } else {
+      fondosReservaDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
+    }
+
+
+
+    ced = valorCedula;
+    this.obtenerAnticipoHorasExtrasPorCedula(ced)
+      .then((data: any) => {
+        this.rolIndividualForm.controls['anticipo'].setValue(data.valorAnticipo);
+        this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
+        this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
+
+        this.salarioSum = parseFloat(data.salario);
+        this.valorHorasExtrasSum = parseFloat(data.valorFinalHoras);
+        this.fondosReservaSum = valorFondosReserva;
+        this.iessSum = valorIess;
+        this.anticipoSum = parseFloat(data.valorAnticipo);
+        this.prestamoIessSum = valorPrestamoIess;
+
+        this.totalIngresosSum = parseFloat(this.salarioSum + this.valorHorasExtrasSum + this.fondosReservaSum);
+        this.totalEgresoSum = parseFloat(this.iessSum + this.anticipoSum + this.prestamoIessSum);
+        this.liquidoRecibirSum = this.totalIngresosSum - this.totalEgresoSum;
+
+        var totalIngresosSumStr = this.totalIngresosSum.toFixed(2).toString();
+        var totalEgresoSumStr = this.totalEgresoSum.toFixed(2).toString();
+        var liquidoRecibirSumStr = this.liquidoRecibirSum.toFixed(2).toString();
+
+        if (!totalIngresosSumStr.includes(".")) {
+          totalIngresosSumStr = totalIngresosSumStr + ".00";
+        }
+        if (!totalEgresoSumStr.includes(".")) {
+          totalEgresoSumStr = totalEgresoSumStr + ".00";
+        }
+        if (!liquidoRecibirSumStr.includes(".")) {
+          liquidoRecibirSumStr = liquidoRecibirSumStr + ".00";
+        }
+
+
+        this.rolIndividualForm.controls['totalIngresos'].setValue(totalIngresosSumStr);
+        this.rolIndividualForm.controls['totalEgreso'].setValue(totalEgresoSumStr);
+        this.rolIndividualForm.controls['liquidoRecibir'].setValue(liquidoRecibirSumStr);
+      })
+
+
+
+
+
+
+
+
   }
 
 }

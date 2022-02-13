@@ -56,6 +56,10 @@ export class NominaPagoService {
     return this.http.delete(this.url1 + "eliminar/" + anho + "/" + mes);
   }
 
+  obtenerAnticipoHorasExtrasPorCedula(anho: any, mes: any, cedula: any): Observable<any> {
+    return this.http.get(this.url1 + "anticipoHorasExtras/" + anho + "/" + mes + "/" + cedula);
+  }
+/*
   obtenerAnticipoPorCedula(anho: any, mes: any, cedula: any): Observable<any> {
     return this.http.get(this.url1 + "anticipo/" + anho + "/" + mes + "/" + cedula);
   }
@@ -63,7 +67,7 @@ export class NominaPagoService {
   obtenerHorasExtrasPorCedula(anho: any, mes: any, cedula: any): Observable<any> {
     return this.http.get(this.url1 + "horasExtras/" + anho + "/" + mes + "/" + cedula);
   }
-
+*/
 }
 
 
