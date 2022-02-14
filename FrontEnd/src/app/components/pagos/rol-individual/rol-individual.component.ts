@@ -87,74 +87,163 @@ export class RolIndividualComponent implements OnInit {
 
   agregarRolIndividual() {
 
-    var fondoReserva: string = this.sePagaFondoReserva();
-    const ROL_INDIVIDUAL: NominaPago = {
+    var ced = "";
 
-      cedula: this.rolIndividualForm.get('cedula')?.value,
-      nomina: this.rolIndividualForm.get('nomina')?.value,
-      cargo: this.rolIndividualForm.get('cargo')?.value,
-      salario: this.rolIndividualForm.get('salario')?.value,
-      numeroHorasExtras: this.rolIndividualForm.get('numeroHorasExtras')?.value,
-      valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,
-      sePagaFondosReserva: fondoReserva.toString(),
-      fondosReserva: this.rolIndividualForm.get('fondosReserva')?.value,
-      totalIngresos: this.rolIndividualForm.get('totalIngresos')?.value,
-      iess: this.rolIndividualForm.get('iess')?.value,
-      anticipo: this.rolIndividualForm.get('anticipo')?.value,
-      prestamoIess: this.rolIndividualForm.get('prestamoIess')?.value,
-      totalEgreso: this.rolIndividualForm.get('totalEgreso')?.value,
-      liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value,
-      numeroCuenta: this.numeroCuenta,
-      tipoCuenta: this.tipoCuenta,
-      institucionFinanciera: this.institucionFinanciera
+    var cedulaDato = document.getElementById('cedul');
+    var valorCedula = "";
+    if (cedulaDato !== null) {
+      valorCedula = (<HTMLInputElement>cedulaDato).value;
+    }
+
+
+    var fondosReservaDato = document.getElementById('fondosReserva');
+    var iessDato = document.getElementById('iessDato');
+    var prestamoIessDato = document.getElementById('prestamoIess');
+
+    var valorPrestamoIess = 0.00;
+    if (prestamoIessDato !== null) {
+      valorPrestamoIess = parseFloat((<HTMLInputElement>prestamoIessDato).value);
+    }
+
+    if (prestamoIessDato == null) { } else {
+      prestamoIessDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
+    }
+
+    var valorIess = 0.00;
+    if (iessDato !== null) {
+      valorIess = parseFloat((<HTMLInputElement>iessDato).value);
+    }
+
+    if (iessDato == null) { } else {
+      iessDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
+    }
+
+    var valorFondosReserva = 0.00;
+    if (fondosReservaDato !== null) {
+      valorFondosReserva = parseFloat((<HTMLInputElement>fondosReservaDato).value);
+    }
+
+    if (fondosReservaDato == null) { } else {
+      fondosReservaDato.addEventListener('focusout', (event) => {
+        this.calcularValores();
+      });
     }
 
 
 
+    ced = valorCedula;
+    this.obtenerAnticipoHorasExtrasPorCedula(ced)
+      .then((data: any) => {
+        this.rolIndividualForm.controls['anticipo'].setValue(data.valorAnticipo);
+        this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
+        this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
 
-    this._nominaPagoService.comprobarIdNominaPago(this.id, this.anho, this.mes).subscribe(data => {
+        this.salarioSum = parseFloat(data.salario);
+        this.valorHorasExtrasSum = parseFloat(data.valorFinalHoras);
+        this.fondosReservaSum = valorFondosReserva;
+        this.iessSum = valorIess;
+        this.anticipoSum = parseFloat(data.valorAnticipo);
+        this.prestamoIessSum = valorPrestamoIess;
 
-      if (data == "Si") {
-        //editamos nomina
-        this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
-          this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
-          this.router.navigate(['/nomina-pagos']);
+        this.totalIngresosSum = parseFloat(this.salarioSum + this.valorHorasExtrasSum + this.fondosReservaSum);
+        this.totalEgresoSum = parseFloat(this.iessSum + this.anticipoSum + this.prestamoIessSum);
+        this.liquidoRecibirSum = this.totalIngresosSum - this.totalEgresoSum;
+
+        var totalIngresosSumStr = this.totalIngresosSum.toFixed(2).toString();
+        var totalEgresoSumStr = this.totalEgresoSum.toFixed(2).toString();
+        var liquidoRecibirSumStr = this.liquidoRecibirSum.toFixed(2).toString();
+
+        if (!totalIngresosSumStr.includes(".")) {
+          totalIngresosSumStr = totalIngresosSumStr + ".00";
+        }
+        if (!totalEgresoSumStr.includes(".")) {
+          totalEgresoSumStr = totalEgresoSumStr + ".00";
+        }
+        if (!liquidoRecibirSumStr.includes(".")) {
+          liquidoRecibirSumStr = liquidoRecibirSumStr + ".00";
+        }
+
+
+        this.rolIndividualForm.controls['totalIngresos'].setValue(totalIngresosSumStr);
+        this.rolIndividualForm.controls['totalEgreso'].setValue(totalEgresoSumStr);
+        this.rolIndividualForm.controls['liquidoRecibir'].setValue(liquidoRecibirSumStr);
+
+        var fondoReserva: string = this.sePagaFondoReserva();
+        const ROL_INDIVIDUAL: NominaPago = {
+
+          cedula: this.rolIndividualForm.get('cedula')?.value,
+          nomina: this.rolIndividualForm.get('nomina')?.value,
+          cargo: this.rolIndividualForm.get('cargo')?.value,
+          salario: this.rolIndividualForm.get('salario')?.value,
+          numeroHorasExtras: this.rolIndividualForm.get('numeroHorasExtras')?.value,
+          valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,
+          sePagaFondosReserva: fondoReserva.toString(),
+          fondosReserva: this.rolIndividualForm.get('fondosReserva')?.value,
+          totalIngresos: this.rolIndividualForm.get('totalIngresos')?.value,
+          iess: this.rolIndividualForm.get('iess')?.value,
+          anticipo: this.rolIndividualForm.get('anticipo')?.value,
+          prestamoIess: this.rolIndividualForm.get('prestamoIess')?.value,
+          totalEgreso: this.rolIndividualForm.get('totalEgreso')?.value,
+          liquidoRecibir: this.rolIndividualForm.get('liquidoRecibir')?.value,
+          numeroCuenta: this.numeroCuenta,
+          tipoCuenta: this.tipoCuenta,
+          institucionFinanciera: this.institucionFinanciera
+        }
+
+
+
+
+        this._nominaPagoService.comprobarIdNominaPago(this.id, this.anho, this.mes).subscribe(data => {
+
+          if (data == "Si") {
+            //editamos nomina
+            this._nominaPagoService.editarNominaPago(this.id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
+              this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
+              this.router.navigate(['/nomina-pagos']);
+            }, error => {
+              console.log(error);
+              this.mensaje = error.error;
+            })
+          } else {
+
+
+            this._nominaPagoService.obtenerCedula(this.id).subscribe(data => {
+
+              this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL, this.anho, this.mes, data.toString()).subscribe(data => {
+                this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
+                this.router.navigate(['/nomina-pagos']);
+
+              }, error => {
+                console.log(error);
+                this.mensaje = error.error;
+              })
+
+
+            }, error => {
+              console.log(error);
+            })
+
+
+            //agregamos nomina ---          
+
+
+          }
+
+
+
+
         }, error => {
           console.log(error);
           this.mensaje = error.error;
         })
-      } else {
 
 
-        this._nominaPagoService.obtenerCedula(this.id).subscribe(data => {
+      })
 
-          this._nominaPagoService.guardarNominaPago(ROL_INDIVIDUAL, this.anho, this.mes, data.toString()).subscribe(data => {
-            this.toastr.success('La nómina de pago fue registrada con éxito!', 'Nomina de pago Registrada!');
-            this.router.navigate(['/nomina-pagos']);
-
-          }, error => {
-            console.log(error);
-            this.mensaje = error.error;
-          })
-
-
-        }, error => {
-          console.log(error);
-        })
-
-
-        //agregamos nomina ---          
-
-
-      }
-
-
-
-
-    }, error => {
-      console.log(error);
-      this.mensaje = error.error;
-    })
 
 
 
@@ -164,7 +253,7 @@ export class RolIndividualComponent implements OnInit {
   esEditar() {
     if (this.id !== null) {
 
-      window.alert(this.id);
+
       this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
         console.log(data);
 
@@ -358,13 +447,6 @@ export class RolIndividualComponent implements OnInit {
         this.rolIndividualForm.controls['totalEgreso'].setValue(totalEgresoSumStr);
         this.rolIndividualForm.controls['liquidoRecibir'].setValue(liquidoRecibirSumStr);
       })
-
-
-
-
-
-
-
 
   }
 
