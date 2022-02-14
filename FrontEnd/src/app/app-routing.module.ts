@@ -23,6 +23,9 @@ import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actuali
 import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anticipo/listar-anticipo.component';
 import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
+import { CrearPorcentajesComponent} from './components/pagos/porcentajes/crear-porcentajes/crear-porcentajes.component';
+import { ListarPorcentajesComponent } from './components/pagos/porcentajes/listar-porcentajes/listar-porcentajes.component';
+
 
 
 
@@ -51,7 +54,9 @@ const routes: Routes = [
   { path: 'horas-extra', component: ListarHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'nueva-hora-extra', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'editar-horaExtra/:id', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },
-  
+  { path: 'porcentajes', component: ListarPorcentajesComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-porcentaje', component: CrearPorcentajesComponent, canActivate: [AuthGuard] },
+  { path: 'editar-porcentaje/:anho/:mes/:id', component: CrearPorcentajesComponent, canActivate: [AuthGuard] }, 
 ];
 
 

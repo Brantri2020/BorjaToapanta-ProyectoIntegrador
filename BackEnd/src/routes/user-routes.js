@@ -141,8 +141,11 @@ router.post('/horasExtra/:anho/:mes', crearHoraExtra);
 router.get('/horasExtra/:anho/:mes/:id', obtenerHoraExtra);
 router.get('/horasExtra/:anho/:mes/horas-extra-ordenadas/:filtro', obtenerHorasExtraOrdenadas);
 
-
-
+//Porcentajes
+const {
+    obtenerPorcentajes,   
+} = require('../controllers/porcentajeController');
+router.get('/porcentajes/:anho/:mes', obtenerPorcentajes);
 module.exports = {
     routes: router
 }

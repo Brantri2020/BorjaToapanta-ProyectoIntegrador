@@ -16,6 +16,7 @@ import { AuthService } from './services/auth-service.service';
 import { ProveedorService } from './services/proveedor.service';
 import { NominaPagoService } from './services/nomina-pago.service';
 import { UsuarioService } from './services/usuario.service';
+import { PorcentajesService } from './services/porcentajes.service';
 
 import { UserGmailComponent } from './components/usuarios/user-gmail/user-gmail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +46,8 @@ import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-antici
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
 import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
 import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actualizar-anticipo/actualizar-anticipo.component';
+import { CrearPorcentajesComponent } from './components/pagos/porcentajes/crear-porcentajes/crear-porcentajes.component';
+import { ListarPorcentajesComponent } from './components/pagos/porcentajes/listar-porcentajes/listar-porcentajes.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actuali
     CrearAnticipoComponent,
     ListarHoraExtraComponent,
     CrearHoraExtraComponent,
-    ActualizarAnticipoComponent
+    ActualizarAnticipoComponent,
+    CrearPorcentajesComponent,
+    ListarPorcentajesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -86,7 +92,7 @@ import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actuali
   ],
 
 
-  providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService],
+  providers: [AuthService, ProveedorService, UsuarioService, NominaPagoService, PorcentajesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
