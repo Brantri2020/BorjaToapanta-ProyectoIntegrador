@@ -93,8 +93,9 @@
 
 
 
-            <!--
-<form class="row g-2" style="justify-content: center;" [formGroup]="busquedaPorcentjaeForm"
+
+
+            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaPorcentajeForm"
                 (ngSubmit)="buscarPorcentaje()">
                 <div class="col-auto">
                     <label for="inputPassword2" class="visually-hidden">Buscar</label>
@@ -105,20 +106,7 @@
                 </div>
             </form>
 
-
--->
-
-            <form class="row g-2" style="justify-content: center;" [formGroup]="busquedaPorcentjaeForm">
-                <div class="col-auto">
-                    <label for="inputPassword2" class="visually-hidden">Buscar</label>
-                    <input type="text" class="form-control" formControlName="busqueda" placeholder="Búsqueda">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">BUSCAR</button>
-                </div>
-            </form>
-
-
+            <button class="btn btn-success float-end" routerLink="/nuevo-porcentaje">+ NUEVO</button>
 
 
 
@@ -142,10 +130,9 @@
                         <td>{{porcentajeValor.tipoPorcentaje}}</td>
                         <td>{{porcentajeValor.porcentaje}}</td>
                         <td>
-                            <i [routerLink]="['/rol-individual', this.anho,this.mes,porcentajeValor.id]"
+                            <i [routerLink]="['/editar-porcentaje', this.anho,this.mes,porcentajeValor.id]"
                                 class="far fa-edit text-primary"></i>
-                            <!--<i (click)="eliminarPorcentaje(porcentajeValor.id)" class="fas fa-trash text-danger"></i>-->
-                            <i class="fas fa-trash text-danger"></i>
+                            <i (click)="eliminarPorcentaje(porcentajeValor.id, this.anho, this.mes)" class="fas fa-trash text-danger"></i>                            
                         </td>
                     </tr>
                 </tbody>

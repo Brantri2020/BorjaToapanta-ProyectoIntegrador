@@ -19,15 +19,15 @@ export class PorcentajesService {
   getPorcentajes(anho: any, mes: any): Observable<any> {
     return this.http.get(this.url1 + anho + "/" + mes);
   }
+
+  buscarPorcentaje(busqueda: string, anho: string, mes: string): Observable<any> {
+    return this.http.get(this.url1 + anho + "/" + mes + "/busqueda/" + busqueda);
+  }
+
+  eliminarPorcentaje(id: string, anho: string, mes: string): Observable<any> {
+    return this.http.delete(this.url1 + anho + "/" + mes + "/" + id);
+  }
   /*
-    buscarNominaPago(busqueda: string, anho: string, mes: string): Observable<any> {
-      return this.http.get(this.url1 + anho + "/" + mes + "/busqueda/" + busqueda);
-    }
-  
-    eliminarNominaPago(id: string): Observable<any> {
-      return this.http.delete(this.url1 + id);
-    }
-  
     editarNominaPago(id: any, nominaPago: NominaPago, anho: any, mes: any): Observable<any> {
       return this.http.put(this.url1 + anho + "/" + mes + "/" + id, nominaPago);
     }

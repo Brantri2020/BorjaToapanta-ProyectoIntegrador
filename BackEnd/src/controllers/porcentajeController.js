@@ -10,15 +10,15 @@ const firestore = firebase.firestore();
 
 
 
-const obtenerPorcentajes = async(req, res, next) => {
+const obtenerPorcentajes = async (req, res, next) => {
     const anho = req.params.anho;
     const mes = req.params.mes;
     try {
-        const porcentajes = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+"/"+mes);
+        const porcentajes = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/' + anho + "/" + mes);
         const data = await porcentajes.get();
         const porcentajesArray = [];
         if (data.empty) {
-            res.status(404).send('No se encontraron porcentajes');
+            res.json("");
         } else {
             data.forEach(doc => {
                 const porcentaje = new Porcentaje(
@@ -35,61 +35,53 @@ const obtenerPorcentajes = async(req, res, next) => {
     }
 }
 
-/*
-const busquedaProveedor = async(req, res, next) => {
+
+const busquedaPorcentaje = async (req, res, next) => {
 
     try {
+        const mes = req.params.mes;
+        const anho = req.params.anho;
         const nombre = req.params.busqueda;
-        const proveedores = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor');
-        const data = await proveedores.get();
-        const proveedoresArray = [];
+
+        const porcentajes = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/' + anho + '/' + mes);
+        const data = await porcentajes.get();
+        const porcentajesArray = [];
         if (data.empty) {
-            res.status(404).send('No se encontraron proveedores');
+            res.json("");
         } else {
             data.forEach(doc => {
-                const proveedor = new Proveedor(
+                const procentaje = new Porcentaje(
                     doc.id,
-                    doc.data().ruc,
-                    doc.data().nombre,
-                    doc.data().cuenta,
-                    doc.data().banco,
-                    doc.data().tipoCuenta,
-                    doc.data().telefonoCelular,
-                    doc.data().telefonoConvencional,
-                    doc.data().correo
+                    doc.data().tipoPorcentaje,
+                    doc.data().porcentaje,
                 );
 
-                if (doc.data().ruc == nombre ||
-                    doc.data().nombre == nombre ||
-                    doc.data().cuenta == nombre ||
-                    doc.data().banco == nombre ||
-                    doc.data().tipoCuenta == nombre ||
-                    doc.data().telefonoCelular == nombre ||
-                    doc.data().telefonoConvencional == nombre ||
-                    doc.data().correo == nombre) {
-                    proveedoresArray.push(proveedor);
+                if (doc.data().tipoPorcentaje == nombre ||
+                    doc.data().porcentaje == nombre) {
+                    porcentajesArray.push(procentaje);
                 }
-
-
             });
-
-            res.json(proveedoresArray);
-
+            res.json(porcentajesArray);
         }
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const eliminarProveedor = async(req, res, next) => {
+const eliminarPorcentaje = async(req, res, next) => {
     try {
         const id = req.params.id;
-        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id).delete();
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+'/'+mes).doc(id).delete();
         res.json('Proveedor eliminado correctamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
+
+
+/*
 
 
 
@@ -166,6 +158,8 @@ const obtenerProveedoresOrdenados = async(req, res, next) => {
 */
 module.exports = {
     obtenerPorcentajes,
+    busquedaPorcentaje,
+    eliminarPorcentaje
     //busquedaProveedor,
     //eliminarProveedor,
     //actualizarProveedor,

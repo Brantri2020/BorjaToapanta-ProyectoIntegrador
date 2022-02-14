@@ -143,9 +143,14 @@ router.get('/horasExtra/:anho/:mes/horas-extra-ordenadas/:filtro', obtenerHorasE
 
 //Porcentajes
 const {
-    obtenerPorcentajes,   
+    obtenerPorcentajes,
+    busquedaPorcentaje,
+    eliminarPorcentaje
 } = require('../controllers/porcentajeController');
 router.get('/porcentajes/:anho/:mes', obtenerPorcentajes);
+router.get('/porcentajes/:anho/:mes/busqueda/:busqueda', busquedaPorcentaje);
+router.delete('/porcentajes/:anho/:mes/:id', eliminarPorcentaje);
+
 module.exports = {
     routes: router
 }

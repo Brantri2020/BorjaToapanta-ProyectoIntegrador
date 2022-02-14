@@ -12,7 +12,7 @@ import { Porcentaje } from 'src/app/model/porcentaje';
 })
 export class ListarPorcentajesComponent implements OnInit {
 
-  busquedaPorcentjaeForm: FormGroup;
+  busquedaPorcentajeForm: FormGroup;
   listPorcentaje: Porcentaje[] = [];
   listPorcentaje2: Porcentaje[] = [];
   listaAnhos: any = [];
@@ -29,7 +29,7 @@ export class ListarPorcentajesComponent implements OnInit {
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router,) {
-    this.busquedaPorcentjaeForm = this.fb.group({
+    this.busquedaPorcentajeForm = this.fb.group({
       busqueda: ['',]
     });
   }
@@ -81,7 +81,7 @@ export class ListarPorcentajesComponent implements OnInit {
     this.anho = fecha.getFullYear().toString();
     this.mes = this.nombreMeses[fecha.getMonth()];
   }
-/*
+
   buscarPorcentaje() {
     if (this.busquedaPorcentajeForm.get('busqueda')?.value == "") {
 
@@ -94,7 +94,7 @@ export class ListarPorcentajesComponent implements OnInit {
       })
     }
   }
-*/
+
 
   obtenerPorcentajes(anho: any, mes: any) {
     this._porcentajeServices.getPorcentajes(anho, mes).subscribe(data => {
@@ -104,6 +104,23 @@ export class ListarPorcentajesComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+  eliminarPorcentaje(id: any,anho: any, mes: any) {
+    var resultado = window.confirm('¿Estas seguro de eliminar el porcentaje?');
+    if (resultado === true) {
+      this._porcentajeServices.eliminarPorcentaje(id, anho, mes).subscribe(data => {
+        this.toastr.error('El porcentaje fue eliminado con éxito', 'Porcentaje eliminado');
+        this.obtenerPorcentajes(this.anho, this.mes);
+    
+      }, error =>{
+        console.log(error);
+      })
+    } else { 
+        this.toastr.warning('No se realizó ningún cambio', 'No eliminado');
+        this.obtenerPorcentajes(this.anho, this.mes);
+    }
+
   }
 
 
@@ -126,22 +143,7 @@ export class ListarPorcentajesComponent implements OnInit {
 
 
 
-  eliminarPorcentaje(id: any) {
-    var resultado = window.confirm('¿Estas seguro de eliminar el porcentaje?');
-    if (resultado === true) {
-      this._porcentajeServices.eliminarPorcentaje(id).subscribe(data => {
-        this.toastr.error('El porcentaje fue eliminado con éxito', 'Porcentaje eliminado');
-        this.obtenerPorcentajes();
-    
-      }, error =>{
-        console.log(error);
-      })
-    } else { 
-        this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
-        this.obtenerPorcentajes();
-    }
-
-  }
+  
 */
 
 }
