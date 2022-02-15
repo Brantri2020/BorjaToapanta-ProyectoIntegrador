@@ -80,6 +80,37 @@ const eliminarPorcentaje = async(req, res, next) => {
     }
 }
 
+// ordenar
+const obtenerPorcentajesOrdenados = async(req, res, next) => {
+    
+    try {
+        const filtro = req.params.filtro;
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+
+        const porcentajes = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+'/'+mes)
+            .orderBy(filtro, "asc");
+        const data = await porcentajes.get();
+        const porcentajesArray = [];
+        if (data.empty) {
+            res.status(404).send('No se encontraron porcentajes');
+        } else {
+            data.forEach(doc => {
+                const porcentaje = new Porcentaje(
+                    doc.id,
+                    doc.data().tipoPorcentaje,
+                    doc.data().porcentaje,                    
+                );
+                
+                porcentajesArray.push(porcentaje);
+            });
+            res.json(porcentajesArray);
+        }
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 
 /*
 
@@ -124,42 +155,13 @@ const obtenerProveedor = async(req, res, next) => {
     }
 }
 
-// ordenar
-const obtenerProveedoresOrdenados = async(req, res, next) => {
-    try {
-        const filtro = req.params.filtro;
-        const proveedores = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor')
-            .orderBy(filtro, "asc");
-        const data = await proveedores.get();
-        const proveedoresArray = [];
-        if (data.empty) {
-            res.status(404).send('No se encontraron proveedores');
-        } else {
-            data.forEach(doc => {
-                const proveedor = new Proveedor(
-                    doc.id,
-                    doc.data().ruc,
-                    doc.data().nombre,
-                    doc.data().cuenta,
-                    doc.data().banco,
-                    doc.data().tipoCuenta,
-                    doc.data().telefonoCelular,
-                    doc.data().telefonoConvencional,
-                    doc.data().correo
-                );
-                proveedoresArray.push(proveedor);
-            });
-            res.json(proveedoresArray);
-        }
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
-}
+
 */
 module.exports = {
     obtenerPorcentajes,
     busquedaPorcentaje,
-    eliminarPorcentaje
+    eliminarPorcentaje,
+    obtenerPorcentajesOrdenados
     //busquedaProveedor,
     //eliminarProveedor,
     //actualizarProveedor,

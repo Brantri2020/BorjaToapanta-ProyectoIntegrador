@@ -124,8 +124,6 @@ export class ListarPorcentajesComponent implements OnInit {
   }
 
 
-/*
-
   ordenarPorcentaje(filtro: any) {
     this.i++;
     this._porcentajeServices.obtenerPorcentajesOrdenado(filtro, this.anho, this.mes).subscribe(data => {
@@ -143,8 +141,7 @@ export class ListarPorcentajesComponent implements OnInit {
 
 
 
-  
-*/
+
 
 }
 

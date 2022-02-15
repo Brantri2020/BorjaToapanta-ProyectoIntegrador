@@ -27,6 +27,11 @@ export class PorcentajesService {
   eliminarPorcentaje(id: string, anho: string, mes: string): Observable<any> {
     return this.http.delete(this.url1 + anho + "/" + mes + "/" + id);
   }
+
+  obtenerPorcentajesOrdenado(filtro: string, anho: string, mes: string): Observable<any> {
+    return this.http.get(this.url1 + anho + "/" + mes + "/porcentajes-ordenados/" + filtro);
+  }
+  
   /*
     editarNominaPago(id: any, nominaPago: NominaPago, anho: any, mes: any): Observable<any> {
       return this.http.put(this.url1 + anho + "/" + mes + "/" + id, nominaPago);
@@ -44,9 +49,7 @@ export class PorcentajesService {
       return this.http.get(this.url1 + "ced/" + id);
     }
   
-    obtenerNominasPagoOrdenado(filtro: string, anho: string, mes: string): Observable<any> {
-      return this.http.get(this.url1 + anho + "/" + mes + "/nominasPago-ordenados/" + filtro);
-    }
+    
   
     comprobarIdNominaPago(id: any, anho: any, mes: any): Observable<any> {
       return this.http.get(this.url1 + "comprobar/" + anho + "/" + mes + "/" + id);
