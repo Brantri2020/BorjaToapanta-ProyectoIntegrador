@@ -146,12 +146,18 @@ const {
     obtenerPorcentajes,
     busquedaPorcentaje,
     eliminarPorcentaje,
-    obtenerPorcentajesOrdenados
+    obtenerPorcentajesOrdenados,
+    crearPorcentaje,
+    actualizarPorcentaje,
+    obtenerPorcentaje
 } = require('../controllers/porcentajeController');
 router.get('/porcentajes/:anho/:mes', obtenerPorcentajes);
 router.get('/porcentajes/:anho/:mes/busqueda/:busqueda', busquedaPorcentaje);
 router.delete('/porcentajes/:anho/:mes/:id', eliminarPorcentaje);
 router.get('/porcentajes/:anho/:mes/porcentajes-ordenados/:filtro', obtenerPorcentajesOrdenados);
+router.post('/porcentajes/:anho/:mes', crearPorcentaje);
+router.put('/porcentajes/:anho/:mes/:id', actualizarPorcentaje);
+router.get('/porcentajes/:anho/:mes/:id', obtenerPorcentaje);
 
 module.exports = {
     routes: router

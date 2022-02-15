@@ -31,19 +31,27 @@ export class PorcentajesService {
   obtenerPorcentajesOrdenado(filtro: string, anho: string, mes: string): Observable<any> {
     return this.http.get(this.url1 + anho + "/" + mes + "/porcentajes-ordenados/" + filtro);
   }
+
+  guardarPorcentaje(porcentaje: Porcentaje, anho: any, mes: any): Observable<any> {
+    return this.http.post(this.url1 + anho + "/" + mes, porcentaje);
+  }
+
+  editarPorcentaje(id: any, porcentaje: Porcentaje, anho: any, mes: any): Observable<any> {
+    return this.http.put(this.url1 + anho + "/" + mes + "/" + id, porcentaje);
+  }
   
+  obtenerPorcentaje(id: string, anho: any, mes: any): Observable<any> {
+    return this.http.get(this.url1 + anho + "/" + mes + "/" + id);
+  }
+
   /*
-    editarNominaPago(id: any, nominaPago: NominaPago, anho: any, mes: any): Observable<any> {
-      return this.http.put(this.url1 + anho + "/" + mes + "/" + id, nominaPago);
-    }
+    
   
     guardarNominaPago(nominaPago: NominaPago, anho: any, mes: any, cedula: any): Observable<any> {
       return this.http.post(this.url1 + anho + "/" + mes + "/" + cedula, nominaPago);
     }
   
-    obtenerNominaPago(id: string, anho: any, mes: any): Observable<any> {
-      return this.http.get(this.url1 + anho + "/" + mes + "/" + id);
-    }
+    
   
     obtenerCedula(id: any): Observable<any> {
       return this.http.get(this.url1 + "ced/" + id);

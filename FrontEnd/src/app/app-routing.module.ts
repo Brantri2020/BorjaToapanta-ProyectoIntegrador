@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'nueva-hora-extra', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'editar-horaExtra/:id', component: CrearHoraExtraComponent, canActivate: [AuthGuard] },
   { path: 'porcentajes', component: ListarPorcentajesComponent, canActivate: [AuthGuard] },
-  { path: 'nuevo-porcentaje', component: CrearPorcentajesComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-porcentaje/:anho/:mes', component: CrearPorcentajesComponent, canActivate: [AuthGuard] },
   { path: 'editar-porcentaje/:anho/:mes/:id', component: CrearPorcentajesComponent, canActivate: [AuthGuard] }, 
 ];
 

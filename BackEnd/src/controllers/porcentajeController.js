@@ -112,41 +112,45 @@ const obtenerPorcentajesOrdenados = async(req, res, next) => {
 }
 
 
-/*
-
-
-
-const actualizarProveedor = async(req, res, next) => {
+const crearPorcentaje = async(req, res, next) => {
     try {
-        const id = req.params.id;
         const data = req.body;
-        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
-        await proveedor.update(data);
-        res.json('Proveedor actualizado correctamente');
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+
+        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+'/'+mes).doc().set(data);
+
+        res.json('Porcentaje guardado exitosamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const crearProveedor = async(req, res, next) => {
+const actualizarPorcentaje = async(req, res, next) => {
     try {
+        const id = req.params.id;
         const data = req.body;
+        const anho = req.params.anho;
+        const mes = req.params.mes;
 
-        await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc().set(data);
-
-        res.json('Proveedor guardado exitosamente');
+        const porcentaje = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+'/'+mes).doc(id);
+        await porcentaje.update(data);
+        res.json('Porcentaje actualizado correctamente');
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const obtenerProveedor = async(req, res, next) => {
+const obtenerPorcentaje = async(req, res, next) => {
     try {
         const id = req.params.id;
-        const proveedor = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Proveedor').doc(id);
-        const data = await proveedor.get();
+        const anho = req.params.anho;
+        const mes = req.params.mes;
+
+        const porcentaje = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Porcentaje/'+anho+'/'+mes).doc(id);
+        const data = await porcentaje.get();
         if (!data.exists) {
-            res.status(404).send('Proveedor no encontrado');
+            res.status(404).send('Porcentaje no encontrado');
         } else {
             res.json(data.data());
         }
@@ -155,13 +159,14 @@ const obtenerProveedor = async(req, res, next) => {
     }
 }
 
-
-*/
 module.exports = {
     obtenerPorcentajes,
     busquedaPorcentaje,
     eliminarPorcentaje,
-    obtenerPorcentajesOrdenados
+    obtenerPorcentajesOrdenados,
+    crearPorcentaje,
+    actualizarPorcentaje,
+    obtenerPorcentaje
     //busquedaProveedor,
     //eliminarProveedor,
     //actualizarProveedor,
