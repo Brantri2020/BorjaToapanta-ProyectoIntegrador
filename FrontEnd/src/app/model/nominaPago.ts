@@ -8,8 +8,10 @@ export class NominaPago {
     valorHorasExtras: string;
     sePagaFondosReserva: string;
     fondosReserva: string;
+    porcentajeFondo: string;
     totalIngresos: string;
     iess: string;
+    porcentajeIess: string;
     anticipo: string;
     prestamoIess: string;
     totalEgreso: string;
@@ -27,8 +29,10 @@ export class NominaPago {
         valorHorasExtras: string,
         sePagaFondosReserva: string,
         fondosReserva: string,
+        porcentajeFondo:string,
         totalIngresos: string,
         iess: string,
+        porcentajeIess: string,
         anticipo: string,
         prestamoIess: string,
         totalEgreso: string,
@@ -44,8 +48,11 @@ export class NominaPago {
             this.valorHorasExtras=valorHorasExtras;
             this.sePagaFondosReserva=sePagaFondosReserva;
             this.fondosReserva=fondosReserva;
+            this.fondosReserva=fondosReserva;
+            this.porcentajeFondo=porcentajeFondo;
             this.totalIngresos=totalIngresos;
             this.iess=iess;
+            this.porcentajeIess=porcentajeIess;
             this.anticipo=anticipo;
             this.prestamoIess=prestamoIess;
             this.totalEgreso=totalEgreso;

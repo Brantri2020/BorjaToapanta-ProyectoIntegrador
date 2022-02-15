@@ -7,8 +7,10 @@ class NominaPagoEmpleado {
         valorHorasExtras,
         sePagaFondosReserva,
         fondosReserva,
+        porcentajeFondo,
         totalIngresos,
         iess,
+        porcentajeIess,
         anticipo,
         prestamiIess,
         totalEgreso,
@@ -24,8 +26,10 @@ class NominaPagoEmpleado {
             this.valorHorasExtras=valorHorasExtras;
             this.sePagaFondosReserva=sePagaFondosReserva;
             this.fondosReserva=fondosReserva;
+            this.porcentajeFondo=porcentajeFondo,
             this.totalIngresos=totalIngresos;
             this.iess=iess;
+            this.porcentajeIess=porcentajeIess;
             this.anticipo=anticipo;
             this.prestamiIess=prestamiIess;
             this.totalEgreso=totalEgreso;

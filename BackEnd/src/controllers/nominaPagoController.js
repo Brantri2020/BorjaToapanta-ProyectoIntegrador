@@ -98,6 +98,8 @@ const obtenerNominaPagos = async (req, res, next) => {
                             "",
                             "",
                             "",
+                            "",
+                            "",
                             doc2.data().numeroCuenta,
                             doc2.data().tipoCuenta,
                             doc2.data().institucionFinanciera
@@ -122,8 +124,10 @@ const obtenerNominaPagos = async (req, res, next) => {
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
+                    doc.data().porcentajeFondo,
                     doc.data().totalIngresos,
                     doc.data().iess,
+                    doc.data().porcentajeIess,
                     doc.data().anticipo,
                     doc.data().prestamoIess,
                     doc.data().totalEgreso,
@@ -166,6 +170,8 @@ const obtenerNominaPago = async (req, res, next) => {
                         data2.data().nombre,
                         data2.data().cargo,
                         data2.data().salario,
+                        "",
+                        "",
                         "",
                         "",
                         "",
@@ -231,6 +237,8 @@ const busquedaNominasPago = async (req, res, next) => {
                             "",
                             "",
                             "",
+                            "",
+                            "",
                             doc2.data().numeroCuenta,
                             doc2.data().tipoCuenta,
                             doc2.data().institucionFinanciera
@@ -266,8 +274,10 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
+                    doc.data().porcentajeFondo,
                     doc.data().totalIngresos,
                     doc.data().iess,
+                    doc.data().porcentajeIess,                    
                     doc.data().anticipo,
                     doc.data().prestamoIess,
                     doc.data().totalEgreso,
@@ -285,8 +295,10 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().valorHorasExtras == nombre ||
                     doc.data().sePagaFondosReserva == nombre ||
                     doc.data().fondosReserva == nombre ||
+                    doc.data().porcentajeFondo == nombre ||
                     doc.data().totalIngresos == nombre ||
                     doc.data().iess == nombre ||
+                    doc.data().porcentajeIess == nombre ||
                     doc.data().anticipo == nombre ||
                     doc.data().prestamoIess == nombre ||
                     doc.data().totalEgreso == nombre ||
@@ -345,6 +357,8 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                             "",
                             "",
                             "",
+                            "",
+                            "",
                             doc2.data().numeroCuenta,
                             doc2.data().tipoCuenta,
                             doc2.data().institucionFinanciera
@@ -369,8 +383,10 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
+                    doc.data().porcentajeFondo,  
                     doc.data().totalIngresos,
                     doc.data().iess,
+                    doc.data().porcentajeIess,                    
                     doc.data().anticipo,
                     doc.data().prestamoIess,
                     doc.data().totalEgreso,
@@ -429,8 +445,10 @@ const crearNominaPago = async (req, res, next) => {
                         "valorHorasExtras": "",
                         "sePagaFondosReserva": "",
                         "fondosReserva": "",
+                        "porcentajeFondo": "",
                         "totalIngresos": "",
                         "iess": "",
+                        "porcentajeIess": "",
                         "anticipo": "",
                         "prestamoIess": "",
                         "totalEgreso": "",

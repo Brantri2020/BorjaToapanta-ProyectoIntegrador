@@ -7,9 +7,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NominaPago } from 'src/app/model/nominaPago';
+import { Porcentaje } from 'src/app/model/porcentaje';
 //import { NominaPagoMenosInfo } from 'src/app/model/nominaPagoMenosInfo';
 import { MustMatch } from 'src/app/services/must-match.validator';
 import { NominaPagoService } from 'src/app/services/nomina-pago.service';
+import { PorcentajesService } from 'src/app/services/porcentajes.service';
 
 
 
@@ -20,6 +22,11 @@ import { NominaPagoService } from 'src/app/services/nomina-pago.service';
 })
 export class RolIndividualComponent implements OnInit {
   listNominasPago: NominaPago[] = [];
+  listPorcentajes: Porcentaje[] = [];
+
+  listFondo: string[] = [];
+  listIess: string[] = [];
+
   rolIndividualForm: FormGroup;
   titulo = 'Rol Individual';
   id: string | null;
@@ -32,8 +39,10 @@ export class RolIndividualComponent implements OnInit {
   salarioSum: any;
   valorHorasExtrasSum: any;
   fondosReservaSum: any;
+  porcentajeFondoSum: any;
   totalIngresosSum: any;
   iessSum: any;
+  porcentajeIessSum: any;
   anticipoSum: any;
   prestamoIessSum: any;
   liquidoRecibirSum: any;
@@ -42,6 +51,7 @@ export class RolIndividualComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private _nominaPagoService: NominaPagoService,
+    private _porcentajeService: PorcentajesService,
     private aRouter: ActivatedRoute) {
 
     this.rolIndividualForm = this.fb.group({
@@ -52,8 +62,11 @@ export class RolIndividualComponent implements OnInit {
       valorHorasExtras: ['', Validators.required],
       numeroHorasExtras: ['',],
       fondosReserva: ['', Validators.required],
+      sePagaFondosReserva: ['', Validators.required],
+      porcentajeFondo: ['', Validators.required],
       totalIngresos: ['', Validators.required],
       iess: ['', Validators.required],
+      porcentajeIess: ['', Validators.required],
       anticipo: ['', Validators.required],
       prestamoIess: ['', Validators.required],
       totalEgreso: ['', Validators.required],
@@ -65,7 +78,9 @@ export class RolIndividualComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerPorcentajes();
     this.esEditar();
+    this.sePagaFondoReserva();
 
   }
 
@@ -73,15 +88,73 @@ export class RolIndividualComponent implements OnInit {
 
 
   sePagaFondoReserva() {
-    var fondoReserva = "No";
+    ///falta setear fondo reserva
 
-    if (this.rolIndividualForm.get('fondosReserva')?.value !== "0.00") {
-      fondoReserva = "Si";
+    const selectElementBoolean = document.getElementById('booleanSelect');
+    const selectElementPorcentaje = document.getElementById('porcentajeSelect');
+
+    if (selectElementBoolean === null) {
+
+    } else {
+      selectElementBoolean.addEventListener('change', (event) => {
+        
+        if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si" && this.rolIndividualForm.get('porcentajeFondo')?.value !== "") {
+
+          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value;
+          this.rolIndividualForm.controls['sePagaFondosReserva'].setValue(this.fondosReservaSum);
+        } else {
+          this.fondosReservaSum = "0.00";
+        }
+
+       
+
+      });
+
     }
 
-    return fondoReserva;
+    if (selectElementPorcentaje === null) {
+
+    } else {
+      selectElementPorcentaje.addEventListener('change', (event) => {
+        
+        if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si" && this.rolIndividualForm.get('porcentajeFondo')?.value !== "") {
+
+          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value;
+          this.rolIndividualForm.controls['sePagaFondosReserva'].setValue(this.fondosReservaSum);
+
+        } else {
+          this.fondosReservaSum = "0.00";
+        }
+        
+      });
+
+
+    }
+
+
   }
 
+  obtenerPorcentajes() {
+
+    this._porcentajeService.getPorcentajes(this.anho, this.mes).subscribe(data => {
+
+      this.listPorcentajes = data;
+      this.listPorcentajes.forEach(element => {
+
+        if (element.tipoPorcentaje == "Fondos de reserva") {
+
+          this.listFondo.push(element.porcentaje.toString());
+
+        } else if (element.tipoPorcentaje == "Iess") {
+          this.listIess.push(element.porcentaje.toString());
+        }
+      });
+
+
+    }, error => {
+      console.log(error);
+    })
+  }
 
 
 
@@ -172,7 +245,7 @@ export class RolIndividualComponent implements OnInit {
         this.rolIndividualForm.controls['totalEgreso'].setValue(totalEgresoSumStr);
         this.rolIndividualForm.controls['liquidoRecibir'].setValue(liquidoRecibirSumStr);
 
-        var fondoReserva: string = this.sePagaFondoReserva();
+
         const ROL_INDIVIDUAL: NominaPago = {
 
           cedula: this.rolIndividualForm.get('cedula')?.value,
@@ -181,10 +254,12 @@ export class RolIndividualComponent implements OnInit {
           salario: this.rolIndividualForm.get('salario')?.value,
           numeroHorasExtras: this.rolIndividualForm.get('numeroHorasExtras')?.value,
           valorHorasExtras: this.rolIndividualForm.get('valorHorasExtras')?.value,
-          sePagaFondosReserva: fondoReserva.toString(),
+          sePagaFondosReserva: this.rolIndividualForm.get('sePagaFondosReserva')?.value,
           fondosReserva: this.rolIndividualForm.get('fondosReserva')?.value,
+          porcentajeFondo: this.rolIndividualForm.get('porcentajeFondo')?.value,
           totalIngresos: this.rolIndividualForm.get('totalIngresos')?.value,
           iess: this.rolIndividualForm.get('iess')?.value,
+          porcentajeIess: this.rolIndividualForm.get('porcentajeIess')?.value,
           anticipo: this.rolIndividualForm.get('anticipo')?.value,
           prestamoIess: this.rolIndividualForm.get('prestamoIess')?.value,
           totalEgreso: this.rolIndividualForm.get('totalEgreso')?.value,
@@ -255,7 +330,7 @@ export class RolIndividualComponent implements OnInit {
 
 
       this._nominaPagoService.obtenerNominaPago(this.id, this.anho, this.mes).subscribe(data => {
-        console.log(data);
+
 
         this.rolIndividualForm.setValue({
           cedula: data.cedula,
@@ -265,8 +340,11 @@ export class RolIndividualComponent implements OnInit {
           valorHorasExtras: data.valorHorasExtras,
           numeroHorasExtras: data.numeroHorasExtras,
           fondosReserva: data.fondosReserva,
+          sePagaFondosReserva: data.sePagaFondosReserva,
+          porcentajeFondo: data.porcentajeFondo,
           totalIngresos: data.totalIngresos,
           iess: data.iess,
+          porcentajeIess: data.porcentajeIess,
           anticipo: data.anticipo,
           prestamoIess: data.prestamoIess,
           totalEgreso: data.totalEgreso,
