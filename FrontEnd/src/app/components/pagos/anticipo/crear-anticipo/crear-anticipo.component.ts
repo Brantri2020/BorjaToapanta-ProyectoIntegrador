@@ -19,13 +19,14 @@ export class CrearAnticipoComponent implements OnInit {
   anticipoForm: FormGroup;
   titulo = 'Generar Anticipo';
   id: string | null;
+  anho: string | null;
+  mes: string | null;
   mensaje: string = "";
   listEmpleados: Empleado[] = [];
   emple = [{"nombre":""}];
   cedEmple  = "";
   nombreSelec = "";
-  anho = "";
-  mes = "";
+  
   fhoy = new Date(Date.now());
   
   hoy = this.fhoy.toLocaleDateString('en-GB').split('/').reverse().join('-');
@@ -47,6 +48,8 @@ export class CrearAnticipoComponent implements OnInit {
         fechaAnticipo: ['', Validators.required]
       });
       this.id = this.aRouter.snapshot.paramMap.get('id');
+      this.anho = this.aRouter.snapshot.paramMap.get('anho');
+      this.mes = this.aRouter.snapshot.paramMap.get('mes');
 
      }
      

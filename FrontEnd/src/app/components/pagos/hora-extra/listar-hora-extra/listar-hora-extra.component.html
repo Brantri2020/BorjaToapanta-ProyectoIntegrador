@@ -124,7 +124,7 @@
                         <td>{{horaExtra.valorFinalHoras}}</td>
                         <td>{{horaExtra.fechaHoraExtra}}</td>
                         <td>
-                            <i [routerLink]="['/editar-horaExtra', horaExtra.id]" class="far fa-edit text-primary"></i>
+                            <i [routerLink]="['/editar-horaExtra',this.anho,this.mes, horaExtra.id]" class="far fa-edit text-primary"></i>
                             <i (click)="eliminarHoraExtra(horaExtra.id)" class="fas fa-trash text-danger"></i>
                         </td>
                     </tr>

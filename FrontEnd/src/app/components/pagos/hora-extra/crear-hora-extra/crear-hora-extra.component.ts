@@ -19,13 +19,14 @@ export class CrearHoraExtraComponent implements OnInit {
   horaExtraForm: FormGroup;
   titulo = 'Generar Hora Extra';
   id: string | null;
+  anho: string | null;
+  mes: string | null;
   mensaje: string = "";
   listEmpleados: Empleado[] = [];
   emple = [{"nombre":""}];
   cedEmple  = "";
   nombreSelec = "";
-  anho = "";
-  mes = "";
+ 
   valFinal = "";
   fhoy = new Date(Date.now());
   
@@ -47,6 +48,8 @@ export class CrearHoraExtraComponent implements OnInit {
         fechaHoraExtra: ['', Validators.required]
       });
       this.id = this.aRouter.snapshot.paramMap.get('id');
+      this.anho = this.aRouter.snapshot.paramMap.get('anho');
+      this.mes = this.aRouter.snapshot.paramMap.get('mes');
 
      }
 

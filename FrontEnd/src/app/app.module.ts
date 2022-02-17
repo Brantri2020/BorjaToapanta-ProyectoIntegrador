@@ -45,7 +45,7 @@ import { ListarAnticipoComponent } from './components/pagos/anticipo/listar-anti
 import { CrearAnticipoComponent } from './components/pagos/anticipo/crear-anticipo/crear-anticipo.component';
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
 import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hora-extra/crear-hora-extra.component';
-import { ActualizarAnticipoComponent } from './components/pagos/anticipo/actualizar-anticipo/actualizar-anticipo.component';
+
 import { CrearPorcentajesComponent } from './components/pagos/porcentajes/crear-porcentajes/crear-porcentajes.component';
 import { ListarPorcentajesComponent } from './components/pagos/porcentajes/listar-porcentajes/listar-porcentajes.component';
 
@@ -73,7 +73,6 @@ import { ListarPorcentajesComponent } from './components/pagos/porcentajes/lista
     CrearAnticipoComponent,
     ListarHoraExtraComponent,
     CrearHoraExtraComponent,
-    ActualizarAnticipoComponent,
     CrearPorcentajesComponent,
     ListarPorcentajesComponent,
     
