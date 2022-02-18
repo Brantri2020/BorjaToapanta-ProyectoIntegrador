@@ -228,7 +228,7 @@
                         <div class="form-group row formRol input-sm md-5">
                             <label class="col-sm-2 col-form-label label-rol">FONDOS RESERVA</label>
                             <div class="col-sm-1"  style="font-size:  80%">
-                                Si/no
+                               
                                 <select class="form-select" formControlName="sePagaFondosReserva" id="booleanSelect"
                                     aria-label="Default select example"> 
                                     <option selected disabled value="">-</option>
@@ -236,12 +236,12 @@
                                     <option value="No" >No</option>                               
                                 </select>
                                 <div class="text-danger"
-                                    *ngIf="rolIndividualForm.get('porcentajeFondo')?.hasError('required') && rolIndividualForm.get('porcentajeFondo')?.touched">
-                                    <span>El porcentaje <strong>es obligatorio</strong>, seleccione uno.</span>
+                                    *ngIf="rolIndividualForm.get('sePagaFondosReserva')?.hasError('required') && rolIndividualForm.get('sePagaFondosReserva')?.touched">
+                                    <span>Se paga fondo de reserva <strong>?</strong>, seleccione uno.</span>
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" style="height: 10px;" formControlName="fondosReserva"
+                                <input readonly type="text" style="height: 10px;" formControlName="fondosReserva"
                                     id="fondosReserva" class="form-control form-control-lg col-sm-2 col-form-label"
                                     placeholder="Ingrese el fondo de reserva" minlength="4" maxlength="10"
                                     pattern="[0-9]*.[0-9]{2}">
@@ -260,9 +260,9 @@
                                 </div>
                             </div>
                             <div class="col-md-1">
-                                %
+                            
                                 <select class="form-select" formControlName="porcentajeFondo" id="porcentajeSelect"
-                                    aria-label="Default select example" > 
+                                    aria-label="Default select example" style="display:none;" > 
                                     <option selected disabled value="">%</option>
                                     <option value="{{fondoPrestamo}}" *ngFor="let fondoPrestamo of listFondo">{{fondoPrestamo}}%</option>                               
                                 </select>

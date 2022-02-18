@@ -88,7 +88,7 @@ export class RolIndividualComponent implements OnInit {
 
 
   sePagaFondoReserva() {
-    ///falta setear fondo reserva
+
 
     const selectElementBoolean = document.getElementById('booleanSelect');
     const selectElementPorcentaje = document.getElementById('porcentajeSelect');
@@ -97,17 +97,36 @@ export class RolIndividualComponent implements OnInit {
 
     } else {
       selectElementBoolean.addEventListener('change', (event) => {
-        
-        if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si" && this.rolIndividualForm.get('porcentajeFondo')?.value !== "") {
-
-          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value;
-          this.rolIndividualForm.controls['sePagaFondosReserva'].setValue(this.fondosReservaSum);
+        if (selectElementPorcentaje === null) {
         } else {
-          this.fondosReservaSum = "0.00";
+          if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si") {
+
+            selectElementPorcentaje.style.display = "inline";
+
+          } else {
+
+            selectElementPorcentaje.style.display = "none";
+            selectElementPorcentaje.tabIndex = 0;
+
+          }
         }
 
-       
 
+
+        if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si" && this.rolIndividualForm.get('porcentajeFondo')?.value !== "") {
+
+
+
+          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value / 100;
+          this.fondosReservaSum = parseFloat(this.fondosReservaSum).toFixed(2);
+          this.rolIndividualForm.controls['fondosReserva'].setValue(this.fondosReservaSum);
+        } else {
+          this.fondosReservaSum = "0.00";
+          this.rolIndividualForm.controls['fondosReserva'].setValue(this.fondosReservaSum);
+        }
+
+
+        this.calcularValores();
       });
 
     }
@@ -116,16 +135,20 @@ export class RolIndividualComponent implements OnInit {
 
     } else {
       selectElementPorcentaje.addEventListener('change', (event) => {
-        
+
         if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si" && this.rolIndividualForm.get('porcentajeFondo')?.value !== "") {
 
-          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value;
-          this.rolIndividualForm.controls['sePagaFondosReserva'].setValue(this.fondosReservaSum);
+
+          this.fondosReservaSum = this.salarioSum * this.rolIndividualForm.get('porcentajeFondo')?.value / 100;
+          this.fondosReservaSum = parseFloat(this.fondosReservaSum).toFixed(2);
+          this.rolIndividualForm.controls['fondosReserva'].setValue(this.fondosReservaSum);
 
         } else {
           this.fondosReservaSum = "0.00";
+          this.rolIndividualForm.controls['fondosReserva'].setValue(this.fondosReservaSum);
         }
-        
+        this.calcularValores();
+
       });
 
 

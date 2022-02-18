@@ -160,7 +160,7 @@ const obtenerNominaPago = async (req, res, next) => {
                 const nominaPago2 = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado/').doc(id);
                 const data2 = await nominaPago2.get();
                 if (!data2.exists) {
-                    res.status(404).send('Nomina de pago no encontrado');
+                    res.json("");
                 } else {
 
 
