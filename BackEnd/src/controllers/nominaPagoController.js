@@ -36,38 +36,6 @@ const obtenerNominaPagos = async (req, res, next) => {
     try {
         const anho = req.params.anho;
         const mes = req.params.mes;
-        /*
-        
-                //ANTICIPO
-                const anticipos = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes);
-                const dataAnticipo = await anticipos.get();
-                const anticiposArray = [];
-                if (dataAnticipo.empty) {
-        
-                    console.log("VACIO");
-        
-                } else {
-        
-                    try {
-        
-                        dataAnticipo.forEach(doc3 => {
-                            const anticipo = new Anticipo(
-                                doc3.id,
-                                doc3.data().cedulaEmpleado,
-                                doc3.data().valorAnticipo,
-                                doc3.data().fechaAnticipo
-                            );
-                            anticiposArray.push(anticipo);
-                        });
-        
-                    }
-                    catch (error) {
-                        res.status(400).send(error.message);
-                    }
-                    console.log(anticiposArray);
-                }
-        
-        */
 
         const nominasPago = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/NominaPago/' + anho + "/" + mes);
         const data = await nominasPago.get();
@@ -113,6 +81,18 @@ const obtenerNominaPagos = async (req, res, next) => {
             }
 
         } else {
+            var sumSalario = 0;
+            var sumHorasExtras = 0;
+            var sumValorHorasExtras = 0;
+            var sumFondosReserva = 0;
+            var sumTotalIngresos = 0;
+            var sumIess = 0;
+            var sumAnticipo = 0;
+            var sumPrestamoIess = 0;
+            var sumTotalEgresos = 0;
+            var sumLiquidoRecibir = 0;
+
+
             data.forEach(doc => {
                 const nominaPag = new NominaPago(
                     doc.id,
@@ -136,8 +116,64 @@ const obtenerNominaPagos = async (req, res, next) => {
                     doc.data().tipoCuenta,
                     doc.data().institucionFinanciera
                 );
+                if (doc.data().salario.toString() !== "") {
+                    sumSalario += parseFloat(doc.data().salario.toString());
+                }
+                if (doc.data().numeroHorasExtras.toString() !== "") {
+                    sumHorasExtras += parseFloat(doc.data().numeroHorasExtras.toString());
+                }
+                if (doc.data().valorHorasExtras.toString() !== "") {
+                    sumValorHorasExtras += parseFloat(doc.data().valorHorasExtras.toString());
+                }
+                if (doc.data().fondosReserva.toString() !== "") {
+                    sumFondosReserva += parseFloat(doc.data().fondosReserva.toString());
+                }
+                if (doc.data().totalIngresos.toString() !== "") {
+                    sumTotalIngresos += parseFloat(doc.data().totalIngresos.toString());
+                }
+                if (doc.data().iess.toString() !== "") {
+                    sumIess += parseFloat(doc.data().iess.toString());
+                }
+
+                if (doc.data().anticipo.toString() !== "") {
+                    sumAnticipo += parseFloat(doc.data().anticipo.toString());
+                }
+                if (doc.data().prestamoIess.toString() !== "") {
+                    sumPrestamoIess += parseFloat(doc.data().prestamoIess.toString());
+                }
+                if (doc.data().totalEgreso.toString() !== "") {
+                    sumTotalEgresos += parseFloat(doc.data().totalEgreso.toString());
+                }
+                if (doc.data().liquidoRecibir.toString() !== "") {
+                    sumLiquidoRecibir += parseFloat(doc.data().liquidoRecibir.toString());
+                }
+
+
                 nominasPagoArray.push(nominaPag);
             });
+            const sumaTodo = new NominaPago(
+                "---",
+                "SUMA",
+                "--->",
+                "--->",
+                sumSalario.toFixed(2),
+                sumHorasExtras.toFixed(2),
+                sumValorHorasExtras.toFixed(2),
+                "---",
+                sumFondosReserva.toFixed(2),
+                "---",
+                sumTotalIngresos.toFixed(2),
+                sumIess.toFixed(2),
+                "---",
+                sumAnticipo.toFixed(2),
+                sumPrestamoIess.toFixed(2),
+                sumTotalEgresos.toFixed(2),
+                sumLiquidoRecibir.toFixed(2),
+                "---",
+                "---",
+                "---",
+            );
+            nominasPagoArray.push(sumaTodo);
             res.json(nominasPagoArray);
         }
     } catch (error) {
@@ -277,7 +313,7 @@ const busquedaNominasPago = async (req, res, next) => {
                     doc.data().porcentajeFondo,
                     doc.data().totalIngresos,
                     doc.data().iess,
-                    doc.data().porcentajeIess,                    
+                    doc.data().porcentajeIess,
                     doc.data().anticipo,
                     doc.data().prestamoIess,
                     doc.data().totalEgreso,
@@ -372,6 +408,7 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
             }
 
         } else {
+            
             data.forEach(doc => {
                 const nominaPag = new NominaPago(
                     doc.id,
@@ -383,10 +420,10 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                     doc.data().valorHorasExtras,
                     doc.data().sePagaFondosReserva,
                     doc.data().fondosReserva,
-                    doc.data().porcentajeFondo,  
+                    doc.data().porcentajeFondo,
                     doc.data().totalIngresos,
                     doc.data().iess,
-                    doc.data().porcentajeIess,                    
+                    doc.data().porcentajeIess,
                     doc.data().anticipo,
                     doc.data().prestamoIess,
                     doc.data().totalEgreso,
@@ -551,23 +588,23 @@ const obtenerAnticipoHorasExtrasPorCedula = async (req, res, next) => {
 
     var valorDeAnticipo = 0;
     var valorAnticipoFinalStr = "";
-    var salarioStr="";
+    var salarioStr = "";
 
     try {
-        
+
         const salario = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Empleado').where("cedula", "==", cedula);
         const data3 = await salario.get();
-        
+
         if (data3.empty) {
-            salarioStr="0.00"
-            
-        } else {            
+            salarioStr = "0.00"
+
+        } else {
             data3.forEach(doc => {
-                
-                salarioStr=doc.data().salario;
+
+                salarioStr = doc.data().salario;
                 //console.log(salarioStr);
             });
-            
+
         }
     } catch (error) {
         res.status(400).send(error.message);
@@ -577,21 +614,21 @@ const obtenerAnticipoHorasExtrasPorCedula = async (req, res, next) => {
         const anticipo = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Anticipo/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
         const data = await anticipo.get();
         if (data.empty) {
-            valorAnticipoFinalStr='0.00';
+            valorAnticipoFinalStr = '0.00';
         } else {
             data.forEach(doc => {
                 valorDeAnticipo += parseFloat(doc.data().valorAnticipo);
-                valorAnticipoFinalStr=valorDeAnticipo.toString();
+                valorAnticipoFinalStr = valorDeAnticipo.toString();
                 if (!valorDeAnticipo.toString().includes(".")) {
                     valorAnticipoFinalStr = valorDeAnticipo.toString() + ".00";
                 }
             });
-            
+
 
 
         }
-        
-        
+
+
 
     } catch (error) {
         res.status(400).send(error.message);
@@ -599,7 +636,7 @@ const obtenerAnticipoHorasExtrasPorCedula = async (req, res, next) => {
     try {
         const horasExtrasD = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/HorasExtra/' + anho + "/" + mes).where("cedulaEmpleado", "==", cedula);
         const data2 = await horasExtrasD.get();
-        
+
         if (data2.empty) {
             var horasExtras = {
                 "cantidadHoras": "0",
@@ -625,7 +662,7 @@ const obtenerAnticipoHorasExtrasPorCedula = async (req, res, next) => {
                     "cantidadHoras": cantidadHorasSuma,
                     "valorFinalHoras": valorFinalStr,
                     "valorAnticipo": valorAnticipoFinalStr,
-                    "salario":salarioStr
+                    "salario": salarioStr
                 }
 
 

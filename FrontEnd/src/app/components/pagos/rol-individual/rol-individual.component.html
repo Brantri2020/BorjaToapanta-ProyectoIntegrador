@@ -152,7 +152,7 @@
                             <!--Aporte IESS-->
                             <label class="col-sm-2 col-form-label label-rol">APORTE IESS</label>
                             <div class="col-sm-2">
-                                <input type="text" style="height: 10px;" id="iessDato" formControlName="iess"
+                                <input readonly type="text" style="height: 10px;" id="iessDato" formControlName="iess"
                                     class="form-control form-control-lg col-sm-2 col-form-label"
                                     placeholder="Ingrese el aporte IESS" minlength="4" maxlength="10"
                                     pattern="[0-9]*.[0-9]{2}">
@@ -171,7 +171,7 @@
                             <div class="col-sm-2">
                                 
                                 <select class="form-select" formControlName="porcentajeIess"
-                                    aria-label="Default select example" > 
+                                    aria-label="Default select example" id="aporteSelect" > 
                                     <option selected disabled value="">Porcentaje</option>
                                     <option value="{{iessPrestamo}}" *ngFor="let iessPrestamo of listIess">{{iessPrestamo}}%</option>                               
                                 </select>

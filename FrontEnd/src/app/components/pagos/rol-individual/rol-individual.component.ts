@@ -81,6 +81,7 @@ export class RolIndividualComponent implements OnInit {
     this.obtenerPorcentajes();
     this.esEditar();
     this.sePagaFondoReserva();
+    this.aporteIess();
 
   }
 
@@ -107,6 +108,7 @@ export class RolIndividualComponent implements OnInit {
 
             selectElementPorcentaje.style.display = "none";
             selectElementPorcentaje.tabIndex = 0;
+            this.rolIndividualForm.controls['porcentajeFondo'].setValue("0");
 
           }
         }
@@ -154,6 +156,30 @@ export class RolIndividualComponent implements OnInit {
 
     }
 
+
+  }
+
+  aporteIess() {
+
+
+    const selectElementAporte = document.getElementById('aporteSelect');
+
+    if (selectElementAporte === null) {
+
+    } else {
+      selectElementAporte.addEventListener('change', (event) => {
+
+
+        this.iessSum = this.salarioSum * this.rolIndividualForm.get('porcentajeIess')?.value / 100;
+        this.iessSum = parseFloat(this.iessSum).toFixed(2);
+        this.rolIndividualForm.controls['iess'].setValue(this.iessSum);
+
+
+
+        this.calcularValores();
+      });
+
+    }
 
   }
 
@@ -403,25 +429,18 @@ export class RolIndividualComponent implements OnInit {
         if (data.liquidoRecibir.toString() == "") {
           this.rolIndividualForm.controls['liquidoRecibir'].setValue("0.00");
         }
-        /*
-                if (data.anticipo.toString() == "") {
-        
-                  this.obtenerAnticipoPorCedula(ced)
-                    .then((data: any) => {
-                      this.rolIndividualForm.controls['anticipo'].setValue(data);
-                    })
-                }
-                if (data.valorHorasExtras.toString() == "") {
-        
-                  this.obtenerHorasExtrasPorCedula(ced)
-                    .then((data: any) => {
-                      this.rolIndividualForm.controls['valorHorasExtras'].setValue(data.valorFinalHoras);
-                      this.rolIndividualForm.controls['numeroHorasExtras'].setValue(data.cantidadHoras);
-        
-                    })
-                }
-                */
 
+        const selectElementPorcentaje = document.getElementById('porcentajeSelect');
+
+
+        if (selectElementPorcentaje === null) {
+        } else {
+          
+          if (this.rolIndividualForm.get('sePagaFondosReserva')?.value == "Si") {
+
+            selectElementPorcentaje.style.display = "inline";
+          }
+        }
 
         this.calcularValores();
 
