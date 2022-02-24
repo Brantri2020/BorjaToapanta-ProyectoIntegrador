@@ -152,7 +152,7 @@ const obtenerNominaPagos = async (req, res, next) => {
                 nominasPagoArray.push(nominaPag);
             });
             const sumaTodo = new NominaPago(
-                "---",
+                0,
                 "SUMA",
                 "--->",
                 "--->",
@@ -408,7 +408,17 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
             }
 
         } else {
-            
+            var sumSalario = 0;
+            var sumHorasExtras = 0;
+            var sumValorHorasExtras = 0;
+            var sumFondosReserva = 0;
+            var sumTotalIngresos = 0;
+            var sumIess = 0;
+            var sumAnticipo = 0;
+            var sumPrestamoIess = 0;
+            var sumTotalEgresos = 0;
+            var sumLiquidoRecibir = 0;
+
             data.forEach(doc => {
                 const nominaPag = new NominaPago(
                     doc.id,
@@ -432,8 +442,62 @@ const obtenerNominasPagoOrdenados = async (req, res, next) => {
                     doc.data().tipoCuenta,
                     doc.data().institucionFinanciera
                 );
+                if (doc.data().salario.toString() !== "") {
+                    sumSalario += parseFloat(doc.data().salario.toString());
+                }
+                if (doc.data().numeroHorasExtras.toString() !== "") {
+                    sumHorasExtras += parseFloat(doc.data().numeroHorasExtras.toString());
+                }
+                if (doc.data().valorHorasExtras.toString() !== "") {
+                    sumValorHorasExtras += parseFloat(doc.data().valorHorasExtras.toString());
+                }
+                if (doc.data().fondosReserva.toString() !== "") {
+                    sumFondosReserva += parseFloat(doc.data().fondosReserva.toString());
+                }
+                if (doc.data().totalIngresos.toString() !== "") {
+                    sumTotalIngresos += parseFloat(doc.data().totalIngresos.toString());
+                }
+                if (doc.data().iess.toString() !== "") {
+                    sumIess += parseFloat(doc.data().iess.toString());
+                }
+
+                if (doc.data().anticipo.toString() !== "") {
+                    sumAnticipo += parseFloat(doc.data().anticipo.toString());
+                }
+                if (doc.data().prestamoIess.toString() !== "") {
+                    sumPrestamoIess += parseFloat(doc.data().prestamoIess.toString());
+                }
+                if (doc.data().totalEgreso.toString() !== "") {
+                    sumTotalEgresos += parseFloat(doc.data().totalEgreso.toString());
+                }
+                if (doc.data().liquidoRecibir.toString() !== "") {
+                    sumLiquidoRecibir += parseFloat(doc.data().liquidoRecibir.toString());
+                }
                 nominasPagoArray.push(nominaPag);
             });
+            const sumaTodo = new NominaPago(
+                0,
+                "SUMA",
+                "--->",
+                "--->",
+                sumSalario.toFixed(2),
+                sumHorasExtras.toFixed(2),
+                sumValorHorasExtras.toFixed(2),
+                "---",
+                sumFondosReserva.toFixed(2),
+                "---",
+                sumTotalIngresos.toFixed(2),
+                sumIess.toFixed(2),
+                "---",
+                sumAnticipo.toFixed(2),
+                sumPrestamoIess.toFixed(2),
+                sumTotalEgresos.toFixed(2),
+                sumLiquidoRecibir.toFixed(2),
+                "---",
+                "---",
+                "---",
+            );
+            nominasPagoArray.push(sumaTodo);
             res.json(nominasPagoArray);
         }
     } catch (error) {

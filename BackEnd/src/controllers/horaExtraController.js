@@ -14,7 +14,7 @@ const obtenerHorasExtra = async(req, res, next) => {
         const data = await horasExtra.get();
         const horasExtraArray = [];
         if (data.empty) {
-            res.status(404).send('No se encontraron Horas Extra en la fecha indicada');
+            res.json('');
         } else {
             data.forEach(doc => {
                 const horasExtra = new HoraExtra(

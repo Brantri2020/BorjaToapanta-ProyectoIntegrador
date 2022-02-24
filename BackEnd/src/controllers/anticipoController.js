@@ -14,7 +14,7 @@ const obtenerAnticipos = async(req, res, next) => {
         const data = await anticipos.get();
         const anticiposArray = [];
         if (data.empty) {
-            res.status(404).send('No se encontraron Anticipos');
+            res.json('');
         } else {
             data.forEach(doc => {
                 const anticipo = new Anticipo(

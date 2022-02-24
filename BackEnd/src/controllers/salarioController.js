@@ -11,7 +11,7 @@ const obtenerSalarios = async(req, res, next) => {
         const data = await salarios.get();
         const salariosArray = [];
         if (data.empty) {
-            res.status(404).send('No se encontraron Salarios');
+            res.json('');
         } else {
             data.forEach(doc => {
                 const salario = new Salario(

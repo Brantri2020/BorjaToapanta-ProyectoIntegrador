@@ -126,7 +126,7 @@ export class NominaPagosComponent implements OnInit {
 
   obtenerNominasPago(anho: any, mes: any) {
     this._nominaPagoServices.getNominasPago(anho, mes).subscribe(data => {
-      
+
       this.listNominasPago = data;
 
     }, error => {
@@ -154,59 +154,63 @@ export class NominaPagosComponent implements OnInit {
 
 
 
-  eliminarNominaPago(id: any) {
-    var resultado = window.confirm('¿Estas seguro de eliminar la nómina de pago?');
-    if (resultado === true) {
-      this._nominaPagoServices.obtenerNominaPago(id, this.anho, this.mes).subscribe(data => {
+  eliminarNominaPago(id: any) {    
+    window.alert(id);
+    if (id === 0) {
+     
+    } else {
+      var resultado = window.confirm('¿Estas seguro de eliminar la nómina de pago?');
+      if (resultado === true) {
+        this._nominaPagoServices.obtenerNominaPago(id, this.anho, this.mes).subscribe(data => {
 
-        const ROL_INDIVIDUAL = {
+          const ROL_INDIVIDUAL = {
 
-          cedula: data.cedula,
-          nomina: data.nomina,
-          cargo: data.cargo,
-          salario: data.salario,
-          numeroHorasExtras: "",
-          valorHorasExtras: "",
-          sePagaFondosReserva: "",
-          fondosReserva: "",
-          porcentajeFondo: "",
-          totalIngresos: "",
-          iess: "",
-          porcentajeIess: "",
-          anticipo: "",
-          prestamoIess: "",
-          totalEgreso: "",
-          liquidoRecibir: "",
-          numeroCuenta: data.numeroCuenta,
-          tipoCuenta: data.tipoCuenta,
-          institucionFinanciera: data.institucionFinanciera
-        }
+            cedula: data.cedula,
+            nomina: data.nomina,
+            cargo: data.cargo,
+            salario: data.salario,
+            numeroHorasExtras: "",
+            valorHorasExtras: "",
+            sePagaFondosReserva: "",
+            fondosReserva: "",
+            porcentajeFondo: "",
+            totalIngresos: "",
+            iess: "",
+            porcentajeIess: "",
+            anticipo: "",
+            prestamoIess: "",
+            totalEgreso: "",
+            liquidoRecibir: "",
+            numeroCuenta: data.numeroCuenta,
+            tipoCuenta: data.tipoCuenta,
+            institucionFinanciera: data.institucionFinanciera
+          }
 
-        this._nominaPagoServices.editarNominaPago(id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
-          this.toastr.error('La nómina de pago fué eliminada con éxito', 'Nómina de pago eliminada');
-          this.router.navigate(['/nomina-pagos']);
-          this.obtenerNominasPago(this.anho, this.mes);
+          this._nominaPagoServices.editarNominaPago(id, ROL_INDIVIDUAL, this.anho, this.mes).subscribe(data => {
+            this.toastr.error('La nómina de pago fué eliminada con éxito', 'Nómina de pago eliminada');
+            this.router.navigate(['/nomina-pagos']);
+            this.obtenerNominasPago(this.anho, this.mes);
+
+          }, error => {
+            console.log(error);
+
+          })
 
         }, error => {
-          console.log(error);
 
+          console.log(error);
         })
 
-      }, error => {
+        this.obtenerNominasPago(this.anho, this.mes);
 
-        console.log(error);
-      })
+      } else {
+        this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
 
-      this.obtenerNominasPago(this.anho, this.mes);
-
-    } else {
-      this.toastr.warning('No se realizó ningún cambio', 'NO eliminado');
+      }
 
     }
 
   }
-
-
 }
 
 
