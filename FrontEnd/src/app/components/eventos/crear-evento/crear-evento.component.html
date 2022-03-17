@@ -1,0 +1,116 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">{{ titulo | uppercase}}</span>
+                    <form class="mt-3" [formGroup]="eventoForm" (ngSubmit)="agregarEvento()">
+
+                        <!--nombre Evento -->
+                        <div class="mb-3">
+                            <input type="text" formControlName="nombreEvento" class="form-control form-control-lg"
+                                placeholder="Ingrese el nombre del evento" minlength="3" maxlength="20"
+                                pattern="[A-Za-záéíóúñüÑ\-\.\,0-9 ]*">
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('nombreEvento')?.hasError('required') && eventoForm.get('nombreEvento')?.touched">
+                                <span>El nombre de evento <strong>es obligatorio.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="eventoForm.get('nombreEvento')?.hasError('minlength')">
+                                <span>El nombre de evento puede contener <strong>mínimo 3 caracteres o máximo
+                                        20.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="eventoForm.get('nombreEvento')?.hasError('pattern')">
+                                <span>El nombre del evento puede contener <strong>letras, números, signos,
+                                        etc</strong></span>
+                            </div>
+                        </div>
+                        <!--tipo evento-->
+                        <div class="mb-3">
+                            <select class="form-select" formControlName="tipoEvento"
+                                aria-label="Default select example">
+                                <option selected disabled value="">Seleccione el tipo de evento</option>
+                                <option value="Reunion">Reunión</option>
+                                <option value="Visita">Visita</option>
+                                <option value="Celebracion">Celebración</option>
+                                <option value="Importante">Importante</option>
+                                <option value="Urgente">Urgente</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('tipoEvento')?.hasError('required') && eventoForm.get('tipoEvento')?.touched">
+                                <span>El tipo de evento <strong>es obligatorio</strong>, seleccione uno.</span>
+                            </div>
+
+                        </div>
+                        <!--fecha -->
+                        <div class="form-group row formRol input-sm md-6">                                    
+                            <div class="col-sm-5">
+                                <label class=" col-form-label label-rol">Fecha : {{this.anho}} / {{this.mes}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="form-select" formControlName="fecha"
+                                aria-label="Default select example">
+                                <option selected disabled value="">Seleccione el día del evento</option>
+                                <option *ngFor="let dia of arrayDias" value={{dia}}>{{dia}}</option>                               
+                            </select>
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('fecha')?.hasError('required') && eventoForm.get('fecha')?.touched">
+                                <span>La fecha del evento <strong>es obligatoria</strong>, seleccione una.</span>
+                            </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!--hora inicio -->
+                        <label style="font-weight: bold; font-size: 130%; text-align: left;">Hora inicio</label>
+                        <div class="mb-3">
+                            <input id="inicio" type="time" formControlName="horaInicio" class="form-control form-control-lg">
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('horaInicio')?.hasError('required') && eventoForm.get('horaInicio')?.touched">
+                                <span>La hora inicio del evento <strong>es obligatoria.</strong></span>
+                            </div>                            
+                        </div>
+                        <!--hora fin -->
+                        <label style="font-weight: bold; font-size: 130%; text-align: left;">Hora fin</label>
+                        <div class="mb-3">
+                            <input id="fin"  type="time" formControlName="horaFin" class="form-control form-control-lg" style="pointer-events:none;">
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('horaFin')?.hasError('required') && eventoForm.get('horaFin')?.touched">
+                                <span>La hora fin del evento <strong>es obligatoria.</strong></span>
+                            </div>                            
+                        </div>                        
+                        <!--descripcion -->
+                        <div class="mb-3">
+                            <textarea formControlName="descripcion" class="form-control form-control-lg"
+                                placeholder="Ingrese la descripcion del evento" minlength="5" maxlength="500"
+                                pattern="[A-Za-záéíóúñüÑ\-\.\,0-9\@\: ]*"></textarea>
+                            <div class="text-danger"
+                                *ngIf="eventoForm.get('descripcion')?.hasError('required') && eventoForm.get('descripcion')?.touched">
+                                <span>La descripción del evento <strong>es obligatoria.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="eventoForm.get('descripcion')?.hasError('minlength')">
+                                <span>La descripción del evento puede contener <strong>mínimo 5 caracteres o máximo
+                                        500.</strong></span>
+                            </div>
+                            <div class="text-danger" *ngIf="eventoForm.get('descripcion')?.hasError('pattern')">
+                                <span>La descripción del evento puede contener <strong>letras, números, signos,
+                                        etc</strong></span>
+                            </div>
+                        </div>
+
+
+                        <div class="text-danger" style="text-align: center;">
+                            <span><strong>{{mensaje}}</strong></span>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <button routerLink="/eventos" class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="eventoForm.invalid"
+                                class="btn btn-success btn-lg float-end">ACEPTAR</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

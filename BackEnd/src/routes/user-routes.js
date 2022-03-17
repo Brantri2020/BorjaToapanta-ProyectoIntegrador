@@ -159,6 +159,24 @@ router.post('/porcentajes/:anho/:mes', crearPorcentaje);
 router.put('/porcentajes/:anho/:mes/:id', actualizarPorcentaje);
 router.get('/porcentajes/:anho/:mes/:id', obtenerPorcentaje);
 
+//Eventos
+const {
+    obtenerEventos,
+    busquedaEvento,
+    obtenerEventosOrdenados,
+    eliminarEvento,
+    crearEvento,
+    actualizarEvento,
+    obtenerEvento
+} = require('../controllers/eventoController');
+router.get('/eventos/:anho/:mes', obtenerEventos);
+router.get('/eventos/:anho/:mes/busqueda/:busqueda', busquedaEvento);
+router.get('/eventos/:anho/:mes/eventos-ordenados/:filtro', obtenerEventosOrdenados);
+router.delete('/eventos/:anho/:mes/:id', eliminarEvento);
+router.post('/eventos/:anho/:mes', crearEvento);
+router.put('/eventos/:anho/:mes/:id', actualizarEvento);
+router.get('/eventos/:anho/:mes/:id', obtenerEvento);
+
 module.exports = {
     routes: router
 }

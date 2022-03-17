@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import * as $ from 'jquery';
 
 // Reactive Form
 import { ReactiveFormsModule } from "@angular/forms";
@@ -48,6 +49,8 @@ import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hor
 
 import { CrearPorcentajesComponent } from './components/pagos/porcentajes/crear-porcentajes/crear-porcentajes.component';
 import { ListarPorcentajesComponent } from './components/pagos/porcentajes/listar-porcentajes/listar-porcentajes.component';
+import { CrearEventoComponent } from './components/eventos/crear-evento/crear-evento.component';
+import { ListarEventoComponent } from './components/eventos/listar-evento/listar-evento.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,8 @@ import { ListarPorcentajesComponent } from './components/pagos/porcentajes/lista
     CrearHoraExtraComponent,
     CrearPorcentajesComponent,
     ListarPorcentajesComponent,
+    CrearEventoComponent,
+    ListarEventoComponent,
     
   ],
   imports: [

@@ -25,6 +25,8 @@ import { CrearHoraExtraComponent } from './components/pagos/hora-extra/crear-hor
 import { ListarHoraExtraComponent } from './components/pagos/hora-extra/listar-hora-extra/listar-hora-extra.component';
 import { CrearPorcentajesComponent} from './components/pagos/porcentajes/crear-porcentajes/crear-porcentajes.component';
 import { ListarPorcentajesComponent } from './components/pagos/porcentajes/listar-porcentajes/listar-porcentajes.component';
+import { ListarEventoComponent } from './components/eventos/listar-evento/listar-evento.component';
+import { CrearEventoComponent } from './components/eventos/crear-evento/crear-evento.component';
 
 
 
@@ -57,6 +59,10 @@ const routes: Routes = [
   { path: 'porcentajes', component: ListarPorcentajesComponent, canActivate: [AuthGuard] },
   { path: 'nuevo-porcentaje/:anho/:mes', component: CrearPorcentajesComponent, canActivate: [AuthGuard] },
   { path: 'editar-porcentaje/:anho/:mes/:id', component: CrearPorcentajesComponent, canActivate: [AuthGuard] }, 
+  { path: 'eventos', component: ListarEventoComponent, canActivate: [AuthGuard] },
+  { path: 'nuevo-evento/:anho/:mes', component: CrearEventoComponent, canActivate: [AuthGuard] },
+  { path: 'editar-evento/:anho/:mes/:id', component: CrearEventoComponent, canActivate: [AuthGuard] }, 
+  
 ];
 
 
