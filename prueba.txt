@@ -1,4 +1,2 @@
-Hola
-Hola- Borja
-a
-Otra vez B
+npm i primeng primeicons
+npm i @fullcalendar/core@4.4.2 @fullcalendar/daygrid@4.4.2 @fullcalendar/interaction@4.4.2 @fullcalendar/timegrid@4.4.2

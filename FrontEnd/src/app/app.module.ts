@@ -52,6 +52,9 @@ import { ListarPorcentajesComponent } from './components/pagos/porcentajes/lista
 import { CrearEventoComponent } from './components/eventos/crear-evento/crear-evento.component';
 import { ListarEventoComponent } from './components/eventos/listar-evento/listar-evento.component';
 
+//Calendario
+import { FullCalendarModule } from 'primeng/fullcalendar'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +95,8 @@ import { ListarEventoComponent } from './components/eventos/listar-evento/listar
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FullCalendarModule
   ],
 
 
