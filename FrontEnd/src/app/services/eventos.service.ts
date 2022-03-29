@@ -42,6 +42,10 @@ export class EventosService {
   obtenerEvento(id: string, anho: any, mes: any): Observable<any> {
     return this.http.get(this.url1 + anho + "/" + mes + "/" + id);
   }
+
+  obtenerEventosFechas(): Observable<any> {
+    return this.http.get(this.url1);
+  }
 }
 
 

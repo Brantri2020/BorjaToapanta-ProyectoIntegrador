@@ -2,6 +2,7 @@
 
 const firebase = require('../db');
 const Evento = require("../models/evento");
+const Calendario = require("../models/calendario");
 const firestore = firebase.firestore();
 
 
@@ -258,7 +259,7 @@ const crearEvento = async (req, res, next) => {
                         for (let i = 0; i < arrayTiempo.length; i++) {
                             for (let j = 0; j < arrayTiempo2.length && mensaje !== "Cruce de horarios"; j++) {
                                 if (arrayTiempo[i] === arrayTiempo2[j]) {
-                                    
+
                                     mensaje = "Cruce de horarios";
                                 }
                             }
@@ -418,7 +419,7 @@ const actualizarEvento = async (req, res, next) => {
                         if (mensaje !== "Cruce de horarios") {
                             for (let i = 0; i < arrayTiempo.length; i++) {
                                 for (let j = 0; j < arrayTiempo2.length && mensaje !== "Cruce de horarios"; j++) {
-                                    if (arrayTiempo[i] === arrayTiempo2[j]) {                                        
+                                    if (arrayTiempo[i] === arrayTiempo2[j]) {
                                         mensaje = "Cruce de horarios";
                                     }
                                 }
@@ -462,6 +463,122 @@ const obtenerEvento = async (req, res, next) => {
     }
 }
 
+/*
+
+const obtenerAnios = async (req, res, next) => {
+
+    const anios = [];
+
+    try {
+        const aniosBase = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Evento');
+        const data = await aniosBase.get()
+
+        if (data.empty) {
+            res.json("");
+        } else {
+            data.forEach(doc => {
+                anios.push(doc.id);
+            });
+        }
+
+        res.json(anios);
+
+    } catch (error) {
+
+    }
+}
+
+const obtenerMeses = async (req, res, next) => {
+
+    const anios = req.body;
+    const meses=[]
+    console.log(anios);
+
+
+
+    /*
+    try {
+        anios.forEach(doc => {
+            const mesesBase = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Evento/'+doc);
+            const data = await mesesBase.get()
+            if (data.empty) {
+                res.json("");
+            } else {
+                data.forEach(doc2 => {
+                    meses.push(doc2.id);
+                });
+            }
+
+        });
+        
+
+        
+
+        res.json(meses);
+
+    } catch (error) {
+
+    }
+    */
+//}
+
+
+const obtenerEventosTodos = async (req, res, next) => {
+
+    const anios = ["2021", "2022", "2023"];
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const fechasArray = [];
+    try {
+
+        for (let anio of anios) {
+            for (let mes of meses) {
+                //console.log('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Evento/' + anio + "/" + mes)
+                try {
+
+
+                    const fechas = await firestore.collection('/Gobierno Autonomo Descentralizado Parroquial/Uyumbicho/Evento/' + anio + "/" + mes);
+                    const data = await fechas.get()
+
+                    if (data.empty) {
+                        //res.json("")
+                    } else {
+                        
+                        data.forEach(doc => {
+                            const evento = {                       
+                                title: doc.data().nombreEvento,                                
+                                start: doc.data().fecha+" "+doc.data().horaInicio+":00",
+                                end: doc.data().fecha+" "+doc.data().horaFin+":00",                                
+                            }
+                            fechasArray.push(evento);
+                        });
+
+                        console.log(fechasArray)                        
+                    }
+                } catch (error) {
+
+                }
+
+            }
+        }
+
+        res.json(fechasArray);
+
+
+
+    } catch (error) {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     obtenerEventos,
     busquedaEvento,
@@ -469,5 +586,6 @@ module.exports = {
     eliminarEvento,
     crearEvento,
     actualizarEvento,
-    obtenerEvento
+    obtenerEvento,
+    obtenerEventosTodos
 }

@@ -167,7 +167,8 @@ const {
     eliminarEvento,
     crearEvento,
     actualizarEvento,
-    obtenerEvento
+    obtenerEvento,
+    obtenerEventosTodos
 } = require('../controllers/eventoController');
 router.get('/eventos/:anho/:mes', obtenerEventos);
 router.get('/eventos/:anho/:mes/busqueda/:busqueda', busquedaEvento);
@@ -176,6 +177,10 @@ router.delete('/eventos/:anho/:mes/:id', eliminarEvento);
 router.post('/eventos/:anho/:mes', crearEvento);
 router.put('/eventos/:anho/:mes/:id', actualizarEvento);
 router.get('/eventos/:anho/:mes/:id', obtenerEvento);
+router.get('/eventos', obtenerEventosTodos);
+
+
+
 
 module.exports = {
     routes: router

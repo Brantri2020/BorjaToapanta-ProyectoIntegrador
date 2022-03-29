@@ -3,6 +3,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
+import { EventosService } from 'src/app/services/eventos.service';
+
 
 @Component({
   selector: 'app-inicio',
@@ -14,13 +16,13 @@ export class InicioComponent implements OnInit {
   public events: any[];
   public options: any;
 
-
-  constructor() { }
+  constructor(private _eventoServices: EventosService) { }
 
   ngOnInit(): void {
-
+   
+    this.obtenerEventosFechas()
     this.options = {
-      dateClick: this.handleDateClick.bind(this),
+      //dateClick: this.handleDateClick.bind(this),
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: new Date(),
       locale: esLocale,
@@ -32,30 +34,18 @@ export class InicioComponent implements OnInit {
       editable: false
     }
     
-
-    this.events = [
-      {
-        title: "Evento 1",
-        start: new Date(),
-        description: "Evento 1aaa"
-      },
-      {
-        title: "Evento 2",
-        start: new Date(new Date().getTime() + 86400000),
-        description: "Evento 2"
-      },
-      {
-        title: "Evento 3",
-        start: new Date(new Date().getTime() + (86400000 * 2)),
-        end: new Date(new Date().getTime() + (86400000 * 3)),
-        description: "Evento 3"
-      },
-    ]
-
   }
-
+/*
   handleDateClick(arg) {
-    alert('date click! ' + arg.dateStr)
+    alert('date click! ' + arg.dateStr )
   }
+*/
 
+  obtenerEventosFechas() {
+    this._eventoServices.obtenerEventosFechas().subscribe(data => {
+      this.events = data;
+      console.log(this.events)
+    });
+  }
+ 
 }
